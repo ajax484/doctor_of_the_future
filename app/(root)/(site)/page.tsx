@@ -1,14 +1,23 @@
-import React from 'react'
+import Header from "@/components/ui/header";
+import { Bio, Comments, Hero, MailingList, Programs, Section3, Section4, Section6, Section8 } from "@/components/home";
+import Footer from "@/components/ui/footer";
 
-const Home = () => {
+export default function Home() {
   return (
     <>
-        {/* add all home screen componenets here */}
-        hello world
+      <Header />
+      <main>
+        <Hero />
+        <Bio />
+        <Section3 />
+        <Section4 />
+        <Programs />
+        <Section6 />
+        <Comments />
+        <Section8  />
+        <MailingList />
+        <Footer />
+      </main>
     </>
-  )
+  );
 }
-
-export default Home
-
-// main home page
