@@ -1,11 +1,18 @@
-import Header from "@/components/ui/header";
-import { Bio, Comments, Hero, MailingList, Programs, Section3, Section4, Section6, Section8 } from "@/components/home";
-import Footer from "@/components/ui/footer";
+import {
+  Bio,
+  Comments,
+  Hero,
+  MailingList,
+  Programs,
+  Section3,
+  Section4,
+  Section6,
+  Section8,
+} from "@/components/home";
 
 export default function Home() {
   return (
     <>
-      <Header />
       <main>
         <Hero />
         <Bio />
@@ -14,9 +21,8 @@ export default function Home() {
         <Programs />
         <Section6 />
         <Comments />
-        <Section8  />
+        <Section8 />
         <MailingList />
-        <Footer />
       </main>
     </>
   );
