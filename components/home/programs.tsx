@@ -6,7 +6,7 @@ import Button from "../ui/button";
 export default function Programs() {
   return (
     <section>
-      <h2 className="bg-black text-white py-4 md:py-8 text-center text-3xl md:text-6xl font-medium">
+      <h2 className="bg-black text-white py-8 text-center text-3xl md:text-6xl font-medium">
         My Programs
       </h2>
       <div className="grid md:grid-cols-2 md:grid-rows-2 h-screen md:h-[calc(100vh*1.5)]">

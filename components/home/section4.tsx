@@ -6,7 +6,7 @@ import Button from "../ui/button";
 
 export default function Section4() {
   return (
-    <section className="flex flex-col md:flex-row py-2">
+    <section className="flex flex-col md:flex-row py-6">
       <div className="flex-[40%] h-48 md:h-[calc(100vh*1.5)] w-screen md:w-full relative">
         <Image
           src="/home/soup3.jpg"
