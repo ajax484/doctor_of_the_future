@@ -13,9 +13,9 @@ export default function Hero() {
         objectPosition="center"
         alt="image of soup"
       />
-      <div className="absolute bottom-1/4 md:bottom-4 -translate-x-1/2 -translate-y-1/2 left-1/2 z-20 w-[95vw] md:w-[45vw] space-y-6">
+      <div className="absolute bottom-1/3 lg:bottom-1/4 -translate-x-1/2 -translate-y-1/2 left-1/2 z-20 w-[95vw] lg:w-[45vw] space-y-6">
         <h2 className="text-white capitalize text-4xl md:text-7xl font-black text-center leading-relaxed tracking-wider">Doctor of the Future</h2>
-        <Button label="Get in Touch" intent="transparent" />
+        <Button  label="Get in Touch" intent="transparent" />
       </div>
     </section>
   );

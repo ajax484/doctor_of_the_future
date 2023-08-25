@@ -7,7 +7,7 @@ export default function Comments() {
       <h2 className="mb-4 text-2xl md:text-4xl text-center w-full">
         Happy Clients
       </h2>
-      <h3 className="mb-6 md:mb-8 text-3xl md:text-5xl text-center w-full">
+      <h3 className="mb-6 md:mb-8 font-semibold text-3xl md:text-5xl text-center w-full">
         See what they are saying
       </h3>
       <div className="flex flex-col md:flex-row gap-8 md:gap-12 px-4 md:px-8">
