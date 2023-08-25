@@ -7,7 +7,7 @@ import Button from "../ui/button";
 export default function Section3() {
   return (
     <section className="flex flex-col md:flex-row">
-      <div className="flex-[50%] bg-black text-white px-8 md:px-24 flex flex-col gap-8 py-8 md:py-12 space-y-6 md:space-y-12">
+      <div className="flex-[50%] bg-orange text-white px-8 md:px-24 flex flex-col gap-8 py-8 md:py-12 space-y-6 md:space-y-12">
         <h2 className="space-y-3 flex flex-col text-2xl md:text-4xl">
           <span>Mental Health,</span>
           <span>Mental Wealth.</span>

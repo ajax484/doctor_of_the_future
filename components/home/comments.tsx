@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Comments() {
   return (
-    <section className="bg-black p-8 md:p-12 text-white">
+    <section className="bg-limeGreen p-8 md:p-12 text-white">
       <h2 className="mb-4 text-2xl md:text-4xl text-center w-full">
         Happy Clients
       </h2>

@@ -13,17 +13,15 @@ import {
 export default function Home() {
   return (
     <>
-      <main>
-        <Hero />
-        <Bio />
-        <Section3 />
-        <Section4 />
-        <Programs />
-        <Section6 />
-        <Comments />
-        <Section8 />
-        <MailingList />
-      </main>
+      <Hero />
+      <Bio />
+      <Section3 />
+      <Section4 />
+      <Programs />
+      <Section6 />
+      <Comments />
+      <Section8 />
+      <MailingList />
     </>
   );
 }
