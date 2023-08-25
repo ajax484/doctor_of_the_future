@@ -13,7 +13,7 @@ export default function Header() {
   const [navMobile, setNavMobile] = useState(false);
   
   return (
-    <header className="fixed w-full bg-white h-20 z-50 flex justify-between gap-x-4 px-4 md:px-8 py-7">
+    <header className="fixed w-full bg-white h-20 z-50 flex justify-between items-center gap-x-4 px-4 md:px-8 py-7">
       <Link href={`/`}>
         <Image
           src="/dotf_logo.png"
@@ -24,7 +24,7 @@ export default function Header() {
       </Link>
       <Navbar />
 
-      <div>login component here</div>
+      <div>login</div>
 
       {/* mobile nav functionality */}
       <HiMenu
