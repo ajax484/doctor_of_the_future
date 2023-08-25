@@ -18,7 +18,7 @@ function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
           <Link href={`/`}>Home</Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/`}>Pricing & Plans</Link>
+          <Link href={`/plans`}>Pricing & Plans</Link>
         </li>
         <li className="hover:font-light">
           <Link href={`/`}>Book Online</Link>

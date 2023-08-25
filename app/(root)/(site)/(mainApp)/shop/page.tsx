@@ -48,7 +48,7 @@ export const DUMMY_PRODUCTS: ProductCardProps[] = [
 
 const page = () => {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
       {DUMMY_PRODUCTS.map((product) => (
         <Fragment key={product.name}>
           <ProductCard {...product} />

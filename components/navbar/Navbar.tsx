@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -9,7 +8,7 @@ const Navbar = () => {
           <Link href={`/`}>Home</Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/`}>Pricing & Plans</Link>
+          <Link href={`/plans`}>Plans & Pricing</Link>
         </li>
         <li className="hover:font-light">
           <Link href={`/`}>Book Online</Link>
