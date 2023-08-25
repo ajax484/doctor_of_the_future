@@ -3,27 +3,41 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <nav className="flex  items-center gap-x-4">
-      <ul className="hidden md:flex  gap-x-6 uppercase text-sm">
+      <ul className="hidden md:flex gap-x-6 uppercase">
         <li className="hover:font-light">
-          <Link href={`/`}>Home</Link>
+          <Link href={`/`}>
+            <span className="text-sm text-slate-700">Home</span>
+          </Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/plans`}>Plans & Pricing</Link>
+          <Link href={`/plans`}>
+            <span className="text-sm text-slate-700">Plans & Pricing</span>
+          </Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/`}>Book Online</Link>
+          <Link href={`/`}>
+            <span className="text-sm text-slate-700">Book Online</span>
+          </Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/shop`}>Shop</Link>
+          <Link href={`/shop`}>
+            <span className="text-sm text-slate-700">Shop</span>
+          </Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/`}>Blog</Link>
+          <Link href={`/`}>
+            <span className="text-sm text-slate-700">Blog</span>
+          </Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/`}>Programs</Link>
+          <Link href={`/programs`}>
+            <span className="text-sm text-slate-700">Programs</span>
+          </Link>
         </li>
         <li className="hover:font-light">
-          <Link href={`/terms`}>Terms</Link>
+          <Link href={`/terms`}>
+            <span className="text-sm text-slate-700">Terms</span>
+          </Link>
         </li>
       </ul>
     </nav>
