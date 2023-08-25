@@ -24,8 +24,8 @@ export default async function Product({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-8">
-      <div className="h-screen w-full relative">
+    <div className="grid md:grid-cols-2 gap-8">
+      <div className="h-40 md:h-80 lg:h-screen w-full relative">
         <Image
           src={product.image}
           alt={product.name}
