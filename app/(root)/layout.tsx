@@ -12,7 +12,7 @@ const layout = ({ children }: SiteProps) => {
     <ClientPreventHydration>
       {/* header */}
       <Header />
-      <main className="py-24">{children}</main>
+      <main className="py-20">{children}</main>
       {/* children leads to page i.e home */}
       {/* footer */}
       <Footer />
