@@ -1,10 +1,10 @@
-import { siteConfig } from '@/siteConfig/site';
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { siteConfig } from "@/siteConfig/site";
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import CartContextProvider from "@/context/CartContext";
 
-const inter = Inter({ subsets: ['latin'] })
-
+const inter = Inter({ subsets: ["latin"] });
 
 // change favicon and site config files
 export const metadata: Metadata = {
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-      {/* providers will be added here */}
-        {children}
+        {/* providers will be added here */}
+        <CartContextProvider>{children}</CartContextProvider>
       </body>
     </html>
-  )
+  );
 }

@@ -2,16 +2,30 @@ import ClientPreventHydration from "@/components/preventHydration/PreventHydrati
 import React from "react";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/navbar/Header";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from 'next/headers';
+import CartScreen from "@/components/ui/cartScreen";
 
 interface SiteProps {
   children: React.ReactNode;
 }
 
-const layout = ({ children }: SiteProps) => {
+const layout = async ({ children }: SiteProps) => {
+  const supabase = createServerComponentClient({ cookies });
+  // Rest of your code here
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()  
+
+  console.log(session?.user);
+  
+
   return (
     <ClientPreventHydration>
       {/* header */}
-      <Header />
+      <Header session={session} />
+      <CartScreen />
       <main className="py-20">{children}</main>
       {/* children leads to page i.e home */}
       {/* footer */}

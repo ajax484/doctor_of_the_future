@@ -2,21 +2,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-// conponents
+// components
 import Navbar from "./Navbar";
 import MobileNav from "./MobileNav";
-import {
-  Session  
-} from "@supabase/auth-helpers-nextjs";
+import { Session } from "@supabase/auth-helpers-nextjs";
 // icons
-import { HiChevronDown, HiMenu, HiUser } from "react-icons/hi";
+import { HiChevronDown, HiMenu, HiShoppingCart, HiUser } from "react-icons/hi";
 import AccountDropDown from "./AccountDropDown";
 
 export default function Header({ session }: { session?: Session | null }) {
   const [navMobile, setNavMobile] = useState(false);
-  const user = session?.user;
-
-  console.log(user?.user_metadata);
 
   return (
     <header className="fixed w-full bg-white h-20 z-50 flex justify-between items-center gap-x-4 px-4 md:px-8 py-7">
@@ -30,7 +25,10 @@ export default function Header({ session }: { session?: Session | null }) {
       </Link>
       <Navbar />
 
-      <AccountDropDown />
+      <div className="flex gap-4 items-center">
+        <AccountDropDown session={session} />
+        <HiShoppingCart />
+      </div>
 
       {/* mobile nav functionality */}
       <HiMenu
@@ -44,5 +42,3 @@ export default function Header({ session }: { session?: Session | null }) {
     </header>
   );
 }
-
-

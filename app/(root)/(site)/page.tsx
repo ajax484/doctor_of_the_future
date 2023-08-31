@@ -9,8 +9,12 @@ import {
   Section6,
   Section8,
 } from "@/components/home";
+import {
+  Session, createServerComponentClient  
+} from "@supabase/auth-helpers-nextjs";
 
-export default function Home() {
+
+export default async function Home() {
   return (
     <>
       <Hero />

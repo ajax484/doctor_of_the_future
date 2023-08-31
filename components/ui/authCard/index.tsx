@@ -12,9 +12,7 @@ export default function AuthForm() {
       supabaseClient={supabase}
       view={"sign_in"}
       appearance={{ theme: ThemeSupa }}
-      showLinks={true}
-      providers={['google', 'facebook']}
-      redirectTo="http://localhost:3000/callback"
+      redirectTo="http://localhost:3000/auth/callback"
     />
   )
 }

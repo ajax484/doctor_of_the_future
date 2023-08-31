@@ -23,9 +23,7 @@ export default function AccountDropDown({
   session?: Session | null;
 }) {
   const user = session?.user;
-
   
-
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
