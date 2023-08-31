@@ -36,5 +36,7 @@ const layout = async ({ children }: SiteProps) => {
 
 export default layout;
 
+export const dynamic = 'force-dynamic'
+
 // root layout for all components in HOme
 // client prevent hydration to stop nextjs hydration error in the client side
