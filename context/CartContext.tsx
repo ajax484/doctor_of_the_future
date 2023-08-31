@@ -1,20 +1,29 @@
 "use client";
+import { planCardProps } from "@/components/ui/planCard";
+import { ProductCardProps } from "@/components/ui/productCard";
+import { ProgramCardProps } from "@/components/ui/programCard";
 import { useLocalState } from "@/hooks/useLocalStorage";
-import React, { createContext, ReactNode, useContext } from "react";
+import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface ICartContext {
-  cart: any[];
+  cart: planCardProps[] | ProductCardProps[] | ProgramCardProps[];
+  cartVisible: boolean;
+  showCart: () => void;
+  hideCart: () => void;
   addItem: (product: any) => void;
   removeItem: (productId: string) => void;
-  resetItems: () => void;
+  resetCart: () => void;
   isAdded: (productId: string) => boolean;
 }
 
 const CartContext = createContext<ICartContext>({
   cart: [],
+  cartVisible: false,
+  showCart() {},
+  hideCart() {},
   addItem() {},
   removeItem() {},
-  resetItems() {},
+  resetCart() {},
   isAdded() {
     return false;
   },
@@ -25,6 +34,12 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
     stateKey: "cart",
     defaultValue: [],
   });
+
+  const [cartVisible, setShowCart] = useState<boolean>(false);
+
+  const showCart = () => setShowCart(true);
+
+  const hideCart = () => setShowCart(false);
 
   const addItem = (product: any) => {
     console.log(product);
@@ -37,7 +52,7 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const resetItems = () => {
+  const resetCart = () => {
     setCart([]);
   };
 
@@ -47,9 +62,12 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
 
   const values: ICartContext = {
     cart,
+    cartVisible,
+    hideCart,
+    showCart,
     addItem,
     removeItem,
-    resetItems,
+    resetCart,
     isAdded,
   };
 

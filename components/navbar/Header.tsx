@@ -9,12 +9,14 @@ import { Session } from "@supabase/auth-helpers-nextjs";
 // icons
 import { HiChevronDown, HiMenu, HiShoppingCart, HiUser } from "react-icons/hi";
 import AccountDropDown from "./AccountDropDown";
+import { useCart } from "@/context/CartContext";
 
 export default function Header({ session }: { session?: Session | null }) {
   const [navMobile, setNavMobile] = useState(false);
+  const { cartVisible, hideCart, showCart } = useCart();
 
   return (
-    <header className="fixed w-full bg-white h-20 z-50 flex justify-between items-center gap-x-4 px-4 md:px-8 py-7">
+    <header className="fixed w-full bg-white h-20 z-50 flex justify-between items-center gap-x-4 px-4 md:px-8 py-8">
       <Link href={`/`}>
         <Image
           src="/dotf_logo.png"
@@ -27,7 +29,10 @@ export default function Header({ session }: { session?: Session | null }) {
 
       <div className="flex gap-4 items-center">
         <AccountDropDown session={session} />
-        <HiShoppingCart />
+
+        <button onClick={showCart}>
+          <HiShoppingCart className="text-2xl" />
+        </button>
       </div>
 
       {/* mobile nav functionality */}
