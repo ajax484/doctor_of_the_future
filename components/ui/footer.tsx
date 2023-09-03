@@ -19,15 +19,17 @@ export default function Footer() {
             <span className="font-bold text-white hover:text-neutral-500">Gideon</span> Bassey
           </span>
         </div>
-        <span className="text-sm">Facebook: Gideon Bassey Jacobs</span>
-        <span className="text-sm cursor-pointer hover:text-neutral-400">
-          Twitter: <a href="https://x.com/g_diets_">g_diets_</a>
+        <span className="text-sm">Facebook: Doctor Of The Future </span>
+        <span className="text-sm cursor-pointer">
+          Twitter: <a href="https://x.com/g_diets_" className="hover:text-neutral-400">g_diets_</a>
         </span>
-        <span className="text-sm">
-          gidietsworld@gmail.com | +234 912 318 5655 | +234 810 437 5180
+        <span className="text-sm flex flex-col gap-x-3 md:flex-row gap-y-2">
+          <p>
+            <a href="mailto:gidietsworld@gmail.com">gidietsworld@gmail.com</a>
+          </p> <p>| +234 912 318 5655 |</p> <p>+234 810 437 5180</p>
         </span>
       </div>
-      <div className="flex flex-col md:flex-row justify-center text-sm text-center">
+      <div className="flex my-5 md:my-0 flex-col md:flex-row justify-center text-sm text-center">
         <span>All Rights Reserved | DOCTOR OF THE FUTURE 2023</span>
       </div>
     </section>

@@ -1,8 +1,30 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    typescript: {
-        ignoreBuildErrors: true,
-    }
-}
+  reactStrictMode: true,
+};
 
-module.exports = nextConfig
+// next.config.js
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+    ],
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+};

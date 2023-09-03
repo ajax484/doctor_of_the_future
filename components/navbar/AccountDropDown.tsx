@@ -45,7 +45,7 @@ export default function AccountDropDown({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-72 h-44 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {getAccountLinks(user).map((link) => (
               <Menu.Item key={link.label}>
@@ -60,7 +60,7 @@ export default function AccountDropDown({
             ))}
             {!!user && (
               <form action={"/signout"} method="POST">
-                <Menu.Item>
+                <Menu.Item className=''>
                   {({ active }) => (
                     <button
                       type="submit"
