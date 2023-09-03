@@ -42,7 +42,7 @@ export default function Header({ session }: { session?: Session | null }) {
       />
       {/* mobile */}
       <div className={`${navMobile ? "right-0" : "-right-full"} toggle `}>
-        <MobileNav setNavMobile={setNavMobile} />
+        <MobileNav setNavMobile={setNavMobile} session={session} />
       </div>
     </header>
   );

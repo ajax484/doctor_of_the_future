@@ -1,11 +1,15 @@
+import { Session } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 
 type MobileNavProps = {
   setNavMobile: (value: boolean) => void;
+  session: Session | null;
 };
 
-function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
+function MobileNav({ setNavMobile, session }: MobileNavProps): JSX.Element {
+  const user = session?.user;
+
   return (
     <nav className="block md:hidden bg-black text-gray-300 w-full h-full">
       <IoClose
@@ -15,7 +19,7 @@ function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
 
       <ul className="flex flex-col justify-center space-y-8 h-full items-center capitalize font-secondary">
         <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/`} >Home</Link>
+          <Link href={`/`}>Home</Link>
         </li>
         <li onClick={() => setNavMobile(false)} className="hover:font-light">
           <Link href={`/plans`}>Pricing & Plans</Link>
@@ -35,6 +39,30 @@ function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
         <li onClick={() => setNavMobile(false)} className="hover:font-light">
           <Link href={`/terms`}>Terms</Link>
         </li>
+        {!!user ? (
+          <>
+            <li
+              onClick={() => setNavMobile(false)}
+              className="hover:font-light"
+            >
+              <Link href={`/account`}>Account</Link>
+            </li>
+            <form action={"/signout"} method="POST">
+              <li
+                onClick={() => {
+                  setNavMobile(false);
+                }}
+                className="hover:font-light"
+              >
+                <button type="submit">Sign out</button>
+              </li>
+            </form>
+          </>
+        ) : (
+          <li onClick={() => setNavMobile(false)} className="hover:font-light">
+            <Link href={`/login`}>Sign In/Up</Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
