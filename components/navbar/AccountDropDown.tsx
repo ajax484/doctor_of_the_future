@@ -23,9 +23,9 @@ export default function AccountDropDown({
   session?: Session | null;
 }) {
   const user = session?.user;
-  
+
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative md:inline-block text-left hidden ">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
           <HiUser />
@@ -51,9 +51,7 @@ export default function AccountDropDown({
               <Menu.Item key={link.label}>
                 {({ active }) => (
                   <Link href={link.href}>
-                    <span
-                      className={"text-gray-700 block px-4 py-2 text-sm"}
-                    >
+                    <span className={"text-gray-700 block px-4 py-2 text-sm"}>
                       {link.label}
                     </span>
                   </Link>

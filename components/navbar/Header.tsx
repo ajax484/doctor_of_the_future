@@ -33,13 +33,13 @@ export default function Header({ session }: { session?: Session | null }) {
         <button onClick={showCart}>
           <HiShoppingCart className="text-2xl" />
         </button>
+        {/* mobile nav functionality */}
+        <HiMenu
+          onClick={() => setNavMobile(true)}
+          className="md:hidden text-black text-3xl cursor-pointer"
+        />
       </div>
 
-      {/* mobile nav functionality */}
-      <HiMenu
-        onClick={() => setNavMobile(true)}
-        className="md:hidden text-black text-3xl cursor-pointer"
-      />
       {/* mobile */}
       <div className={`${navMobile ? "right-0" : "-right-full"} toggle `}>
         <MobileNav setNavMobile={setNavMobile} session={session} />
