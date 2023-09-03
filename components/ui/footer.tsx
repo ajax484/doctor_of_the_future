@@ -25,7 +25,7 @@ export default function Footer() {
         </span>
         <span className="text-sm flex flex-col gap-x-3 md:flex-row gap-y-2">
           <p>
-            <a href="mailto:gidietsworld@gmail.com">gidietsworld@gmail.com</a>
+            <a className="hover:text-neutral-400" href="mailto:gidietsworld@gmail.com">gidietsworld@gmail.com</a>
           </p> <p>| +234 912 318 5655 |</p> <p>+234 810 437 5180</p>
         </span>
       </div>
