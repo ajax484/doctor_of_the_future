@@ -3,8 +3,8 @@ import React from "react";
 
 export default function Comments() {
   return (
-    <section className="bg-limeGreen p-8 md:p-12 text-white">
-      <h2 className="mb-4 text-2xl md:text-4xl text-center w-full">
+    <section className="bg-limeGreen p-2 py-5 md:p-12 text-white">
+      <h2 className="mb-4 text-2xl md:text-4xl my-4 text-center w-full">
         Happy Clients
       </h2>
       <h3 className="mb-6 md:mb-8 font-semibold text-3xl md:text-5xl text-center w-full">
@@ -25,7 +25,7 @@ export default function Comments() {
               alt="image of soup 2"
             />
           </div>
-          <h4 className="text-xl">Lagbaja Omo Lagbaja</h4>
+          <h4 className="text-xl text-center">Lagbaja Omo Lagbaja</h4>
         </div>
         <div className="flex flex-col items-center gap-4 px-4">
           <p className="md-8 md:mb-12 text-justify leading-loose text-sm md:text-base">
@@ -41,7 +41,7 @@ export default function Comments() {
               alt="image of soup 2"
             />
           </div>
-          <h4 className="text-xl">Lagbaja Omo Lagbaja</h4>
+          <h4 className="text-xl text-center">Lagbaja Omo Lagbaja</h4>
         </div>
         <div className="flex flex-col items-center gap-4 px-4">
           <p className="md-8 md:mb-12 text-justify leading-loose text-sm md:text-base">
@@ -57,7 +57,7 @@ export default function Comments() {
               alt="image of soup 2"
             />
           </div>
-          <h4 className="text-xl">Lagbaja Omo Lagbaja</h4>
+          <h4 className="text-xl text-center">Lagbaja Omo Lagbaja</h4>
         </div>
       </div>
     </section>
