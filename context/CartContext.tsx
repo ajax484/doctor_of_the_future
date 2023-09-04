@@ -57,7 +57,7 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const isAdded = (productId: string) => {
-    return cart.some((item: { slug: string }) => item.slug === productId);
+    return cart?.some((item: { slug: string }) => item.slug === productId);
   };
 
   const values: ICartContext = {

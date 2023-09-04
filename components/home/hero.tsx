@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="h-screen relative max-w-screen overflow-hidden">
       <div className="bg-black opacity-25 absolute inset-0 h-screen w-screen z-10 !overflow-hidden" />
       <Image
-        src="/home/soup.jpg"
+        src="/homepage/image14.jpg"
         layout="fill"
         objectFit="cover"
         objectPosition="center"

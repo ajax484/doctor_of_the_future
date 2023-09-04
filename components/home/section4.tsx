@@ -9,7 +9,7 @@ export default function Section4() {
     <section className="flex flex-col md:flex-row py-6">
       <div className="flex-[40%] h-48 md:h-[calc(100vh*1.5)] w-screen md:w-full relative">
         <Image
-          src="/home/soup3.jpg"
+          src="/homepage/image9.jpg"
           fill={true}
           objectFit="cover"
           objectPosition="center"
@@ -17,7 +17,7 @@ export default function Section4() {
         />
         <div className="absolute top-1/2 -right-[20%] hidden md:block">
         <Image
-          src="/home/soup4.jpg"
+          src="/homepage/image4.jpg"
           height={window.innerHeight / 4}
           width={window.innerWidth / 4}
           alt="image of soup 3"
@@ -29,10 +29,7 @@ export default function Section4() {
           Nutrition Assessment & Counseling
         </h2>
         <p className="md:leading-loose text-justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia vel
-          accusamus nisi fugiat rerum blanditiis, quidem atque laboriosam,
-          officiis vitae, minima et magni omnis fugit ullam eius. Ipsam, sed
-          assumenda.
+        Nutrition assessment and counseling provide personalized guidance for better health through tailored dietary recommendations.
         </p>
         <Button
           label="Learn More"

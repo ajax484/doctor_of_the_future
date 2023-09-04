@@ -50,8 +50,8 @@ export default function AccountDropDown({
             {getAccountLinks(user).map((link) => (
               <Menu.Item key={link.label}>
                 {({ active }) => (
-                  <Link href={link.href}>
-                    <span className={"text-gray-700 block px-4 py-2 text-sm border"}>
+                  <Link href={link.href} >
+                    <span className={"text-gray-700 block px-4 py-2 my-3 text-sm border"}>
                       {link.label}
                     </span>
                   </Link>
@@ -60,7 +60,7 @@ export default function AccountDropDown({
             ))}
             {!!user && (
               <form action={"/signout"} method="POST">
-                <Menu.Item className=''>
+                <Menu.Item >
                   {({ active }) => (
                     <button
                       type="submit"
