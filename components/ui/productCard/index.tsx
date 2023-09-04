@@ -1,15 +1,8 @@
 "use client";
+import { ProductCardProps } from "@/types/products";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-
-export interface ProductCardProps {
-  image: string;
-  name: string;
-  price: number;
-  week: number;
-  id: number;
-}
 
 const ProductCard: React.FC<ProductCardProps> = ({
   image,

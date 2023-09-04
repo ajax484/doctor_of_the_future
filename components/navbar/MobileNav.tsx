@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 
 type MobileNavProps = {
   setNavMobile: (value: boolean) => void;
-  session: Session | null;
+  session: Session | null | undefined;
 };
 
 function MobileNav({ setNavMobile, session }: MobileNavProps): JSX.Element {

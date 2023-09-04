@@ -1,48 +1,31 @@
-import ProductCard, { ProductCardProps } from "@/components/ui/productCard";
+import ProductCard from "@/components/ui/productCard";
+import { ProductCardProps } from "@/types/products";
 import React, { Fragment } from "react";
 
 export const DUMMY_PRODUCTS: ProductCardProps[] = [
   {
     image: "/shop/shop1.jpg",
-    name: "Workout Session",
-    price: 200,
-    week: 1,
+    name: "Organic Seasoning/Spices",
+    price: 2700,
     id: 1,
+    description:
+      "Learn everything you need to know about organic spices and seasonings, from the basic foundations to more complex techniques. With our guide, you'll learn how to properly store and use spices in order to get the maximum flavor and aroma out of them. Our in-depth guide gives you step-by-step instructions on using various types of herbs and spices, as well as ideas for creating unique combinations that will take your dishes to the next level. Start adding amazing flavors to your recipes today with our comprehensive organic spice and seasoning training guide!",
   },
   {
-    image: "/shop/shop2.jpg",
-    name: "Healthy Meal Plan",
-    price: 150,
-    week: 2,
+    image: "/shop/shop2.jpeg",
+    name: "keep it off for good",
+    price: 3560,
     id: 2,
+    description:
+      "Keep it off for good is a concise and simple guide to preventing and reversing metabolic disease. With this guide, you will lose weight effortlessly, you will reverse high blood pressure, diabetes type 2, high blood cholesterol, fatty liver, insulin resistance among other range of metabolic issues.",
   },
   {
     image: "/shop/shop3.jpg",
-    name: "Yoga Class",
-    price: 180,
-    week: 3,
+    name: "the healthy nigeria meal guide",
+    price: 1650,
     id: 3,
-  },
-  {
-    image: "/shop/shop4.jpg",
-    name: "Personal Training",
-    price: 300,
-    week: 4,
-    id: 4,
-  },
-  {
-    image: "/shop/shop5.jpg",
-    name: "Mindfulness Workshop",
-    price: 120,
-    week: 1,
-    id: 5,
-  },
-  {
-    image: "/shop/shop6.jpg",
-    name: "Nutrition Consultation",
-    price: 250,
-    week: 2,
-    id: 6,
+    description:
+      "The healthy Nigerian diet guide seeks to expose up to 50+ healthy Nigerian meals you should eat to help protect you against chronic metabolic disease.",
   },
 ];
 
