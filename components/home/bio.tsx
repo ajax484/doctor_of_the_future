@@ -9,7 +9,11 @@ export default function Bio() {
       <div className="flex-[60%] sapce-y-4 md:space-y-6">
         <h3 className="text-2xl">NUTRITION CONSULTING</h3>
         <p className="md:w-[80%] text-justify leading-relaxed text-slate-800">
-        I am a certified nutritionist researcher and health advisor. I'm here to lighten the load of poor health on your shoulders. I'm here to help you lose weight  and stay fit. I consult on obesity, diabetes, metabolic health, gut health and sexual health. I'm here to constantly remind you that your health is your first wealth.
+          I am a certified nutritionist researcher and health advisor. I&apos;m
+          here to lighten the load of poor health on your shoulders. I&apos;m
+          here to help you lose weight and stay fit. I consult on obesity,
+          diabetes, metabolic health, gut health and sexual health. I&apos;m
+          here to constantly remind you that your health is your first wealth.
         </p>
       </div>
     </section>
