@@ -4,7 +4,7 @@ import React from "react";
 const DUMMY_PLANS: planCardProps[] = [
   {
     id: 1,
-    name: "Super Plan",
+    name: "Combo Plan",
     price: 2000,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus numquam impedit excepturi optio ipsam minima error quam mollitia. Quibusdam a eligendi provident nemo corporis facere asperiores nobis nostrum et dolorem.",
