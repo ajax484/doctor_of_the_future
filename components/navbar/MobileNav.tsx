@@ -1,7 +1,8 @@
 import { Session } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useRouter } from "next/navigation";
 
 type MobileNavProps = {
   setNavMobile: (value: boolean) => void;
@@ -9,7 +10,8 @@ type MobileNavProps = {
 
 function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
   const user = useUser();
-
+  const supabase = useSupabaseClient();
+  const router = useRouter()
   // handle sign out
   const handleLogout = async () => {
     await supabase.auth.signOut();

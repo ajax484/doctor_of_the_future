@@ -53,7 +53,7 @@ const AccountDropDown = () => {
                     </p>
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className=" w-44 h-72">
+                <DropdownMenuContent className=" w-52 h-72">
                   <DropdownMenuLabel> Account Details</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="my-5">
