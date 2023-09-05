@@ -7,8 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 const ProductCard: React.FC<ProductCardProps> = ({
   image,
   name,
-  price,
-  week,
+  price,  
   id,
 }) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
@@ -48,9 +47,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <div ref={cardRef}>
       <Link href={`/shop/${id}`}>
         <div className="h-72 w-full relative overflow-hidden">
-          <div className="px-4 py-0.5 bg-limeGreen absolute top-0 left-0 z-10 text-white text-sm">
+          {/* <div className="px-4 py-0.5 bg-limeGreen absolute top-0 left-0 z-10 text-white text-sm">
             WEEK {week}
-          </div>
+          </div> */}
           <Image
             src={image}
             alt="name"

@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, forwardRef, Ref, InputHTMLAttributes } from "react";
+"use client";
+import React, { useState, forwardRef } from "react";
 import InputBaseStyles, { InputBaseStylesVariants } from "./inputBase.variant";
 
 interface InputProps {
@@ -9,10 +9,11 @@ interface InputProps {
   focus?: InputBaseStylesVariants["focus"];
   rounded?: InputBaseStylesVariants["rounded"];
   placeholder?: string;
+  onInput: () => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ intent, icon, width, rounded, placeholder, ...props }, ref) => {
+  ({ intent, icon, width, rounded, placeholder, onInput, ...props }, ref) => {
     const [focus, setFocus] = useState(false);
 
     return (
@@ -20,6 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
+          onInput={onInput}
           className="text-lg m-0 p-0.5 w-full outline-none bg-transparent"
           ref={ref}
           placeholder={placeholder}

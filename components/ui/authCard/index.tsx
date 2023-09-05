@@ -1,7 +1,7 @@
-'use client'
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa, ViewType } from '@supabase/auth-ui-shared'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+"use client";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa, ViewType } from "@supabase/auth-ui-shared";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 // import { Database } from './database.types'
 
 export default function AuthForm() {
@@ -15,5 +15,5 @@ export default function AuthForm() {
       appearance={{ theme: ThemeSupa }}
       redirectTo="/auth/callback"
     />
-  )
+  );
 }
