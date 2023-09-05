@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import CartContextProvider from "@/context/CartContext";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const queryClient = new QueryClient();
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         {/* providers will be added here */}
-        <CartContextProvider>{children}</CartContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <CartContextProvider>{children}</CartContextProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
