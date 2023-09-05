@@ -1,14 +1,20 @@
 import { Session } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
+import { useUser } from "@supabase/auth-helpers-react";
 
 type MobileNavProps = {
   setNavMobile: (value: boolean) => void;
-  session: Session | null | undefined;
 };
 
-function MobileNav({ setNavMobile, session }: MobileNavProps): JSX.Element {
-  const user = session?.user;
+function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
+  const user = useUser();
+
+  // handle sign out
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/");
+  };
 
   return (
     <nav className="block md:hidden bg-black text-gray-300 w-full h-full">
@@ -47,16 +53,18 @@ function MobileNav({ setNavMobile, session }: MobileNavProps): JSX.Element {
             >
               <Link href={`/account`}>Account</Link>
             </li>
-            <form action={"/signout"} method="POST">
+            <div>
               <li
                 onClick={() => {
                   setNavMobile(false);
                 }}
                 className="hover:font-light"
               >
-                <button type="submit">Sign out</button>
+                <button type="submit" onClick={handleLogout}>
+                  Sign out
+                </button>
               </li>
-            </form>
+            </div>
           </>
         ) : (
           <li onClick={() => setNavMobile(false)} className="hover:font-light">

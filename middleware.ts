@@ -1,30 +1,28 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
+
 import type { NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
-  // console.log("here");
 
+export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
+  const { data } = await supabase.auth.getSession();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  if (data?.session && req.nextUrl.pathname.startsWith("/auth")) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
 
-  // console.log(user, req.nextUrl.pathname);
-
-  // if user is signed in and the current path is / redirect the user to /account
+  // Must be a session to see these routes
   if (
-    (user && req.nextUrl.pathname === "/login") ||
-    req.nextUrl.pathname === "/register"
+    !data?.session &&
+    (req.nextUrl.pathname.startsWith("/checkout") ||
+      req.nextUrl.pathname.startsWith("/success") ||
+      req.nextUrl.pathname.startsWith("/orders") ||
+      req.nextUrl.pathname.startsWith("/address"))
   ) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
   return res;
 }
-
-export const config = {
-  matcher: ["/", "/login", "/register"],
-};

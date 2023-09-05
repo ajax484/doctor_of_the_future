@@ -28,7 +28,6 @@ export default function Programs() {
             src={'https://images.pexels.com/photos/936075/pexels-photo-936075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}
             fill={true}
             objectFit="cover"
-            objectPosition="center"
             alt="image of fit woman"
           />
         </div>

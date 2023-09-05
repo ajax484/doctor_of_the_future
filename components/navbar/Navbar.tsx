@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="flex  items-center gap-x-4">
+    <nav className="flex items-center gap-x-4">
       <ul className="hidden md:flex gap-x-3 text-xs  lg:gap-x-6 uppercase lg:text-sm">
         <li className="hover:font-light">
           <Link href={`/`}>

@@ -1,83 +1,121 @@
 "use client";
-import React, { useState } from "react";
-import { HiChevronDown, HiMenu, HiUser } from "react-icons/hi";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { classNames } from "@/utils/helpers";
-import { Session } from "@supabase/auth-helpers-nextjs";
-import Link from "next/link";
 
-type IAccountLinks = {
-  label: string;
-  href: string;
-};
+import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useRouter } from "next/navigation";
+import {
+  useSessionContext,
+  useSupabaseClient,
+  useUser,
+} from "@supabase/auth-helpers-react";
+import Avatar from "../utils/Avatar";
+import { Link } from "lucide-react";
 
-const getAccountLinks: (user: any) => IAccountLinks[] = (user) =>
-  !!user
-    ? [{ label: "Account", href: "/account" }]
-    : [{ label: "Sign In/Up", href: "/login" }];
+const AccountDropDown = () => {
+  // router
+  const router = useRouter();
+  // user session
+  const { session } = useSessionContext();
+  const supabase = useSupabaseClient();
+  // if theres a user
+  const user = useUser();
 
-export default function AccountDropDown({
-  session,
-}: {
-  session?: Session | null;
-}) {
-  const user = session?.user;
+  // console.log(user)
+  // hook for auth modal
+  const authModal = useAuthModal();
+
+  // handle sign out
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/");
+  };
 
   return (
-    <Menu as="div" className="relative md:inline-block text-left hidden ">
+    <header className="py-2 text-xs md:px-8  flex items-center justify-between">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          <HiUser />
-          <HiChevronDown
-            className="-mr-1 h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-        </Menu.Button>
-      </div>
-
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-72 h-44 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="p-4">
-            {getAccountLinks(user).map((link) => (
-              <Menu.Item key={link.label}>
-                {({ active }) => (
-                  <Link href={link.href} >
-                    <span className={"text-gray-700 block px-4 py-2 my-3 text-sm border"}>
-                      {link.label}
-                    </span>
-                  </Link>
-                )}
-              </Menu.Item>
-            ))}
-            {!!user && (
-              <form action={"/signout"} method="POST">
-                <Menu.Item >
-                  {({ active }) => (
-                    <button
-                      type="submit"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block w-full px-4 py-2 text-left text-sm"
-                      )}
+        <ul className="flex items-center font-normal capitalize gap-x-3 md:gap-x-2">
+          <li className=" font-semibold cursor-pointer">
+            {session && user?.id ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <div className="flex items-center gap-x-2">
+                    <Avatar src={user?.user_metadata.avatar_url} />
+                    <p className=" capitalize text-xs">
+                      {user?.user_metadata.name}
+                    </p>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className=" w-44 h-72">
+                  <DropdownMenuLabel> Account Details</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="my-5">
+                    <div className="flex items-center gap-x-3">
+                      <Avatar src={user?.user_metadata.avatar_url} />
+                      <span>{user?.user_metadata.name}</span>
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <div
+                      onClick={() => router.push("/orders")}
+                      className=" capitalize cursor-pointer"
                     >
-                      Sign out
-                    </button>
-                  )}
-                </Menu.Item>
-              </form>
+                      my orders
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem>
+                    <div
+                      onClick={() => router.push("/orders")}
+                      className=" capitalize cursor-pointer"
+                    >
+                      my bookings
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <div
+                      onClick={() => router.push("/orders")}
+                      className=" capitalize cursor-pointer"
+                    >
+                      my subscriptions
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem>
+                    <div
+                      onClick={() => router.push("/orders")}
+                      className=" capitalize cursor-pointer"
+                    >
+                      my programs
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem>
+                    <button onClick={handleLogout}>Sign Out</button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              //   if no user
+              <div className="flex items-center gap-x-2">
+                <li>Hello,</li>
+                <div onClick={authModal.onOpen}>
+                  <Avatar src={user?.user_metadata.avatar_url} />
+                </div>
+              </div>
             )}
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
+          </li>
+        </ul>
+      </div>
+    </header>
   );
-}
+};
+
+export default AccountDropDown;

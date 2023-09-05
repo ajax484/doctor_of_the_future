@@ -1,9 +1,12 @@
+"use client";
 import { siteConfig } from "@/siteConfig/site";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import CartContextProvider from "@/context/CartContext";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ModalProvider from "@/providers/ModalProvider";
+import SupabaseProvider from "@/providers/SupabaseProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +28,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         {/* providers will be added here */}
-        <QueryClientProvider client={queryClient}>
-          <CartContextProvider>{children}</CartContextProvider>
-        </QueryClientProvider>
+        <SupabaseProvider>
+          <QueryClientProvider client={queryClient}>
+            <ModalProvider />
+            <CartContextProvider>{children}</CartContextProvider>
+          </QueryClientProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
