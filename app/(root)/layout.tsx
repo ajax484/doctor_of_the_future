@@ -1,3 +1,4 @@
+"use client";
 import ClientPreventHydration from "@/components/preventHydration/PreventHydration";
 import React from "react";
 import Footer from "@/components/ui/footer";

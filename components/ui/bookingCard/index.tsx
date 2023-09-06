@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import Button from "../button";
 import { useRouter } from "next/navigation";
 import { BookingProps } from "@/types/products";
+import { Button } from "../button";
 
 const BookingCard: React.FC<BookingProps> = ({
   id,
@@ -42,7 +42,7 @@ const BookingCard: React.FC<BookingProps> = ({
         <Button
           label="Book"
           intent="primary"
-          onClick={() => router.push(`/bookings/info/${id}`)}
+          onClick={() => router.push(`/bookings/calendar/${id}`)}
         />
       </div>
     </div>

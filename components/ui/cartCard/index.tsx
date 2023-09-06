@@ -1,15 +1,18 @@
 import Image from "next/image";
 import React from "react";
 import Button from "../button";
+import { IoClose } from "react-icons/io5";
+import { useCart } from "@/context/CartContext";
 
 interface ICartCard {
   name: string;
   image: string;
   price: number;
-  id: number;
+  id: string;
 }
 
 const CartCard: React.FC<ICartCard> = ({ name, id, image = "", price }) => {
+  const {removeItem} = useCart();
   return (
     <div className="flex gap-2">
       <div className="relative h-20 w-full flex-[35%]">
@@ -22,9 +25,12 @@ const CartCard: React.FC<ICartCard> = ({ name, id, image = "", price }) => {
         />
       </div>
       <div className="flex-[65%] flex flex-col justify-evenly">
-        <h2 className="text-slate-700 font-bold text-md">{name}</h2>
+        <h2 className="text-slate-700 font-bold text-base capitalize">{name}</h2>
         <h3 className="text-slate-700 text-sm">NGN{price}.00</h3>
       </div>
+      <button onClick={() => removeItem(id)} className="self-start">
+          <IoClose className="ml-auto text-black text-2xl hover:font-light" />
+        </button>
     </div>
   );
 };
