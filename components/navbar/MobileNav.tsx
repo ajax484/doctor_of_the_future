@@ -1,14 +1,23 @@
 import { Session } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/navigation";
+import { menuItems } from "./Header";
 
 type MobileNavProps = {
   setNavMobile: (value: boolean) => void;
-  session: Session | null | undefined;
 };
 
-function MobileNav({ setNavMobile, session }: MobileNavProps): JSX.Element {
-  const user = session?.user;
+function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
+  const user = useUser();
+  const supabase = useSupabaseClient();
+  const router = useRouter();
+  // handle sign out
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/");
+  };
 
   return (
     <nav className="block md:hidden bg-black text-gray-300 w-full h-full">
@@ -18,27 +27,15 @@ function MobileNav({ setNavMobile, session }: MobileNavProps): JSX.Element {
       />
 
       <ul className="flex flex-col justify-center space-y-8 h-full items-center capitalize font-secondary">
-        <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/`}>Home</Link>
-        </li>
-        <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/plans`}>Pricing & Plans</Link>
-        </li>
-        <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/`}>Book Online</Link>
-        </li>
-        <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/shop`}>Shop</Link>
-        </li>
-        <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/`}>Blog</Link>
-        </li>
-        <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/`}>Programs</Link>
-        </li>
-        <li onClick={() => setNavMobile(false)} className="hover:font-light">
-          <Link href={`/terms`}>Terms</Link>
-        </li>
+        {menuItems.map((item, index) => (
+          <li
+            onClick={() => setNavMobile(false)}
+            className="hover:font-light"
+            key={item.label}
+          >
+            <Link href={item.link}>{item.label}</Link>
+          </li>
+        ))}
         {!!user ? (
           <>
             <li
@@ -47,16 +44,18 @@ function MobileNav({ setNavMobile, session }: MobileNavProps): JSX.Element {
             >
               <Link href={`/account`}>Account</Link>
             </li>
-            <form action={"/signout"} method="POST">
+            <div>
               <li
                 onClick={() => {
                   setNavMobile(false);
                 }}
                 className="hover:font-light"
               >
-                <button type="submit">Sign out</button>
+                <button type="submit" onClick={handleLogout}>
+                  Sign out
+                </button>
               </li>
-            </form>
+            </div>
           </>
         ) : (
           <li onClick={() => setNavMobile(false)} className="hover:font-light">

@@ -1,24 +1,19 @@
-export interface planCardProps {
-  id: number;
+export interface CommonProps {
+  image: string;
   name: string;
   price: number;
   description: string;
+  id: string;
+}
+
+export interface PlanProps extends CommonProps {
   benefits: string[];
 }
 
-export interface ProgramCardProps {
-  image: string;
-  name: string;
-  id: number;
-  price: number;
+export interface ProgramProps extends CommonProps {
   duration: string;
-  description: string;
 }
 
-export interface ProductCardProps {
-  image: string;
-  name: string;
-  price: number;
-  id: number;
-  description: string;
-}
+export interface ProductProps extends CommonProps {}
+
+export interface BookingProps extends CommonProps {}

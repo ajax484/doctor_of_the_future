@@ -22,8 +22,8 @@ const CartCard: React.FC<ICartCard> = ({ name, id, image = "", price }) => {
         />
       </div>
       <div className="flex-[65%] flex flex-col justify-evenly">
-        <h2 className="text-slate-700 text-lg font-bold">{name}</h2>
-        <h3 className="text-slate-700">NGN{price}.00</h3>
+        <h2 className="text-slate-700 font-bold text-md">{name}</h2>
+        <h3 className="text-slate-700 text-sm">NGN{price}.00</h3>
       </div>
     </div>
   );

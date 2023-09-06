@@ -1,12 +1,16 @@
 "use client";
-import { planCardProps } from "@/components/ui/planCard";
-import { ProductCardProps } from "@/components/ui/productCard";
-import { ProgramCardProps } from "@/components/ui/programCard";
 import { useLocalState } from "@/hooks/useLocalStorage";
+import {
+  PlanProps,
+  ProductProps,
+  ProgramProps,
+} from "@/types/products";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
+type TcartItem = ProductProps;
+
 interface ICartContext {
-  cart: planCardProps[] | ProductCardProps[] | ProgramCardProps[];
+  cart: TcartItem[];
   cartVisible: boolean;
   showCart: () => void;
   hideCart: () => void;
@@ -43,21 +47,25 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
 
   const addItem = (product: any) => {
     console.log(product);
-    setCart((prevState: any[]) => [...prevState, product]);
+
+    if (cart.find((cartItem: { id: string }) => cartItem.id === product.id))
+      return;
+    setCart((prevState: TcartItem[]) => [...prevState, product]);
   };
 
   const removeItem = (productId: string) => {
-    setCart((prevState: any[]) =>
-      prevState.filter((item: { id: string }) => item.id !== productId)
+    setCart((prevState: TcartItem[]) =>
+      prevState.filter((item: TcartItem) => item.id !== productId)
     );
   };
+  
 
   const resetCart = () => {
     setCart([]);
   };
 
   const isAdded = (productId: string) => {
-    return cart?.some((item: { slug: string }) => item.slug === productId);
+    return cart?.some((item: { id: string }) => item.id === productId);
   };
 
   const values: ICartContext = {

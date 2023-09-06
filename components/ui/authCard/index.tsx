@@ -13,7 +13,7 @@ export default function AuthForm() {
       view={"sign_in"}
       providers={["google"]}
       appearance={{ theme: ThemeSupa }}
-      redirectTo="/auth/callback"
+      redirectTo="/"
     />
   );
 }

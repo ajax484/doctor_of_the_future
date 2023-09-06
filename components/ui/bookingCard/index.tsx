@@ -3,10 +3,9 @@ import Image from "next/image";
 import React from "react";
 import Button from "../button";
 import { useRouter } from "next/navigation";
-import { ProgramProps } from "@/types/products";
+import { BookingProps } from "@/types/products";
 
-const ProgramCard: React.FC<ProgramProps> = ({
-  duration,
+const BookingCard: React.FC<BookingProps> = ({
   id,
   image,
   name,
@@ -17,7 +16,7 @@ const ProgramCard: React.FC<ProgramProps> = ({
   return (
     <div className="border-[1px] border-gray-200 h-full flex flex-col justify-between gap-4">
       <div>
-        <div className="w-full h-80 relative">
+        <div className="w-full h-[400px] relative">
           <Image
             src={image}
             alt="name"
@@ -29,7 +28,6 @@ const ProgramCard: React.FC<ProgramProps> = ({
         <div className="p-8 space-y-6">
           <div className="space-y-3">
             <h2 className="text-xl font-bold capitalize">{name}</h2>
-            <h4 className="text-slate-700">{duration}</h4>
           </div>
 
           <div className="bg-gray-600 w-10 h-[1px]" />
@@ -42,13 +40,13 @@ const ProgramCard: React.FC<ProgramProps> = ({
 
       <div className="p-4">
         <Button
-          label="Join"
+          label="Book"
           intent="primary"
-          onClick={() => router.push(`/programs/info/${id}`)}
+          onClick={() => router.push(`/bookings/info/${id}`)}
         />
       </div>
     </div>
   );
 };
 
-export default ProgramCard;
+export default BookingCard;

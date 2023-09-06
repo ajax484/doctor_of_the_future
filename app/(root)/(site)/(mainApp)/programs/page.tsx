@@ -1,8 +1,8 @@
 import ProgramCard from "@/components/ui/programCard";
-import { ProgramCardProps } from "@/types/products";
+import { ProgramProps } from "@/types/products";
 import React from "react";
 
-export const DUMMY_PROGRAMS: ProgramCardProps[] = [
+export const DUMMY_PROGRAMS: ProgramProps[] = [
   {
     image: "/shop/shop1.jpg",
     name: "Knightup Challenge 2.0",

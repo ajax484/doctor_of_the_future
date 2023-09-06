@@ -2,8 +2,6 @@ import ClientPreventHydration from "@/components/preventHydration/PreventHydrati
 import React from "react";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/navbar/Header";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from 'next/headers';
 import CartScreen from "@/components/ui/cartScreen";
 
 interface SiteProps {
@@ -11,24 +9,12 @@ interface SiteProps {
 }
 
 const layout = async ({ children }: SiteProps) => {
-  const supabase = createServerComponentClient({ cookies });
-  // Rest of your code here
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()  
-
-  console.log(session?.user);
-  
-
   return (
     <ClientPreventHydration>
       {/* header */}
-      <Header session={session} />
+      <Header />
       <CartScreen />
       <main className="py-20">{children}</main>
-      {/* children leads to page i.e home */}
-      {/* footer */}
       <Footer />
     </ClientPreventHydration>
   );
@@ -36,7 +22,5 @@ const layout = async ({ children }: SiteProps) => {
 
 export default layout;
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
-// root layout for all components in HOme
-// client prevent hydration to stop nextjs hydration error in the client side

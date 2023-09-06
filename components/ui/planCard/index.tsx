@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "../button";
-import { planCardProps } from "@/types/products";
+import { PlanProps } from "@/types/products";
 import { IoCaretForwardOutline } from "react-icons/io5";
 
-const PlanCard: React.FC<planCardProps> = ({
+const PlanCard: React.FC<PlanProps> = ({
   id,
   name,
   price,
