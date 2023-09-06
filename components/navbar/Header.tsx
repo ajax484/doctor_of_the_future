@@ -1,16 +1,30 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 // components
 import Navbar from "./Navbar";
 import MobileNav from "./MobileNav";
-import { Session } from "@supabase/auth-helpers-nextjs";
+
 // icons
 import { HiChevronDown, HiMenu, HiShoppingCart, HiUser } from "react-icons/hi";
 import AccountDropDown from "./AccountDropDown";
 import { useCart } from "@/context/CartContext";
+
+type TMenuItem = {
+  label: string;
+  link: string;
+};
+
+export const menuItems: TMenuItem[] = [
+  { label: "Home", link: "/" },
+  { label: "Plans & Pricing", link: "/plans" },
+  { label: "Book Online", link: "/bookings" },
+  { label: "Shop", link: "/shop" },
+  { label: "Blog", link: "/" },
+  { label: "Programs", link: "/programs" },
+  { label: "Terms", link: "/terms" },
+];
 
 export default function Header() {
   const [navMobile, setNavMobile] = useState(false);

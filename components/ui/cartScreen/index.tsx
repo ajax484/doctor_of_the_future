@@ -19,7 +19,7 @@ export default function CartScreen() {
         <button onClick={hideCart}>
           <IoClose className="ml-auto text-black text-2xl hover:font-light" />
         </button>
-        <div className="flex-[80%] py-4 flex flex-col gap-8">
+        <div className="flex-[80%] py-4 flex flex-col gap-8 overflow-auto">
           {cart.length > 0 ? (
             cart.map((cartItem) => (
               <CartCard
@@ -34,7 +34,7 @@ export default function CartScreen() {
             <>No Products Found</>
           )}
         </div>
-        <Button label="Checkout" intent="primary" />
+        {cart.length > 0 && <Button label="Checkout" intent="primary" />}
       </div>
     </div>
   );
