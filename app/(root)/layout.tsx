@@ -4,19 +4,24 @@ import React from "react";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/navbar/Header";
 import CartScreen from "@/components/ui/cartScreen";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 interface SiteProps {
   children: React.ReactNode;
 }
 
-const layout = async ({ children }: SiteProps) => {
+const layout = ({ children }: SiteProps) => {
+  const queryClient = new QueryClient();
+
   return (
     <ClientPreventHydration>
-      {/* header */}
-      <Header />
-      <CartScreen />
-      <main className="py-20">{children}</main>
-      <Footer />
+      <QueryClientProvider client={queryClient}>
+        {/* header */}
+        <Header />
+        <CartScreen />
+        <main className="py-20">{children}</main>
+        <Footer />
+      </QueryClientProvider>
     </ClientPreventHydration>
   );
 };
@@ -24,4 +29,3 @@ const layout = async ({ children }: SiteProps) => {
 export default layout;
 
 export const dynamic = "force-dynamic";
-

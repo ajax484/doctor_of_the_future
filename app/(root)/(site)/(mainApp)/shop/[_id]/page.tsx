@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/customButton";
 import { useCart } from "@/context/CartContext";
 import { useGetItem } from "@/hooks/shop";
 import Loading from "@/components/ui/Loading";

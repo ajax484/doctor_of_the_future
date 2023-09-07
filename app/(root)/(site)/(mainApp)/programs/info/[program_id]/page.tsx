@@ -1,7 +1,7 @@
 import React from "react";
 import { DUMMY_PROGRAMS } from "../../page";
 import Image from "next/image";
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/customButton";
 
 async function getProgram(program_id: number) {
   return DUMMY_PROGRAMS.find((program) => program.id == program_id);

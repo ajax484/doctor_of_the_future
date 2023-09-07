@@ -3,7 +3,8 @@ import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { BookingProps } from "@/types/products";
-import { Button } from "../button";
+import Button from "../customButton";
+
 
 const BookingCard: React.FC<BookingProps> = ({
   id,
