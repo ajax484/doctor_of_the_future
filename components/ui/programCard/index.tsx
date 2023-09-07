@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import Button from "../button";
+import Button from "@/components/ui/customButton";
 import { useRouter } from "next/navigation";
 import { ProgramProps } from "@/types/products";
 

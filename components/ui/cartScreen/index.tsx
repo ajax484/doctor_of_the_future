@@ -2,7 +2,7 @@
 import { useCart } from "@/context/CartContext";
 import React from "react";
 import { IoClose } from "react-icons/io5";
-import Button from "../button";
+import Button from "@/components/ui/customButton";
 import CartCard from "../cartCard";
 
 export default function CartScreen() {

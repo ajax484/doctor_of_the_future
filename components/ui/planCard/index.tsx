@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../button";
+import Button from "@/components/ui/customButton";
 import { PlanProps } from "@/types/products";
 import { IoCaretForwardOutline } from "react-icons/io5";
 

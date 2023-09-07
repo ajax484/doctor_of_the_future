@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Button from "../button";
+import Button from "@/components/ui/customButton";
 import { IoClose } from "react-icons/io5";
 import { useCart } from "@/context/CartContext";
 
