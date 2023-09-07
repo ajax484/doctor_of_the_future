@@ -12,7 +12,7 @@ import { useSessionContext } from "@supabase/auth-helpers-react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { IoCaretBack, IoVideocam } from "react-icons/io5";
+import { IoVideocam } from "react-icons/io5";
 
 type TTimeSlot = {
   label: string;
