@@ -28,7 +28,7 @@ export const menuItems: TMenuItem[] = [
 
 export default function Header() {
   const [navMobile, setNavMobile] = useState(false);
-  const { cartVisible, hideCart, showCart } = useCart();
+  const { cartVisible, hideCart, showCart, cart } = useCart();
 
   return (
     <header className="fixed w-full bg-white h-20 z-50  px-4 md:px-8 overflow-hidden bar py-8">
@@ -46,8 +46,11 @@ export default function Header() {
         <div className=" flex items-center gap-x-2">
           <AccountDropDown />
 
-          <button onClick={showCart}>
+          <button onClick={showCart} className="relative">
             <HiShoppingCart className="text-2xl" />
+            <div className="bg-limeGreen px-1 rounded-full absolute -right-4 -top-4 text-white text-[10px]">
+              {cart.length}
+            </div>
           </button>
           {/* mobile nav functionality */}
           <HiMenu
