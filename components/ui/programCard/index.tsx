@@ -4,6 +4,8 @@ import React from "react";
 import Button from "@/components/ui/customButton";
 import { useRouter } from "next/navigation";
 import { ProgramProps } from "@/types/products";
+import { formatPriceToNaira } from "@/utils/FormattedCurrency";
+import { shimmer, toBase64 } from "@/utils/shimmerimage";
 
 const ProgramCard: React.FC<ProgramProps> = ({
   duration,
@@ -20,6 +22,9 @@ const ProgramCard: React.FC<ProgramProps> = ({
         <div className="w-full h-80 relative">
           <Image
             src={image}
+            blurDataURL={`data:image/svg+xml;base64,${toBase64(
+              shimmer(200, 200)
+            )}`}
             alt="name"
             layout="fill"
             objectFit="cover"
@@ -36,7 +41,7 @@ const ProgramCard: React.FC<ProgramProps> = ({
 
           <p>{description}</p>
 
-          <h3 className="text-slate-800">NGN{price}</h3>
+          <h3 className="text-slate-800">{formatPriceToNaira(price)}</h3>
         </div>
       </div>
 

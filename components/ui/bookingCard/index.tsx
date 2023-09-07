@@ -4,6 +4,8 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { BookingProps } from "@/types/products";
 import Button from "../customButton";
+import { formatPriceToNaira } from "@/utils/FormattedCurrency";
+import { shimmer, toBase64 } from "@/utils/shimmerimage";
 
 
 const BookingCard: React.FC<BookingProps> = ({
@@ -20,6 +22,9 @@ const BookingCard: React.FC<BookingProps> = ({
         <div className="w-full h-[400px] relative">
           <Image
             src={image}
+            blurDataURL={`data:image/svg+xml;base64,${toBase64(
+              shimmer(200, 200)
+            )}`}
             alt="name"
             layout="fill"
             objectFit="cover"
@@ -35,7 +40,7 @@ const BookingCard: React.FC<BookingProps> = ({
 
           <p>{description}</p>
 
-          <h3 className="text-slate-800">NGN{price}</h3>
+          <h3 className="text-slate-800">{formatPriceToNaira(price)}</h3>
         </div>
       </div>
 

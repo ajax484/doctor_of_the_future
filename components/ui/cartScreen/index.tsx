@@ -31,7 +31,7 @@ export default function CartScreen() {
               />
             ))
           ) : (
-            <>No Products Found</>
+            <p className=" text-sm text-center text-neutral-500 capitalize">No Products in your cart</p>
           )}
         </div>
         {cart.length > 0 && <Button label="Checkout" intent="primary" />}

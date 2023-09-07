@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import CartContextProvider from "@/context/CartContext";
 import ModalProvider from "@/providers/ModalProvider";
 import SupabaseProvider from "@/providers/SupabaseProvider";
+import ToastProvider from "@/providers/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         {/* providers will be added here */}
         <SupabaseProvider>
           <ModalProvider />
+          <ToastProvider />
           <CartContextProvider>{children}</CartContextProvider>
         </SupabaseProvider>
       </body>

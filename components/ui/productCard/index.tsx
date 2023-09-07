@@ -1,5 +1,7 @@
 "use client";
 import { ProductProps } from "@/types/products";
+import { formatPriceToNaira } from "@/utils/FormattedCurrency";
+import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -52,6 +54,9 @@ const ProductCard: React.FC<ProductProps> = ({
           </div> */}
           <Image
             src={image}
+            blurDataURL={`data:image/svg+xml;base64,${toBase64(
+              shimmer(200, 200)
+            )}`}
             alt="name"
             layout="fill"
             objectFit="cover"
@@ -72,8 +77,8 @@ const ProductCard: React.FC<ProductProps> = ({
           </button>
         </div>
         <div className="pt-4 pb-1">
-          <h2 className="text-slate-900 capitalize">{name}</h2>
-          <h3 className="text-slate-600">NGN {price}.00</h3>
+          <h2 className="text-slate-900 text-lg capitalize line-clamp-1">{name}</h2>
+          <h3 className="text-slate-600 pt-2">{formatPriceToNaira(price)}</h3>
         </div>
       </Link>
     </div>

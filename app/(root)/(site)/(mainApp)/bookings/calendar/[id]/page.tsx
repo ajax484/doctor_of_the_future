@@ -45,13 +45,13 @@ const Page = () => {
   console.log(combineDateAndTime(date, timeSlot.value));
 
   return (
-    <div className="space-y-8">
-      <button className="flex gap-2" onClick={() => router.back()}>
-        <ArrowLeft /> <span>Back</span>
+    <div className="space-y-8 my-10">
+      <button className="flex items-center gap-2" onClick={() => router.back()}>
+        <ArrowLeft size={16} /> <span className=" text-sm text-neutral-500">Back</span>
       </button>
       <div className="space-y-4">
-        <h1>General medical consulting</h1>
-        <p>
+        <h1 className=" font-semibold capitalize text-2xl">General medical consulting</h1>
+        <p className=" text-sm text-neutral-500">
           Check out our availability and book the date and time that works for
           you
         </p>

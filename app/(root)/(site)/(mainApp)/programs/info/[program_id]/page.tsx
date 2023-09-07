@@ -2,6 +2,7 @@ import React from "react";
 import { DUMMY_PROGRAMS } from "../../page";
 import Image from "next/image";
 import Button from "@/components/ui/customButton";
+import { shimmer, toBase64 } from "@/utils/shimmerimage";
 
 async function getProgram(program_id: number) {
   return DUMMY_PROGRAMS.find((program) => program.id == program_id);
@@ -52,6 +53,9 @@ export default async function programInfo({
       <div className="w-full relative h-40 md:h-80 lg:h-96 mb-6 md:mb-12 lg:mb-24">
         <Image
           src={program.image}
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(
+            shimmer(200, 200)
+          )}`}
           alt="name"
           layout="fill"
           objectFit="cover"

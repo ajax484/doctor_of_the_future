@@ -1,10 +1,7 @@
 "use client";
+import { toast } from "@/components/ui/use-toast";
 import { useLocalState } from "@/hooks/useLocalStorage";
-import {
-  PlanProps,
-  ProductProps,
-  ProgramProps,
-} from "@/types/products";
+import { PlanProps, ProductProps, ProgramProps } from "@/types/products";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 type TcartItem = ProductProps;
@@ -51,17 +48,25 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
     if (cart.find((cartItem: { id: string }) => cartItem.id === product.id))
       return;
     setCart((prevState: TcartItem[]) => [...prevState, product]);
+    toast({
+      title: "Item added to cart",
+    });
   };
 
   const removeItem = (productId: string) => {
     setCart((prevState: TcartItem[]) =>
       prevState.filter((item: TcartItem) => item.id !== productId)
     );
+    toast({
+      title: "Item removed from cart",
+    });
   };
-  
 
   const resetCart = () => {
     setCart([]);
+    toast({
+      title: "Cart items reset",
+    });
   };
 
   const isAdded = (productId: string) => {

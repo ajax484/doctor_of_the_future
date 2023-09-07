@@ -5,16 +5,16 @@ import { useGetBookings } from "@/hooks/bookings";
 import { BookingProps } from "@/types/products";
 import React from "react";
 
-export const Page = () => {
+export const Bookings = () => {
   const { bookings, fetchingbookings, fetchingbookingsError } =
     useGetBookings();
 
-  console.log(bookings);
+  // console.log(bookings);
 
   return (
     <Loading loading={fetchingbookings} error={!!fetchingbookingsError}>
       <div className="grid md:grid-cols-2 gap-4">
-        {bookings.map((booking: BookingProps) => (
+        {bookings?.map((booking: BookingProps) => (
           <BookingCard key={booking.name} {...booking} />
         ))}
       </div>
@@ -22,4 +22,4 @@ export const Page = () => {
   );
 };
 
-export default Page;
+export default Bookings;

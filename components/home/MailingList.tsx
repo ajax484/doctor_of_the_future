@@ -10,7 +10,7 @@ export default function MailingList() {
       </h2>
       <div className="w-full md:w-1/2">
         <Input
-          onInput={(e) => console.log(e.target.value)}
+          // onInput={(e) => console.log(e.target.value)}
           intent="secondary"
           rounded="none"
           placeholder="Enter an email..."

@@ -1,9 +1,12 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Button from "@/components/ui/customButton";
 import { useCart } from "@/context/CartContext";
 import { useGetItem } from "@/hooks/shop";
 import Loading from "@/components/ui/Loading";
+import { formatPriceToNaira } from "@/utils/FormattedCurrency";
+import { toast } from "@/components/ui/use-toast";
+import { shimmer, toBase64 } from "@/utils/shimmerimage";
 
 export default function Item({ params }: { params: { _id: string } }) {
   const { _id } = params;
@@ -19,6 +22,9 @@ export default function Item({ params }: { params: { _id: string } }) {
         <div className="h-40 md:h-80 lg:h-screen w-full relative">
           <Image
             src={item.image}
+            blurDataURL={`data:image/svg+xml;base64,${toBase64(
+              shimmer(200, 200)
+            )}`}
             alt={item.name}
             layout="fill"
             objectFit="cover"
@@ -30,17 +36,19 @@ export default function Item({ params }: { params: { _id: string } }) {
             <h2 className="text-slate-900 capitalize text-2xl font-bold">
               {item.name}
             </h2>
-            <h3 className="text-slate-600 text-lg">NGN {item.price}.00</h3>
+            <h3 className="text-slate-600 text-lg">
+              {formatPriceToNaira(item.price)}
+            </h3>
           </div>
           <Button
             label={!isAdded(item.id) ? "Add To Cart" : "Remove From Cart"}
             type="button"
             intent="primary"
-            onClick={() =>
-              !isAdded(item.id) ? addItem(item) : removeItem(item.id)
-            }
+            onClick={() => {
+              !isAdded(item.id) ? addItem(item) : removeItem(item.id);
+            }}
           />
-          <p className="text-slate-700">{item.description}</p>
+          <p className="text-slate-700 leading-8">{item.description}</p>
         </div>
       </div>
     </Loading>
