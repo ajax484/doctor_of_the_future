@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../ui/button'
+import Button from "@/components/ui/customButton";
 import Input from '../ui/inputbase'
 
 export default function MailingList() {
