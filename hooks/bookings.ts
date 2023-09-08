@@ -31,16 +31,16 @@ export const useGetBookings: () => UseGetbookingsResult = () => {
   };
 };
 
-export const useGetItem = ({ _id }: { _id: string }) => {
+export const useGetBooking = ({ _id }: { _id: string }) => {
   const {
-    data: item,
-    isLoading: fetchingItem,
-    error: fetchingItemError,
+    data: booking,
+    isLoading: fetchingBooking,
+    error: fetchingBookingError,
   } = useQuery({
-    queryKey: "get bookings",
+    queryKey: ["get booking", _id],
     queryFn: async () => {
       const { data } = await getRequest({ endpoint: `/api/bookings/${_id}` });
-      return data;
+      return data as unknown as BookingProps;
     },
     onError: (error) => {
       alert(error);
@@ -48,8 +48,8 @@ export const useGetItem = ({ _id }: { _id: string }) => {
   });
 
   return {
-    item: item || [],
-    fetchingItem,
-    fetchingItemError,
+    booking: booking || {},
+    fetchingBooking,
+    fetchingBookingError,
   };
 };

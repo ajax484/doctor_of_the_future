@@ -5,7 +5,6 @@ import { useCart } from "@/context/CartContext";
 import { useGetItem } from "@/hooks/shop";
 import Loading from "@/components/ui/Loading";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
-import { toast } from "@/components/ui/use-toast";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 
 export default function Item({ params }: { params: { _id: string } }) {

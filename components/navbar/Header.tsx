@@ -48,7 +48,7 @@ export default function Header() {
 
           <button onClick={showCart} className="relative">
             <HiShoppingCart className="text-2xl" />
-            <div className="bg-limeGreen px-1 rounded-full absolute -right-4 -top-4 text-white text-[10px]">
+            <div className="bg-limeGreen px-1 rounded-full absolute -right-2 -top-2 text-white text-[10px]">
               {cart.length}
             </div>
           </button>
