@@ -62,7 +62,7 @@ const Page = () => {
           <h2 className="text-lg font-medium pb-2 border-b-[1px]">
             Select Date and Time
           </h2>
-          <div className="flex gap-6">
+          <div className="flex gap-7">
             <Calendar
               mode="single"
               selected={date}
