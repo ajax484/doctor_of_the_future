@@ -29,7 +29,7 @@ const BookingCard: React.FC<BookingCardsProps> = ({
       price,
       description,
     });
-    router.push(`/bookings/calendar/${name}`);
+    router.push(`/bookings/${name.replaceAll(" ", "_")}/calendar`);
   };
 
   return (

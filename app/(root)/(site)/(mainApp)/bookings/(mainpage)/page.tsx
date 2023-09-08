@@ -9,7 +9,7 @@ import { useBookingContext } from "../layout";
 export const Bookings = () => {
   const { bookings, fetchingbookings, fetchingbookingsError } =
     useGetBookings();
-  const { changeBooking } = useBookingContext();
+  const { changeBooking } = useBookingContext()
 
   console.log(bookings);
 
