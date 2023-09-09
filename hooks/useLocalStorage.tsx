@@ -6,7 +6,7 @@ export const useLocalState = ({
   stateKey,
 }: {
   defaultValue: any;
-  stateKey: any;
+  stateKey: string;
 }) => {
   const localValue = localStorage.getItem(stateKey);
   const parsedValue = localValue ? deserializeValue(localValue) : defaultValue;

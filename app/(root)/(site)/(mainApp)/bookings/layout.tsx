@@ -12,19 +12,21 @@ import Button from "@/components/ui/customButton";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
 import { formatDateToHumanReadable } from "@/utils/helpers";
 import { useSessionContext } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/navigation";
+import { useLocalState } from "@/hooks/useLocalStorage";
 
 interface SiteProps {
   children: React.ReactNode;
 }
 
 type TBookingContext = {
-  currentBooking: BookingProps | {};
+  currentBooking: BookingProps;
   changeBooking: (booking: BookingProps) => void;
   date: Date | undefined;
   changeDate: (date: Date) => void;
-  timeSlot: TTimeSlot | {};
+  timeSlot: TTimeSlot;
   changeSlot: (timeSlot: TTimeSlot) => void;
+  paymentMethod: string;
+  changeMethod: (method: string) => void;
 };
 
 type TTimeSlot = {
@@ -33,12 +35,17 @@ type TTimeSlot = {
 };
 
 const BookingContext = createContext<TBookingContext>({
-  currentBooking: {},
+  currentBooking: { name: "", description: "", id: "", image: "", price: 0 },
   changeBooking(booking) {},
   date: new Date(),
   changeDate(date) {},
-  timeSlot: {},
+  timeSlot: {
+    label: "9:00 AM",
+    value: "09:00:00",
+  },
   changeSlot(timeSlot) {},
+  paymentMethod: "",
+  changeMethod(method) {},
 });
 
 export const TIMESLOTS: TTimeSlot[] = [
@@ -57,16 +64,27 @@ export const TIMESLOTS: TTimeSlot[] = [
 ];
 
 const BookingLayout = ({ children }: SiteProps) => {
-  const [currentBooking, setBooking] = useState({});
+  const [currentBooking, setBooking] = useLocalState({
+    defaultValue: {
+      name: "",
+      description: "",
+      id: "",
+      image: "",
+      price: 0,
+    },
+    stateKey: "currentBooking",
+  });
   const [date, setDate] = React.useState<Date>(new Date());
   const [timeSlot, setTimeSlot] = React.useState<TTimeSlot>({
     label: "9:00 AM",
     value: "09:00:00",
   });
+  const [paymentMethod, setMethod] = useState<string>("");
 
   const changeBooking = (booking: BookingProps) => setBooking(booking);
   const changeDate = (date: Date) => setDate(date);
   const changeSlot = (newSlot: TTimeSlot) => setTimeSlot(newSlot);
+  const changeMethod = (method: string) => setMethod(method);
 
   const value: TBookingContext = {
     currentBooking,
@@ -75,6 +93,8 @@ const BookingLayout = ({ children }: SiteProps) => {
     changeDate,
     timeSlot,
     changeSlot,
+    paymentMethod,
+    changeMethod,
   };
 
   return (
@@ -84,11 +104,10 @@ const BookingLayout = ({ children }: SiteProps) => {
 
 export const useBookingContext = () => useContext(BookingContext);
 
-export function BookingAccordion({ navigateTo }: { navigateTo: string }) {
+export function BookingAccordion() {
   const { session } = useSessionContext();
   const { currentBooking: booking, date, timeSlot } = useBookingContext();
-  const router = useRouter();
-  
+
   return (
     <>
       <Accordion type="single" collapsible>
@@ -119,11 +138,6 @@ export function BookingAccordion({ navigateTo }: { navigateTo: string }) {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <Button
-        label="Next"
-        intent="primary"
-        onClick={() => router.push("form")}
-      />
     </>
   );
 }

@@ -9,6 +9,7 @@ import {
   TIMESLOTS,
   useBookingContext,
 } from "../../../layout";
+import Button from "@/components/ui/customButton";
 
 const Page = ({ params }: { params: { _id: string } }) => {
   const {
@@ -70,7 +71,12 @@ const Page = ({ params }: { params: { _id: string } }) => {
           </div>
         </div>
         <div className="flex-[25%] space-y-4">
-          <BookingAccordion navigateTo="form" />
+          <BookingAccordion />
+          <Button
+            label="Next"
+            intent="primary"
+            onClick={() => router.push("form")}
+          />
         </div>
       </div>
     </div>

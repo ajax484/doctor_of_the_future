@@ -5,10 +5,13 @@ import React from "react";
 import { BookingAccordion, useBookingContext } from "../../../layout";
 import Link from "next/link";
 import BookingForm from "./bookingForm";
+import Button from "@/components/ui/customButton";
 
 const Page = () => {
-  const { currentBooking: booking } = useBookingContext();
+  const { currentBooking: booking, paymentMethod } = useBookingContext();
   const router = useRouter();
+
+  console.log(paymentMethod, "mehtod");
 
   return (
     <div className="space-y-8 my-10">
@@ -27,10 +30,17 @@ const Page = () => {
               <span className="underline">switch account</span>
             </Link>
           </div>
-          <BookingForm />
+          <BookingForm booking={booking} />
         </div>
         <div className="flex-[25%] space-y-4">
-          <BookingAccordion navigateTo="form" />
+          <BookingAccordion />
+          <Button
+            label={paymentMethod === "plan" ? "Buy a Plan" : "Book Now"}
+            type="submit"
+            form="booking-form"
+            intent="primary"
+            onClick={() => router.push("form")}
+          />
         </div>
       </div>
     </div>

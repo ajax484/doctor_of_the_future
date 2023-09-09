@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { MouseEvent } from "react";
 import ButtonStyles, { ButtonStylesVariants } from "./button.variants";
@@ -15,6 +15,7 @@ type ButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   type?: "button" | "submit";
+  form?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -28,6 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   loading,
   type = "button",
+  form,
 }) => {
   const onClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
     if (type === "submit") return;
@@ -44,6 +46,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClickHandler}
       type={type}
       disabled={disabled}
+      form={form}
     >
       <div className="w-fit ">
         {!loading ? (
