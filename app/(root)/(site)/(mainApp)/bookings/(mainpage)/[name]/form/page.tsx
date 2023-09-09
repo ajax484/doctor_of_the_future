@@ -41,14 +41,14 @@ const Page = () => {
               </p>
 
               <div onClick={handleLogout}>
-                <span className="underline cursor-pointer">switch account</span>
+                <span className="underline cursor-pointer">switch account?</span>
               </div>
             </div>
           ) : (
             <div className="bg-gray-100 text-gray-500 px-4 py-2">
               Not user?{" "}
               <Link href={"/login"}>
-                <span className="underline">switch account</span>
+                <span className="underline">Login here</span>
               </Link>
             </div>
           )}
