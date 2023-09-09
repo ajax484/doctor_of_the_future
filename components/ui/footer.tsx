@@ -6,7 +6,7 @@ import React from "react";
 export default function Footer() {
   return (
     <section className="px-8 py-6 bg-black text-white space-y-4">
-      <div className="flex flex-col md:flex-row justify-between items-center text-sm md:text-base gap-2">
+      <div className="flex flex-col gap-y-5 lg:flex-row justify-between items-center text-sm md:text-base gap-2">
         <div className="flex flex-col items-center justify-center gap-1.5">
           <Link href="/">
             <Image
