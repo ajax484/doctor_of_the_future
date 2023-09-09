@@ -121,7 +121,7 @@ export function BookingAccordion() {
                 <IoVideocam /> <span className="text-sm">Available Online</span>
               </div>
               <div>
-                <h4 className="text-base text-slate-900">{booking.name}</h4>
+                <h4 className="text-base font-semibold my-2 capitalize text-slate-900">{booking.name}</h4>
                 <h5 className="text-base text-slate-900">
                   {formatDateToHumanReadable(date)} at {timeSlot.label}
                 </h5>
