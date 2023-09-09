@@ -30,17 +30,17 @@ const Page = ({ params }: { params: { _id: string } }) => {
         <ArrowLeft size={16} />{" "}
         <span className=" text-sm text-neutral-500">Back</span>
       </button>
-      <div className="space-y-4 flex">
-        <h1 className=" font-semibold capitalize text-2xl">{booking.name}</h1>
-        <p className=" text-sm text-neutral-500">
+      <div className="flex flex-col gap-y-2 items-center gap-x-4">
+        <h1 className=" font-semibold text-start md:text-center capitalize text-2xl md:text-3xl">{booking.name}</h1>
+        <p className=" text-sm text-start md:text-center  text-neutral-500">
           Check out our availability and book the date and time that works for
           you
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row  gap-4">
+      <div className="flex flex-col lg:flex-row  gap-4">
         <div className="flex-[75%] space-y-4">
-          <h2 className="text-lg font-medium pb-2 border-b-[1px]">
+          <h2 className="text-lg font-semibold pb-2 border-b-[1px]">
             Select Date and Time
           </h2>
           <div className="flex flex-col md:flex-row items-center gap-6">
@@ -60,7 +60,7 @@ const Page = ({ params }: { params: { _id: string } }) => {
                       timeSlot.value === slot.value
                         ? "text-white bg-black"
                         : "text-slate-700"
-                    } border-[1px] px-4 py-2 flex items-center justify-center h-fit`}
+                    } border-[1px] px-4 py-2 text-xs md:text-base flex items-center justify-center h-fit`}
                     key={slot.label}
                   >
                     {slot.label}

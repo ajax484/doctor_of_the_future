@@ -6,12 +6,22 @@ import { BookingAccordion, useBookingContext } from "../../../layout";
 import Link from "next/link";
 import BookingForm from "./bookingForm";
 import Button from "@/components/ui/customButton";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import useAuthModal from "@/hooks/useAuthModal";
 
 const Page = () => {
   const { currentBooking: booking, paymentMethod } = useBookingContext();
   const router = useRouter();
+  const supabase = useSupabaseClient();
+  const user = useUser();
 
-  console.log(paymentMethod, "mehtod");
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+
+    router.push("/login");
+  };
+
+  // console.log(paymentMethod, "mehtod");
 
   return (
     <div className="space-y-8 my-10">
@@ -24,12 +34,25 @@ const Page = () => {
           <h2 className="text-lg font-medium pb-2 border-b-[1px]">
             Fill out your details
           </h2>
-          <div className="bg-gray-100 text-gray-500 px-4 py-2">
-            Not user?{" "}
-            <Link href={"/login"}>
-              <span className="underline">switch account</span>
-            </Link>
-          </div>
+          {user ? (
+            <div className=" flex items-center gap-x-2">
+              <p className=" text-sm capitalize text-neutral-500">
+                Hello, {user.user_metadata.name}
+              </p>
+
+              <div onClick={handleLogout}>
+                <span className="underline cursor-pointer">switch account?</span>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-gray-100 text-gray-500 px-4 py-2">
+              Not user?{" "}
+              <Link href={"/login"}>
+                <span className="underline">Login here</span>
+              </Link>
+            </div>
+          )}
+
           <BookingForm booking={booking} />
         </div>
         <div className="flex-[25%] space-y-4">
