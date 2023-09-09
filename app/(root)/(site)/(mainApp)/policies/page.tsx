@@ -7,6 +7,8 @@ const Policies = () => {
       <h1 className=" capitalize font-semibold text-3xl mb-5">
         Privacy Policy
       </h1>
+
+      {/* updateda on */}
       <div className=" my-2">
         <Link href={`/terms`}>
           <p className=" text-start capitalize  underline text-xs font-semibold hover:text-blue-500 cursor-pointer">
@@ -17,7 +19,7 @@ const Policies = () => {
       <p className=" text-sm text-neutral-500">
         Our Privacy Policy was last updated on 05-09-2023
       </p>
-
+      {/* data */}
       <div className=" my-6 flex flex-col gap-y-4">
         <p className=" text-neutral-700 text-sm leading-8 ">
           Doctor of the Future is committed to protecting your privacy. This
@@ -34,7 +36,7 @@ const Policies = () => {
           our Terms of Service.
         </p>
       </div>
-
+      {/* defination of terms */}
       <main className=" my-5">
         <div className="">
           <h1 className=" capitalize mb-4 font-semibold">
@@ -183,7 +185,7 @@ const Policies = () => {
         </div>
 
         <div className="">
-          <h1 className=" capitalize mb-4 font-semibold">
+          <h1 className="capitalize mb-4 font-semibold">
             When do we use customer information from third parties?
           </h1>
 
@@ -447,7 +449,6 @@ const Policies = () => {
               we have provided to third parties in accordance with this Privacy
               Policy prior to such update, correction, change or deletion.
             </li>
-      
           </ul>
         </div>
 
@@ -695,7 +696,6 @@ const Policies = () => {
         </div>
       </main>
 
-      
       <main className=" my-5">
         <h1 className=" capitalize mb-4 font-normal">Contact us</h1>
         <p className=" mb-4">
@@ -719,8 +719,8 @@ const Policies = () => {
         </ul>
       </main>
 
-       {/* privacy policy */}
-       <div>
+      {/* privacy policy */}
+      <div>
         <Link href={`/terms`}>
           <p className=" font-semibold underline ubder hover:text-blue-500 cursor-pointer">
             Terms and Conditions

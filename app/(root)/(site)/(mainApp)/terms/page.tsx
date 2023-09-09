@@ -7,7 +7,7 @@ const Terms = () => {
       <h1 className=" font-semibold capitalize text-2xl md:text-3xl">
         Terms and Conditions | Policies | Cookies
       </h1>
-
+    {/* privacy */}
       <div className=" my-2">
         <Link href={`/policies`}>
           <p className=" text-start  underline text-xs font-semibold hover:text-blue-500 cursor-pointer">
@@ -15,13 +15,14 @@ const Terms = () => {
           </p>
         </Link>
       </div>
-
+      {/* terms and co */}
       <div className="my-5">
         <h1 className=" capitalize font-normal">Terms and conditions of use</h1>
         <p className=" text-sm text-neutral-500">
           Our Terms and Conditions were last updated on 05-09-2023
         </p>
       </div>
+
       {/* welcome */}
       <main className="flex mt-8 flex-col gap-y-7">
         <div>
@@ -801,7 +802,6 @@ const Terms = () => {
       </main>
 
       {/* contact us */}
-
       <main className=" my-5">
         <h1 className=" capitalize mb-4 font-normal">Contact us</h1>
         <p className=" mb-4">
@@ -824,6 +824,7 @@ const Terms = () => {
           </li>
         </ul>
       </main>
+
       {/* privacy policy */}
       <div>
         <Link href={`/policies`}>
