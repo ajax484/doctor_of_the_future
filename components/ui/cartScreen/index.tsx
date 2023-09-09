@@ -4,9 +4,11 @@ import React from "react";
 import { IoClose } from "react-icons/io5";
 import Button from "@/components/ui/customButton";
 import CartCard from "../cartCard";
+import { useRouter } from "next/navigation";
 
 export default function CartScreen() {
   const { cart, cartVisible, hideCart, showCart, resetCart } = useCart();
+  const router = useRouter();
   console.log(cart);
 
   return (
@@ -31,10 +33,21 @@ export default function CartScreen() {
               />
             ))
           ) : (
-            <p className=" text-sm text-center text-neutral-500 capitalize">No Products in your cart</p>
+            <p className=" text-sm text-center text-neutral-500 capitalize">
+              No Products in your cart
+            </p>
           )}
         </div>
-        {cart.length > 0 && <Button label="Checkout" intent="primary" />}
+        {cart.length > 0 && (
+          <Button
+            label="Checkout"
+            intent="primary"
+            onClick={() => {
+              router.push("/");
+              hideCart();
+            }}
+          />
+        )}
       </div>
     </div>
   );

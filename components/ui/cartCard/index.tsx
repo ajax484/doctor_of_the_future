@@ -14,7 +14,7 @@ interface ICartCard {
 }
 
 const CartCard: React.FC<ICartCard> = ({ name, id, image = "", price }) => {
-  const {removeItem} = useCart();
+  const { removeItem } = useCart();
   return (
     <div className="flex gap-2 mt-6 border-b py-3">
       <div className="relative h-20 w-full flex-[35%]">
@@ -27,12 +27,14 @@ const CartCard: React.FC<ICartCard> = ({ name, id, image = "", price }) => {
         />
       </div>
       <div className="flex-[65%] flex flex-col justify-evenly">
-        <h2 className="text-slate-700 font-bold text-base capitalize">{name}</h2>
+        <h2 className="text-slate-700 font-bold text-base capitalize">
+          {name}
+        </h2>
         <h3 className="text-slate-700 text-sm">{formatPriceToNaira(price)}</h3>
       </div>
       <button onClick={() => removeItem(id)} className="self-start">
-          <MinusCircle className="ml-auto text-black text-2xl hover:font-light" />
-        </button>
+        <MinusCircle className="ml-auto text-black text-2xl hover:font-light" />
+      </button>
     </div>
   );
 };
