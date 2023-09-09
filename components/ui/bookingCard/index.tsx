@@ -7,15 +7,31 @@ import Button from "../customButton";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 
+interface BookingCardProps extends BookingProps {
+  changeBooking: (booking: BookingProps) => void;
+}
 
-const BookingCard: React.FC<BookingProps> = ({
+const BookingCard: React.FC<BookingCardsProps> = ({
   id,
   image,
   name,
   price,
   description,
+  changeBooking,
 }) => {
   const router = useRouter();
+
+  const navigateToCalendar = () => {
+    changeBooking({
+      id,
+      image,
+      name,
+      price,
+      description,
+    });
+    router.push(`/bookings/${name.replaceAll(" ", "_")}/calendar`);
+  };
+
   return (
     <div className="border-[1px] border-gray-200 h-full flex flex-col justify-between gap-4">
       <div>
@@ -45,11 +61,7 @@ const BookingCard: React.FC<BookingProps> = ({
       </div>
 
       <div className="p-4">
-        <Button
-          label="Book"
-          intent="primary"
-          onClick={() => router.push(`/bookings/calendar/${id}`)}
-        />
+        <Button label="Book" intent="primary" onClick={navigateToCalendar} />
       </div>
     </div>
   );
