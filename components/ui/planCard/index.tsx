@@ -41,7 +41,7 @@ const PlanCard: React.FC<PlanProps> = ({
       <Button
         label="Select"
         intent="primary"
-        onClick={() => router.push("/plans/checkout")}
+        onClick={() => router.push(`/plans/checkout/${id}`)}
       />
     </div>
   );

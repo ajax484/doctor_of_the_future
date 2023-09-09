@@ -31,16 +31,16 @@ export const useGetPlans: () => UseGetPlansResult = () => {
   };
 };
 
-export const useGetItem = ({ _id }: { _id: string }) => {
+export const useGetPlan = ({ _id }: { _id: string }) => {
   const {
-    data: item,
-    isLoading: fetchingItem,
-    error: fetchingItemError,
+    data: plan,
+    isLoading: fetchingPlan,
+    error: fetchingPlanError,
   } = useQuery({
     queryKey: "get plans",
     queryFn: async () => {
       const { data } = await getRequest({ endpoint: `/api/plans/${_id}` });
-      return data;
+      return data as unknown as PlanProps;
     },
     onError: (error) => {
       alert(error);
@@ -48,8 +48,8 @@ export const useGetItem = ({ _id }: { _id: string }) => {
   });
 
   return {
-    item: item || [],
-    fetchingItem,
-    fetchingItemError,
+    plan,
+    fetchingPlan,
+    fetchingPlanError,
   };
 };

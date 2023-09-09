@@ -105,7 +105,6 @@ const AccountDropDown = () => {
             ) : (
               //   if no user
               <div className="flex items-center gap-x-2">
-                <li>Hello,</li>
                 <div onClick={authModal.onOpen}>
                   <Avatar src={user?.user_metadata.avatar_url} />
                 </div>
