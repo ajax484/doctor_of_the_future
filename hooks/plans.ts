@@ -11,7 +11,7 @@ interface UseGetPlansResult {
 export const useGetPlans: () => UseGetPlansResult = () => {
   const {
     data: plans,
-    isLoading: fetchingPlans,
+    isFetching: fetchingPlans,
     error: fetchingPlansError,
   } = useQuery({
     queryKey: "get plans",
@@ -34,7 +34,7 @@ export const useGetPlans: () => UseGetPlansResult = () => {
 export const useGetPlan = ({ _id }: { _id: string }) => {
   const {
     data: plan,
-    isLoading: fetchingPlan,
+    isFetching: fetchingPlan,
     error: fetchingPlanError,
   } = useQuery({
     queryKey: "get plans",

@@ -8,7 +8,7 @@ import React, { Fragment } from "react";
 const Page = () => {
   const { shop, fetchingShop, fetchingShopError } = useGetShop();
 
-  // console.log(shop, fetchingShopError);
+  console.log(shop, fetchingShopError);
 
   return (
     <Loading loading={fetchingShop} error={!!fetchingShopError}>

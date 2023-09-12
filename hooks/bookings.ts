@@ -11,7 +11,7 @@ interface UseGetbookingsResult {
 export const useGetBookings: () => UseGetbookingsResult = () => {
   const {
     data: bookings,
-    isLoading: fetchingbookings,
+    isFetching: fetchingbookings,
     error: fetchingbookingsError,
   } = useQuery({
     queryKey: "get bookings",
@@ -34,7 +34,7 @@ export const useGetBookings: () => UseGetbookingsResult = () => {
 export const useGetBooking = ({ _id }: { _id: string }) => {
   const {
     data: booking,
-    isLoading: fetchingBooking,
+    isFetching: fetchingBooking,
     error: fetchingBookingError,
   } = useQuery({
     queryKey: ["get booking", _id],

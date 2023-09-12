@@ -43,7 +43,7 @@ export default function CartScreen() {
             label="Checkout"
             intent="primary"
             onClick={() => {
-              router.push("/");
+              router.push("/cart-page");
               hideCart();
             }}
           />

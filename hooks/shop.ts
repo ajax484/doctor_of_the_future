@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 export const useGetShop = () => {
   const {
     data: shop,
-    isLoading: fetchingShop,
+    isFetching: fetchingShop,
     error: fetchingShopError,
   } = useQuery({
     queryKey: "get shop",
@@ -31,10 +31,10 @@ export const useGetShop = () => {
 export const useGetItem = ({ _id }: { _id: string }) => {
   const {
     data: item,
-    isLoading: fetchingItem,
+    isFetching: fetchingItem,
     error: fetchingItemError,
   } = useQuery({
-    queryKey: "get shop",
+    queryKey: ["get item", _id],
     queryFn: async () => {
       const { data, status } = await getRequest({
         endpoint: `/api/shop/${_id}`,
@@ -46,7 +46,7 @@ export const useGetItem = ({ _id }: { _id: string }) => {
     },
     onError: (error) => {
       console.log(error);
-      
+
       // alert(error.message);
     },
   });
