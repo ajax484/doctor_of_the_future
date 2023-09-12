@@ -25,10 +25,10 @@ export default function Page({ params }: { params: { _id: string } }) {
   console.log(plan);
 
   return (
-    <div className="px-8 space-y-8">
+    <div className="px-4 md:px-8 space-y-8">
       <h2 className="text-gray-400 text-3xl pb-4 border-b-[1px]">Checkout</h2>
-      <div className="flex gap-6">
-        <div className="flex-[70%] space-y-6">
+      <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex-[70%] space-y-6 order-2 md:order-1">
           <div className="pb-8 border-b-[1px] border-slate-500">
             <div className="flex justify-between items-end pb-4">
               <h3 className="text-2xl font-normal">Customer Details</h3>
@@ -78,7 +78,7 @@ export default function Page({ params }: { params: { _id: string } }) {
           </div>
           <Button label="Buy Now" intent="primary" />
         </div>
-        <div className="flex-[30%] border-[1px] p-6 border-slate-800 space-y-4">
+        <div className="flex-[30%] border-[1px] p-6 border-slate-800 space-y-4 order-1 md:order-2">
           <h3 className="text-2xl">Order Summary</h3>
           <Loading loading={fetchingPlan} error={!!fetchingPlanError}>
             <>
