@@ -16,9 +16,9 @@ export const Bookings = () => {
   return (
     <Loading loading={fetchingbookings} error={!!fetchingbookingsError}>
       <div className=" my-10">
-        <div className="text-center">
-          <h1 className="mb-8 font-semibold text-3xl text-center">Bookings</h1>
-        </div>
+      <div className=" my-5">
+        <h1 className=" text-center text-3xl capitalize font-black">bookings</h1>
+      </div>
       <div className="grid md:grid-cols-2 gap-4">
         {bookings?.map((booking: BookingProps) => (
           <BookingCard

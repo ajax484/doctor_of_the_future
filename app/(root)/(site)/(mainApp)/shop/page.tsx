@@ -8,10 +8,13 @@ import React, { Fragment } from "react";
 const Page = () => {
   const { shop, fetchingShop, fetchingShopError } = useGetShop();
 
-  console.log(shop, fetchingShopError);
+  // console.log(shop, fetchingShopError);
 
   return (
     <Loading loading={fetchingShop} error={!!fetchingShopError}>
+      <div className=" my-5">
+        <h1 className=" text-center text-3xl capitalize font-black">shop</h1>
+      </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         {shop?.map((product: ProductProps) => (
           <ProductCard key={product.name} {...product} />

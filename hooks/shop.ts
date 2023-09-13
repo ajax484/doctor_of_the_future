@@ -8,7 +8,7 @@ export const useGetShop = () => {
     isFetching: fetchingShop,
     error: fetchingShopError,
   } = useQuery({
-    queryKey: "get shop",
+    queryKey: "get shop products",
     queryFn: async () => {
       const { data, status } = await getRequest({ endpoint: "/api/shop" });
 
