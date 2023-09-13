@@ -14,7 +14,7 @@ export const useGetBookings: () => UseGetbookingsResult = () => {
     isFetching: fetchingbookings,
     error: fetchingbookingsError,
   } = useQuery({
-    queryKey: "get bookings",
+    queryKey: "get bookings data",
     queryFn: async () => {
       const { data } = await getRequest({ endpoint: "/api/bookings" });
       return data as unknown as BookingProps[];

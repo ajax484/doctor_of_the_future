@@ -26,7 +26,11 @@ export const DUMMY_PROGRAMS: ProgramProps[] = [
 export default function page() {
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-black text-center">Programs</h1>
+      <div className=" my-5">
+        <h1 className=" text-center text-3xl capitalize font-black">
+          programs
+        </h1>
+      </div>
       <div className="grid md:grid-cols-2 gap-8 h-max">
         {DUMMY_PROGRAMS.map((program) => (
           <ProgramCard key={program.id} {...program} />

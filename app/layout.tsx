@@ -6,6 +6,7 @@ import CartContextProvider from "@/context/CartContext";
 import ModalProvider from "@/providers/ModalProvider";
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import ToastProvider from "@/providers/ToastProvider";
+import { absoluteUrl } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +15,63 @@ export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.ico",
+  },
+  manifest: `${siteConfig.url}/site.webmanifest`,
+  keywords: [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "Server Components",
+    "Doctor",
+    "healthcare",
+    "future",
+    "fitness",
+    "doctor",
+    "appointments",
+    "food",
+    "exercise",
+    "wellness",
+    "healthy",
+    "nigerian",
+    "diet",
+    "workouts",
+  ],
+  authors: [
+    {
+      name: "codingossy",
+      url: "https://ossy.vercel.app",
+    },
+  ],
+  creator: "codingossy",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  
+  openGraph: {
+    type: "website",
+    locale: "en_US, en_NG, en_UK",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: absoluteUrl("/dotf_logo.png"),
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
   },
 };
+
 export default function RootLayout({
   children,
 }: {
@@ -36,4 +91,4 @@ export default function RootLayout({
   );
 }
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
