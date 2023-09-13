@@ -13,7 +13,7 @@ export default function Item({ params }: { params: { _id: string } }) {
 
   console.log(item);
 
-  const { isAdded, addItem, removeItem, resetCart } = useCart();
+  const { isAdded, addItem, removeItem } = useCart();
 
   return (
     <Loading loading={fetchingItem}>
