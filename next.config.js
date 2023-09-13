@@ -27,6 +27,10 @@ module.exports = {
         hostname: "th.bing.com",
       },
 
+      {
+        protocol: "https",
+        hostname: "kvxotdwrwawhcmehobmj.supabase.co",
+      },
     ],
   },
 
