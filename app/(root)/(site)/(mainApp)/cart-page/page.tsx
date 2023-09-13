@@ -14,7 +14,7 @@ const Page = () => {
   const total = cart.reduce((total, cartItem) => total + cartItem.price, 0);
 
   return (
-    <div className="mt-12 flex gap-6">
+    <div className="mt-12 flex flex-col md:flex-row gap-6">
       <div className="flex-[75%]">
         <h1 className="border-b-[1px] pb-4">My Cart</h1>
         <div className="space-y-4 pb-4">

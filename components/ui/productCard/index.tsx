@@ -1,4 +1,5 @@
 "use client";
+import { useCart } from "@/context/CartContext";
 import { ProductProps } from "@/types/products";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
@@ -6,16 +7,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
-const ProductCard: React.FC<ProductProps> = ({
-  image,
-  name,
-  price,  
-  id,
-}) => {
+const ProductCard: React.FC<ProductProps> = ({ image, name, price, id }) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [showBtn, setShowBtn] = useState<boolean>(
     window.innerWidth > 768 ? false : true
   );
+  const { isAdded, addItem, removeItem } = useCart();
 
   useEffect(() => {
     const card = cardRef.current;
@@ -66,18 +63,19 @@ const ProductCard: React.FC<ProductProps> = ({
             className={`${
               showBtn ? "bottom-0" : "-bottom-24"
             } w-full absolute py-1.5 px-2 bg-white/60 z-10 left-0 transition-all duration-300`}
+            onClick={() => {
+              !isAdded(id)
+                ? addItem({ image, name, price, id })
+                : removeItem(id);
+            }}
           >
-            <Link
-              href={{
-                pathname: "/shop/2",
-              }}
-            >
-              View More
-            </Link>
+            {!isAdded(id) ? "Add To Cart" : "Remove From Cart"}
           </button>
         </div>
         <div className="pt-4 pb-1">
-          <h2 className="text-slate-900 text-lg capitalize line-clamp-1">{name}</h2>
+          <h2 className="text-slate-900 text-lg capitalize line-clamp-1">
+            {name}
+          </h2>
           <h3 className="text-slate-600 pt-2">{formatPriceToNaira(price)}</h3>
         </div>
       </Link>
