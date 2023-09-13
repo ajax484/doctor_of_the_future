@@ -16,7 +16,12 @@ export default function Item({ params }: { params: { _id: string } }) {
   const { isAdded, addItem, removeItem, resetCart } = useCart();
 
   return (
-    <Loading loading={fetchingItem} error={!!fetchingItemError}>
+    <Loading loading={fetchingItem}>
+      <div className=" my-5">
+        <h1 className=" text-center font-black text-3xl capitalize ">
+          shop product details
+        </h1>
+      </div>
       <div className="grid md:grid-cols-2 gap-8">
         <div className="h-40 md:h-80 lg:h-screen w-full relative">
           <Image

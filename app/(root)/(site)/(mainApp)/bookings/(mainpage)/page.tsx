@@ -3,7 +3,7 @@ import Loading from "@/components/ui/Loading";
 import BookingCard from "@/components/ui/bookingCard";
 import { useGetBookings } from "@/hooks/bookings";
 import { BookingProps } from "@/types/products";
-import React from "react";
+import React, { Suspense } from "react";
 import { useBookingContext } from "../layout";
 
 export const Bookings = () => {
@@ -11,14 +11,15 @@ export const Bookings = () => {
     useGetBookings();
   const { changeBooking } = useBookingContext()
 
-  console.log(bookings);
+  // console.log(bookings);
 
   return (
-    <Loading loading={fetchingbookings} error={!!fetchingbookingsError}>
+   <Suspense>
+     <Loading loading={fetchingbookings} >
       <div className=" my-10">
-        <div className="text-center">
-          <h1 className="mb-8 font-semibold text-3xl text-center">Bookings</h1>
-        </div>
+      <div className=" my-5">
+        <h1 className=" text-center text-3xl capitalize font-black">bookings</h1>
+      </div>
       <div className="grid md:grid-cols-2 gap-4">
         {bookings?.map((booking: BookingProps) => (
           <BookingCard
@@ -30,6 +31,7 @@ export const Bookings = () => {
       </div>
       </div>
     </Loading>
+   </Suspense>
   );
 };
 

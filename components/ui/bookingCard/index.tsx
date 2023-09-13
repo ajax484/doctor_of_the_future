@@ -41,7 +41,7 @@ const BookingCard: React.FC<BookingCardsProps> = ({
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
               shimmer(200, 200)
             )}`}
-            alt="name"
+            alt="booking image"
             layout="fill"
             objectFit="cover"
             objectPosition="center"
