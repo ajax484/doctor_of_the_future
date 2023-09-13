@@ -3,10 +3,9 @@ import React from "react";
 interface ILoading {
   loading: boolean;
   children: React.ReactNode;
-  error: boolean;
 }
 
-const Loading: React.FC<ILoading> = ({ loading, children, error }) => {
+const Loading: React.FC<ILoading> = ({ loading, children}) => {
   if (loading)
     return (
       <div className="flex justify-center items-center w-full h-80">
@@ -14,7 +13,7 @@ const Loading: React.FC<ILoading> = ({ loading, children, error }) => {
       </div>
     );
 
-  if (error) return <>An error has occured</>;
+
 
   return <>{children}</>;
 };

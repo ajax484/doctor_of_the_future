@@ -16,7 +16,7 @@ export default function Item({ params }: { params: { _id: string } }) {
   const { isAdded, addItem, removeItem, resetCart } = useCart();
 
   return (
-    <Loading loading={fetchingItem} error={!!fetchingItemError}>
+    <Loading loading={fetchingItem}>
       <div className=" my-5">
         <h1 className=" text-center font-black text-3xl capitalize ">
           shop product details
