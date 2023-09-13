@@ -8,7 +8,7 @@ const Navbar = () => {
         {menuItems.map((item, index) => (
           <li key={index} className="hover:text-limeGreen">
             <Link href={item.link}>
-              <span className="text-sm text-slate-700">{item.label}</span>
+              <span className="text-xs lg:text-sm text-slate-700">{item.label}</span>
             </Link>
           </li>
         ))}

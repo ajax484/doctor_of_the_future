@@ -5,15 +5,13 @@ interface ILoading {
   children: React.ReactNode;
 }
 
-const Loading: React.FC<ILoading> = ({ loading, children}) => {
+const Loading: React.FC<ILoading> = ({ loading, children }) => {
   if (loading)
     return (
       <div className="flex justify-center items-center w-full h-80">
         <div className="h-12 w-12 rounded-full border-t-black border-r-black border-l-zinc-200 border-b-zinc-200 border-4 animate-spin" />
       </div>
     );
-
-
 
   return <>{children}</>;
 };

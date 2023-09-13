@@ -2,7 +2,8 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-export async function GET(): Promise<NextResponse> { // Specify the return type as Promise<NextResponse>
+export async function GET(): Promise<NextResponse> {
+  // Specify the return type as Promise<NextResponse>
   const supabase = createRouteHandlerClient({ cookies });
 
   try {
@@ -17,6 +18,6 @@ export async function GET(): Promise<NextResponse> { // Specify the return type 
     return NextResponse.json(data);
   } catch (error) {
     // Handle the error here if needed
-    return NextResponse.json({error: "An error occurred", status: 500 });
+    return NextResponse.json({ error: "An error occurred", status: 500 });
   }
 }

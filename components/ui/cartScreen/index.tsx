@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 export default function CartScreen() {
   const { cart, cartVisible, hideCart, showCart, resetCart } = useCart();
   const router = useRouter();
-  console.log(cart);
+  // console.log(cart);
 
   return (
     <div
@@ -40,7 +40,7 @@ export default function CartScreen() {
         </div>
         {cart.length > 0 && (
           <Button
-            label="Checkout"
+            label="Go To Cart"
             intent="primary"
             onClick={() => {
               router.push("/cart-page");

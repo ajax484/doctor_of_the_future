@@ -3,28 +3,26 @@ import { getRequest } from "@/utils/api";
 import { useQuery } from "react-query";
 
 export const useGetShop = () => {
-  const {
-    data: shop,
-    isFetching: fetchingShop,
-    error: fetchingShopError,
-  } = useQuery({
-    queryKey: "get shops",
+  const { data: shop, isFetching: fetchingShop, error: fetchingShopError} = useQuery({
+    queryKey: "get shop",
     queryFn: async () => {
       const { data, status } = await getRequest({ endpoint: "/api/shop" });
-
+  
       if (status !== 200) throw data;
-
+  
       return data as unknown as ProductProps[];
     },
     onError: (error) => {
       alert(error);
     },
+    staleTime: 1000, 
   });
+  
 
   return {
     shop: shop || [],
     fetchingShop,
-    fetchingShopError,
+    fetchingShopError
   };
 };
 
