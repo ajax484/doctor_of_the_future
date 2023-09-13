@@ -16,7 +16,7 @@ interface ICartCard {
 const CartCard: React.FC<ICartCard> = ({ name, id, image = "", price }) => {
   const { removeItem } = useCart();
   return (
-    <div className="flex gap-2 mt-6 border-b py-3">
+    <div className="flex gap-2 mt-6 border-b p-3">
       <div className="relative h-20 w-full flex-[35%]">
         <Image
           src={image}

@@ -45,6 +45,7 @@ export const useGetPlan = ({ _id }: { _id: string }) => {
     onError: (error) => {
       alert(error);
     },
+    staleTime: 1000, 
   });
 
   return {

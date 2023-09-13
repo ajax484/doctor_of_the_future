@@ -16,7 +16,7 @@ const Page = () => {
         <div className=" my-5">
           <h1 className=" text-center text-3xl capitalize font-black">shop</h1>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
           {shop?.map((product: ProductProps) => (
             <ProductCard key={product.name} {...product} />
           ))}

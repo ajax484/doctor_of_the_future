@@ -22,6 +22,7 @@ export const useGetBookings: () => UseGetbookingsResult = () => {
     onError: (error) => {
       alert(error);
     },
+    staleTime: 1000, 
   });
 
   return {

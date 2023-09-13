@@ -20,7 +20,7 @@ export const Bookings = () => {
       <div className=" my-5">
         <h1 className=" text-center text-3xl capitalize font-black">bookings</h1>
       </div>
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-x-6 gap-y-8">
         {bookings?.map((booking: BookingProps) => (
           <BookingCard
             key={booking.name}
