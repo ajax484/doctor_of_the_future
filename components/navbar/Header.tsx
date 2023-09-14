@@ -21,7 +21,7 @@ export const menuItems: TMenuItem[] = [
   { label: "Plans & Pricing", link: "/plans" },
   { label: "Book Online", link: "/bookings" },
   { label: "Shop", link: "/shop" },
-  { label: "Blog", link: "/" },
+  { label: "Blog", link: "/blog" },
   { label: "Programs", link: "/programs" },
   { label: "Terms", link: "/terms" },
 ];

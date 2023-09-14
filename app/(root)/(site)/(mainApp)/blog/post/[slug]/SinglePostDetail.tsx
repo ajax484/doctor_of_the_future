@@ -1,5 +1,4 @@
 "use client";
-import { urlFor } from "@/sanity/lib/client";
 import { Post } from "@/typings/typings";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -53,7 +52,7 @@ const SinglePostDetail = ({ post }: Props) => {
           width="1000"
           height="1000"
           className="w-full h-72 object-cover"
-          src={urlFor(post?.mainImage?.asset?.url).url()!}
+          src={urlFor(post?.mainImage).url()!}
         /> */}
       </div>
 
