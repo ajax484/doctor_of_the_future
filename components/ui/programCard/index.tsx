@@ -34,12 +34,12 @@ const ProgramCard: React.FC<ProgramProps> = ({
         <div className="p-8 space-y-6">
           <div className="space-y-3">
             <h2 className="text-xl font-bold capitalize">{name}</h2>
-            <h4 className="text-slate-700">{duration}</h4>
+            <h4 className="text-slate-700 capitalize">{duration}</h4>
           </div>
 
           <div className="bg-gray-600 w-10 h-[1px]" />
 
-          <p>{description}</p>
+          <p className="">{description}</p>
 
           <h3 className="text-slate-800">{formatPriceToNaira(price)}</h3>
         </div>

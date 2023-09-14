@@ -14,6 +14,7 @@ const Page = () => {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const user = useUser();
+  const openModal = useAuthModal();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -41,7 +42,9 @@ const Page = () => {
               </p>
 
               <div onClick={handleLogout}>
-                <span className="underline cursor-pointer">switch account?</span>
+                <span className="underline cursor-pointer">
+                  switch account?
+                </span>
               </div>
             </div>
           ) : (
@@ -57,13 +60,24 @@ const Page = () => {
         </div>
         <div className="flex-[25%] space-y-4">
           <BookingAccordion />
-          <Button
-            label={paymentMethod === "plan" ? "Buy a Plan" : "Book Now"}
-            type="submit"
-            form="booking-form"
-            intent="primary"
-            onClick={() => router.push("form")}
-          />
+          {user ? (
+            <Button
+              label={paymentMethod === "plan" ? "Buy a Plan" : "Book Now"}
+              type="submit"
+              form="booking-form"
+              intent="primary"
+              onClick={() => router.push("form")}
+            />
+          ) : (
+            <div>
+              <button
+                onClick={openModal.onOpen}
+                className=" w-full capitalize text-center p-2 bg-black text-white"
+              >
+                Login to proceed
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
