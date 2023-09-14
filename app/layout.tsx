@@ -1,4 +1,4 @@
-import { siteConfig } from "@/siteConfig/site";
+import { siteConfig } from "@/app/(root)/siteConfig/page";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -34,6 +34,8 @@ export const metadata: Metadata = {
     "wellness",
     "healthy",
     "nigerian",
+    "healty expert",
+    "weight loss",
     "diet",
     "workouts",
   ],

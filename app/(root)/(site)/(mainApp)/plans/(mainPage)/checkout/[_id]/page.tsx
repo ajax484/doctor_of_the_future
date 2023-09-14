@@ -84,7 +84,7 @@ export default function Page({ params }: { params: { _id: string } }) {
         </div>
         <div className="flex-[30%] border-[1px] p-6 border-slate-800 space-y-4 order-1 md:order-2">
           <h3 className="text-2xl">Order Summary</h3>
-          <Loading loading={fetchingPlan} error={!!fetchingPlanError}>
+          <Loading loading={fetchingPlan}>
             <>
               <div className="space-y-2 pb-4 border-b-[1px]">
                 <h4 className="text-xl text-slate-700">{plan?.name}</h4>
