@@ -17,7 +17,7 @@ export const Bookings = () => {
    <Suspense>
      <Loading loading={fetchingbookings} >
       <div className=" my-10">
-      <div className=" my-5">
+      <div className="my-5">
         <h1 className=" text-center text-3xl capitalize font-black">bookings</h1>
       </div>
       <div className="grid md:grid-cols-2 gap-x-6 gap-y-8">
