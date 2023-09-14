@@ -53,7 +53,7 @@ const AccountDropDown = () => {
                     </p>
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className=" w-52 h-72">
+                <DropdownMenuContent className=" w-52 max-h-max">
                   <DropdownMenuLabel> Account Details</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="my-5">
@@ -64,7 +64,7 @@ const AccountDropDown = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <div
-                      onClick={() => router.push("/orders")}
+                      onClick={() => router.push("/myaccount")}
                       className=" capitalize cursor-pointer"
                     >
                       my orders
@@ -73,7 +73,7 @@ const AccountDropDown = () => {
 
                   <DropdownMenuItem>
                     <div
-                      onClick={() => router.push("/orders")}
+                      onClick={() => router.push("/myaccount")}
                       className=" capitalize cursor-pointer"
                     >
                       my bookings
@@ -81,7 +81,7 @@ const AccountDropDown = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <div
-                      onClick={() => router.push("/orders")}
+                      onClick={() => router.push("/myaccount")}
                       className=" capitalize cursor-pointer"
                     >
                       my subscriptions
@@ -90,10 +90,19 @@ const AccountDropDown = () => {
 
                   <DropdownMenuItem>
                     <div
-                      onClick={() => router.push("/orders")}
+                      onClick={() => router.push("/myaccount")}
                       className=" capitalize cursor-pointer"
                     >
                       my programs
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem>
+                    <div
+                      onClick={() => router.push("/myaccount")}
+                      className=" capitalize cursor-pointer"
+                    >
+                      my account
                     </div>
                   </DropdownMenuItem>
 

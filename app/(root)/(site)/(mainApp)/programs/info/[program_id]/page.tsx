@@ -45,9 +45,7 @@ export default function ProgramInfo({
           </div>
           <div className="w-full relative h-40 md:h-80 lg:h-96 mb-2 md:mb-6 lg:mb-12">
             <Image
-              src={
-                "https://images.pexels.com/photos/791763/pexels-photo-791763.jpeg?auto=compress&cs=tinysrgb&w=800"
-              }
+              src={program.image}
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(200, 200)
               )}`}
@@ -63,9 +61,7 @@ export default function ProgramInfo({
 
             <div className="bg-limeGreen/50 w-full md:min-h-[400px]">
               <Image
-                src={
-                  "https://images.pexels.com/photos/28080/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800"
-                }
+                src={program.image}
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(
                   shimmer(200, 200)
                 )}`}

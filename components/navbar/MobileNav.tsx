@@ -42,7 +42,7 @@ function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
               onClick={() => setNavMobile(false)}
               className="hover:font-light"
             >
-              <Link href={`/account`}>Account</Link>
+              <Link href={`/myaccount`}>Account</Link>
             </li>
             <div>
               <li
