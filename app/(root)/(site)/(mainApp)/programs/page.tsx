@@ -5,27 +5,6 @@ import { useGetPrograms } from "@/hooks/programs";
 import { ProgramProps } from "@/types/products";
 import React, { Suspense } from "react";
 
-export const DUMMY_PROGRAMS: ProgramProps[] = [
-  {
-    image: "/shop/shop1.jpg",
-    name: "Knightup Challenge 2.0",
-    price: 11360,
-    duration: "a 3 day bootcamp",
-    id: 1,
-    description:
-      "for people interested in losing weight and optimising their metabolic health.",
-  },
-  {
-    image: "/shop/shop2.jpg",
-    name: "sexual health and fertility bootcamp 2.0",
-    price: 6000,
-    duration: "a 3 day bootcamp",
-    id: 2,
-    description:
-      "for people interested in  taking their skills to the next level, get their sexual groove back as well as take care of ejaculation, erection and fertility issues.",
-  },
-];
-
 export default function Page() {
   const { programs, fetchingprograms, fetchingprogramsError } =
     useGetPrograms();
