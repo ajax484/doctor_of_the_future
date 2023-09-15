@@ -86,6 +86,9 @@ dependencies:
   eslint-config-next:
     specifier: 13.4.12
     version: 13.4.12(eslint@8.46.0)(typescript@5.1.6)
+  groq:
+    specifier: ^3.16.7
+    version: 3.16.7
   lucide-react:
     specifier: ^0.274.0
     version: 0.274.0(react@18.2.0)
@@ -2144,7 +2147,7 @@ packages:
       '@sanity/eventsource': 5.0.0
       '@sanity/types': 3.16.4
       fast-deep-equal: 3.1.3
-      groq: 3.16.4
+      groq: 3.16.7
       groq-js: 1.2.0
       mendoza: 3.0.3
       simple-get: 4.0.1
@@ -4649,8 +4652,8 @@ packages:
     engines: {node: '>= 14'}
     dev: false
 
-  /groq@3.16.4:
-    resolution: {integrity: sha512-PexitOJcyUYLqGwim9VFyzhmCSLIMjN1e6Yfq8ZjO3U67VCIeTs0UI2XWHhjX4Lkx2O2gXeGZ2x1u/MRJhB3cQ==}
+  /groq@3.16.7:
+    resolution: {integrity: sha512-4Qlmwi9uQOyvc8YLFP5d+y8YssFnfK4imY3ZzP+U06LrV/KectnLsl/nDUQS2YfyTrQ7sGZQVNbhKw8DjT3phw==}
     engines: {node: '>=14.18.0'}
     dev: false
 
@@ -5514,7 +5517,7 @@ packages:
       '@sanity/types': 3.16.4
       '@sanity/ui': 1.8.2(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.2.0)
       '@sanity/webhook': 3.0.1
-      groq: 3.16.4
+      groq: 3.16.7
       next: 13.4.12(@babel/core@7.22.17)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       sanity: 3.16.4(@types/node@20.4.5)(@types/react@18.2.17)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.2.0)

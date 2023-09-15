@@ -35,3 +35,27 @@ export function formatDateToHumanReadable(date: Date | undefined): string {
   };
   return date.toLocaleDateString(undefined, options);
 }
+
+export function convertDateFormat(inputDate: string | number | Date) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const date = new Date(inputDate);
+  const monthIndex = date.getMonth();
+  const day = date.getDate();
+
+  const formattedDate = `${months[monthIndex]} ${day}`;
+  return formattedDate;
+}

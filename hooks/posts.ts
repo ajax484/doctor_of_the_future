@@ -3,20 +3,24 @@ import groq from "groq";
 
 export const getPosts = async () => {
   const queryPosts = groq`*[_type == "post"]{
-        _id,
-        title,
-        author ->{
-          name,
-          image
-        },
-        categories -> {
-          title,
-          description
-        },
-        description,
-        mainImage,
-        slug
-      }`;
+    _id,
+    title,
+    author -> {
+      name,
+      image
+    },
+    categories -> {
+      title,
+      description
+    },
+    description,
+    mainImage,
+    slug,
+    "views": count(*[_type == "view" && references(^._id)]),
+    "comments": count(*[_type == "comment" && references(^._id)]),
+    "likes": count(*[_type == "like" && references(^._id)])
+  }
+  `;
   const posts = await client.fetch(queryPosts);
   return posts;
 };
