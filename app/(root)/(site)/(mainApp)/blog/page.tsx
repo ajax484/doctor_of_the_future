@@ -9,15 +9,18 @@ import React from "react";
 
 const Blog = async () => {
   const posts = await getPosts();
-  console.log(posts);
+  // console.log(posts);
 
   return (
-    <div className="mt-10 py-8">
+    <div className="mt-5 py-8">
+      <div className="mb-10">
+        <h1 className=" font-black capitalize text-3xl text-center ">blogs</h1>
+      </div>
       {posts.map((post) => (
         <div key={post.id}>
           <Link href={`/blog/post/${post.slug.current}`}>
-            <div className="flex bg-white border-[1px] shadow-md">
-              <div className="flex-[50%] h-80 relative bg-black">
+            <div className="flex h-[500px] bg-white border-[1px] shadow-md">
+              <div className="flex-[50%]  relative bg-black">
                 <Image
                   src={post.mainImage || ""}
                   blurDataURL={`data:image/svg+xml;base64,${toBase64(
