@@ -3,8 +3,20 @@
 import Image from "next/image";
 import React from "react";
 import Button from "@/components/ui/customButton";
+import { useRouter } from "next/navigation";
 
 export default function Section3() {
+
+  
+  const router = useRouter()
+
+  const onClick = () => {
+    router.push('/plans')
+  }
+
+
+
+
   return (
     <section className="flex flex-col md:flex-row">
       <div className="flex-[50%] bg-orange text-white px-8 md:px-24 flex flex-col gap-8 py-8 md:py-12 space-y-6 md:space-y-12">
@@ -20,6 +32,7 @@ export default function Section3() {
           intent="tertiary"
           size="fit"
           padding="wide"
+          onClick={onClick}
         />
       </div>
 

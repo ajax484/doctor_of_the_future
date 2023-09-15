@@ -3,8 +3,17 @@
 import Image from "next/image";
 import React from "react";
 import Button from "@/components/ui/customButton";
+import { useRouter } from "next/navigation";
 
 export default function Section4() {
+  
+  const router = useRouter()
+
+  const onClick = () => {
+    router.push('/plans')
+  }
+
+
   return (
     <section className="flex flex-col md:flex-row py-6">
       <div className="flex-[40%] h-48 md:h-[calc(100vh*1.5)] w-screen md:w-full relative">
@@ -32,6 +41,7 @@ export default function Section4() {
         Nutrition assessment and counseling provide personalized guidance for better health through tailored dietary recommendations.
         </p>
         <Button
+          onClick={onClick}
           label="Learn More"
           size="fit"
           padding="wide"

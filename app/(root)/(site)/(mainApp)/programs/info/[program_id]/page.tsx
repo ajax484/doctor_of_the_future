@@ -21,6 +21,12 @@ export default function ProgramInfo({
     <Suspense>
       <Loading loading={fetchingProgram}>
         <section className="md:px-4 lg:px-8">
+          <div className=" my-5">
+            <h1 className=" text-center text-3xl capitalize font-black">
+              program Details
+            </h1>
+          </div>
+
           <div className="p-4 md:p-8 lg:p-16 bg-limeGreen/50 space-y-6">
             <h2 className=" text-2xl lg:text-4xl font-bold text-slate-800">
               {program.name} |{" "}
