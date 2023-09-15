@@ -3,8 +3,17 @@
 import Image from "next/image";
 import React from "react";
 import Button from "@/components/ui/customButton";
+import { useRouter } from "next/navigation";
 
 export default function Section6() {
+  
+  const router = useRouter()
+
+  const onClick = () => {
+    router.push('/blog')
+  }
+
+
   return (
     <section className="h-screen relative">
       <Image
@@ -19,7 +28,7 @@ export default function Section6() {
         <p className="text-white">
           Lose weight, look great in 30 days of transformation. Our program includes, Proper diet and Physical workouts
         </p>
-        <Button label="Read More" intent="primary" size="fit" />
+        <Button onClick={onClick} label="Read More" intent="primary" size="fit" />
       </div>
     </section>
   );

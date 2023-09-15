@@ -205,7 +205,7 @@ const SinglePostDetail = ({ post }: Props) => {
           width="1000"
           height="1000"
           className="w-full h-72 object-cover"
-          src={urlFor(post?.mainImage).url()!}
+          src={urlForImage(post?.mainImage).url()!}
         /> */}
       </div>
 

@@ -10,24 +10,23 @@ export default function Section8() {
         <h2 className="text-3xl md:text-4xl">You're in Safe Hands</h2>
         <ul className="flex flex-col text-start">
           <li className="md:leading-loose text-slate-900">
-            - Personalized Guidance to Meet Your Specific Needs
+            Personalized Guidance to Meet Your Specific Needs
           </li>
           <li className="md:leading-loose text-slate-900">
-           -  Holistic Approach to Address Overall Well-Being
+            Holistic Approach to Address Overall Well-Being
           </li>
           <li className="md:leading-loose text-slate-900">
-          -  Proven Success Stories from Satisfied Clients
+            Proven Success Stories from Satisfied Clients
           </li>
           <li className="md:leading-loose text-slate-900">
-          -  Transparent and Ethical Practices
+            Transparent and Ethical Practices
           </li>
           <li className="md:leading-loose text-slate-900">
-          -  Ongoing Support and Plan Adjustments
+            Ongoing Support and Plan Adjustments
           </li>
           <li className="md:leading-loose text-slate-900">
-          -  Client-Centered Approach Tailored to You
+            Client-Centered Approach Tailored to You
           </li>
-
         </ul>
       </div>
       <div className="h-48 md:h-screen w-screen md:w-full relative">

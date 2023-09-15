@@ -26,6 +26,9 @@ const Page = ({ params }: { params: { _id: string } }) => {
 
   return (
     <div className="space-y-8 my-10">
+
+
+
       <button className="flex items-center gap-2" onClick={() => router.back()}>
         <ArrowLeft size={16} />{" "}
         <span className=" text-sm text-neutral-500">Back</span>

@@ -48,7 +48,7 @@ const AccountDropDown = () => {
                 <DropdownMenuTrigger>
                   <div className="flex items-center gap-x-2">
                     <Avatar src={user?.user_metadata.avatar_url} />
-                    <p className=" capitalize text-xs">
+                    <p className=" capitalize font-light text-xs">
                       {user?.user_metadata.name}
                     </p>
                   </div>

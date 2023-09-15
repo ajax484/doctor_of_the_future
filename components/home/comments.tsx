@@ -10,10 +10,12 @@ export default function Comments() {
       <h3 className="mb-6 md:mb-8 font-semibold text-3xl md:text-5xl text-center w-full">
         See what they are saying
       </h3>
-      <div className="flex flex-col md:flex-row gap-8 md:gap-12 px-4 md:px-8">
-        <div className="flex flex-col items-center gap-4 px-4">
-          <p className="md-8 md:mb-12 text-justify leading-loose text-sm md:text-base">
-          I follow Doctor of the future meal plan and lost alot of weight, no more low libido due to hormonal imbalance.
+      {/* first */}
+      <div className="flex my-5  flex-col md:flex-row gap-8 md:gap-12 px-4 md:px-8">
+        <div className="flex border-b border-slate-400 py-5 md:border-none md:py-0 flex-col items-center gap-4 px-4">
+          <p className="md-8 md:mb-12 text-center leading-loose text-sm md:text-base">
+            I follow Doctor of the future meal plan and lost alot of weight, no
+            more low libido due to hormonal imbalance.
           </p>
           <div className="w-20 md:w-40 h-20 md:h-40 rounded-full relative overflow-hidden">
             <Image
@@ -26,37 +28,40 @@ export default function Comments() {
           </div>
           <h4 className="text-xl text-center">Folasade olunlola</h4>
         </div>
-        <div className="flex flex-col items-center gap-4 px-4">
-          <p className="md-8 md:mb-12 text-justify leading-loose text-sm md:text-base">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
-            nihil assumenda quia illum ipsa commodi.
+        {/* second */}
+        <div className="flex flex-col border-b border-slate-400 py-5 md:border-none md:py-0 items-center gap-4 px-4">
+          <p className="md-8 md:mb-12 text-center leading-loose text-sm md:text-base">
+            I follow Doctor of the future meal plan and lost alot of weight, no
+            more low libido due to hormonal imbalance.
           </p>
           <div className="w-20 md:w-40 h-20 md:h-40 rounded-full relative overflow-hidden">
             <Image
-              src="/home/soup2.jpg"
+              src="/clients/client1.jpg"
               fill={true}
               objectFit="cover"
               objectPosition="center"
               alt="image of client"
             />
           </div>
-          <h4 className="text-xl text-center">Lagbaja Omo Lagbaja</h4>
+          <h4 className="text-xl text-center">Folasade olunlola</h4>
         </div>
-        <div className="flex flex-col items-center gap-4 px-4">
-          <p className="md-8 md:mb-12 text-justify leading-loose text-sm md:text-base">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
-            nihil assumenda quia illum ipsa commodi.
+
+        {/* third */}
+        <div className="flex py-5 md:py-0 flex-col items-center gap-4 px-4">
+          <p className="md-8 md:mb-12 text-center  leading-loose text-sm md:text-base">
+            I follow Doctor of the future meal plan and lost alot of weight, no
+            more low libido due to hormonal imbalance.
           </p>
           <div className="w-20 md:w-40 h-20 md:h-40 rounded-full relative overflow-hidden">
             <Image
-              src="/home/soup2.jpg"
+              src="/clients/client1.jpg"
               fill={true}
               objectFit="cover"
               objectPosition="center"
               alt="image of client"
             />
           </div>
-          <h4 className="text-xl text-center">Lagbaja Omo Lagbaja</h4>
+          <h4 className="text-xl text-center">Folasade olunlola</h4>
         </div>
       </div>
     </section>
