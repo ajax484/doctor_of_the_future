@@ -12,7 +12,7 @@ export default function login() {
 
         {/* image */}
         <div className=" w-full hidden md:block">
-          <Image alt="image" src={"https://images.pexels.com/photos/979310/pexels-photo-979310.jpeg?auto=compress&cs=tinysrgb&w=800"} width={500} height={500} className=" w-full h-full" />
+          <Image alt="home cooked healthy meal" src={"https://images.pexels.com/photos/793770/pexels-photo-793770.jpeg?auto=compress&cs=tinysrgb&w=800"} width={500} height={500} className=" w-full h-full" />
         </div>
       </div>
     </div>

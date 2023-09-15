@@ -9,6 +9,7 @@ import MobileNav from "./MobileNav";
 // icons
 import { HiChevronDown, HiMenu, HiShoppingCart, HiUser } from "react-icons/hi";
 import AccountDropDown from "./AccountDropDown";
+// cart context
 import { useCart } from "@/context/CartContext";
 
 type TMenuItem = {
@@ -31,14 +32,15 @@ export default function Header() {
   const { cartVisible, hideCart, showCart, cart } = useCart();
 
   return (
-    <header className="fixed w-full bg-white h-20 z-50  px-4 md:px-8 overflow-hidden bar py-8">
+    <header className="fixed w-full bg-white h-28 z-50  px-4 md:px-8 overflow-hidden bar py-8">
       <div className=" flex justify-between items-center gap-x-4">
         <Link href={`/`}>
           <Image
             src="/dotf_logo.png"
-            width={40}
+            width={70}
             height={40}
-            alt="doctor of the logo"
+            className="invert-[10]"
+            alt="doctor of the future logo"
           />
         </Link>
         <Navbar />
