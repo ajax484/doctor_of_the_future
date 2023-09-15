@@ -99,6 +99,16 @@ const SinglePostDetail = ({ post }: Props) => {
             },
           }}
         />
+        <div className="flex gap-2 flex-wrap">
+          {post.categories.map((category) => (
+            <div
+              className="border-[1px] px-3 py-0.5 text-slate-700 capitalize"
+              key={category.title}
+            >
+              {category.title}
+            </div>
+          ))}
+        </div>
         <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
           <div className="flex gap-4">
             <span>{post.commentNumber} comments</span>
