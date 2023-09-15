@@ -21,3 +21,5 @@ export async function GET(): Promise<NextResponse> {
     return NextResponse.json({ error: "An error occurred", status: 500 });
   }
 }
+
+export const dynamic = 'force-dynamic'
