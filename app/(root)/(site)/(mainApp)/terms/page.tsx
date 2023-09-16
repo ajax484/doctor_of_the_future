@@ -1,5 +1,15 @@
+import { siteConfig } from "@/app/(root)/siteConfig/page";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Terms and Conditions | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 const Terms = () => {
   return (
@@ -7,7 +17,7 @@ const Terms = () => {
       <h1 className=" font-semibold capitalize text-2xl md:text-3xl">
         Terms and Conditions | Policies | Cookies
       </h1>
-    {/* privacy */}
+      {/* privacy */}
       <div className=" my-2">
         <Link href={`/policies`}>
           <p className=" text-start  underline text-xs font-semibold hover:text-blue-500 cursor-pointer">

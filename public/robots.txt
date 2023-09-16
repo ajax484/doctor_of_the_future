@@ -1,9 +1,0 @@
-const robotsTxt = (): string => {
-  return `
-User-agent: *
-Disallow: /
-`;
-};
-Sitemap: https://mydoctorofthefuture/siteConfig
-
-export default robotsTxt;

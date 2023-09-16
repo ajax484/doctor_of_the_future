@@ -5,7 +5,7 @@ export const siteConfig = {
   name: "Doctor of the Future",
   description: "Your trusted healthcare partner for a healthier tomorrow",
   url: "https://mydoctorofthefuture.com",
-  ogImage: "/dotf_logo.png",
+  ogImage: "/favicon.ico",
 
   // Navigation
   navigation: [
@@ -33,7 +33,7 @@ export const siteConfig = {
   },
 
   // Logo and Favicon URLs
-  logoUrl: "/dotf_logo.png",
+  logoUrl: "/favicon.ico",
   faviconUrl: "/favicon.ico",
 
   // API Endpoints
