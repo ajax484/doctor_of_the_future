@@ -9,6 +9,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { urlForImage } from "@/sanity/lib/image";
 import { convertDateFormat } from "@/utils/helpers";
 import { HeartIcon } from "lucide-react";
+import CommentForm from "@/components/ui/CommentSection";
+import { shimmer, toBase64 } from "@/utils/shimmerimage";
 
 interface Props {
   post: Post;
@@ -51,6 +53,21 @@ const SinglePostDetail = ({ post }: Props) => {
     <>
       <article className="border-[1px] mx-10 my-10 py-10 px-5 space-y-6">
         <div className="flex justify-between">
+          <div className="flex gap-2 items-center">
+            <div className="rounded-full h-8 w-8 relative border-2 border-limeGreen">
+              <Image
+                src={urlForImage(post?.author?.image?.asset?._ref).url()}
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                  shimmer(200, 200)
+                )}`}
+                alt={post.title}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+              />
+            </div>
+            <span className="uppercase">{post.author.name}</span>
+          </div>
           <div className="flex gap-2">
             <span className="text-sm text-slate-700">
               {convertDateFormat(post.publishedAt)}
@@ -60,15 +77,15 @@ const SinglePostDetail = ({ post }: Props) => {
         <h1 className="text-center uppercase text-3xl font-semibold text-slate-900">
           {post.title}
         </h1>
-        {/* <div>
-        <Image
-          alt="post image"
-          width="1000"
-          height="1000"
-          className="w-full h-72 object-cover"
-          src={urlForImage(post?.mainImage?.asset?._url).url()!}
-        />
-      </div> */}
+        <div>
+          <Image
+            alt="post image"
+            width="1000"
+            height="1000"
+            className="w-full h-72 object-cover"
+            src={urlForImage(post?.mainImage?.asset?._ref).url()}
+          />
+        </div>
         <p className="text-center text-slate-600">{post.description}...</p>
 
         <PortableText
@@ -99,16 +116,18 @@ const SinglePostDetail = ({ post }: Props) => {
             },
           }}
         />
-        <div className="flex gap-2 flex-wrap">
-          {post.categories.map((category) => (
-            <div
-              className="border-[1px] px-3 py-0.5 text-slate-700 capitalize"
-              key={category.title}
-            >
-              {category.title}
-            </div>
-          ))}
-        </div>
+        {post.categories && (
+          <div className="flex gap-2 flex-wrap">
+            {post.categories.map((category) => (
+              <div
+                className="border-[1px] px-3 py-0.5 text-slate-700 capitalize"
+                key={category.title}
+              >
+                {category.title}
+              </div>
+            ))}
+          </div>
+        )}
         <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
           <div className="flex gap-4">
             <span>{post.commentNumber} comments</span>
@@ -124,55 +143,7 @@ const SinglePostDetail = ({ post }: Props) => {
         <div className="w-full order-2 md:order-1">
           <h1 className="capitalize text-sm text-slate-700">comment section</h1>
           <p>leave a comment below and join the discussion</p>
-
-          <div className="my-10">
-            <input
-              {...register("_id")}
-              type="hidden"
-              name="_id"
-              value={post._id}
-            />
-            <form
-              onSubmit={handleSubmit(onsubmit)}
-              className="flex capitalize flex-col gap-y-5"
-            >
-              <div className="flex gap-x-2 items-center">
-                <label>name</label>
-                <input
-                  {...register("name", { required: true })}
-                  type="text"
-                  className="p-2 w-full bg-transparent outline-none text-white "
-                  placeholder="enter name"
-                />
-              </div>
-
-              <div className="flex capitalize gap-x-2 items-center">
-                <label>email</label>
-                <input
-                  {...register("email", { required: true })}
-                  type="email"
-                  className="p-2 w-full bg-transparent outline-none text-white "
-                  placeholder="enter email"
-                />
-              </div>
-              <div className="flex flex-col gap-x-2 gap-y-4 capitalize">
-                <label>enter message</label>
-                <textarea
-                  {...register("comment", { required: true })}
-                  className="w-full bg-transparent h-[200px] resize-none"
-                  placeholder="enter message"
-                />
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="text-enter w-full bg-gray-900 p-2 hover:brightness-95 hover:bg-gray-700 transition-all ease-in-out duration-300"
-                >
-                  submit
-                </button>
-              </div>
-            </form>
-          </div>
+          <CommentForm _id={post._id} onSubmit={onsubmit} />
         </div>
         <div className="w-full order-1 md:order-2 space-y-2">
           <h2 className="capitalize text-sm text-slate-700">
