@@ -5,12 +5,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import PortableText from "react-portable-text";
 import { SubmitHandler } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+
 import { urlForImage } from "@/sanity/lib/image";
 import { convertDateFormat } from "@/utils/helpers";
 import { HeartIcon } from "lucide-react";
 import CommentForm from "@/components/ui/CommentSection";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
+import { toast } from "@/components/ui/use-toast";
+
 
 interface Props {
   post: Post;
@@ -40,7 +42,9 @@ const SinglePostDetail = ({ post }: Props) => {
     })
       .then(() => {
         setSubmitted(true);
-        toast.success("submitted for approval");
+       toast({
+        title: "comment submitted for approval"
+        })
       })
       .catch((err) => {
         setSubmitted(false);
@@ -109,7 +113,7 @@ const SinglePostDetail = ({ post }: Props) => {
               />;
             },
             p: (props: any) => {
-              <p className="text-base my-5 text-slate-700" {...props} />;
+              <p className="text-base  leading-8 my-5 text-slate-700" {...props} />;
             },
             link: ({ href, children }: any) => {
               <a href={href} className="text-limeGreen hover:underline"></a>;

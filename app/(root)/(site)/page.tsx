@@ -9,6 +9,7 @@ import {
   Section6,
   Section8,
 } from "@/components/home";
+import Section9 from "@/components/home/Section9";
 import {
   Session, createServerComponentClient  
 } from "@supabase/auth-helpers-nextjs";
@@ -26,6 +27,7 @@ export default async function Home() {
       <Comments />
       <Section8 />
       <MailingList />
+      <Section9 />
     </>
   );
 }

@@ -16,7 +16,7 @@ interface SiteProps {
 
 const layout = ({ children }: SiteProps) => {
   return (
-    <div className="space-y-6 my-8">
+    <div className="space-y-6 my-8 mb-20">
       <div className=" my-10">
         <h1 className=" text-center text-3xl capitalize font-black">
           plans & pricing

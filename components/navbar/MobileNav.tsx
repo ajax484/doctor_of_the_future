@@ -23,7 +23,7 @@ function MobileNav({ setNavMobile }: MobileNavProps): JSX.Element {
     <nav className="block md:hidden bg-black text-gray-300 w-full h-full">
       <IoClose
         onClick={() => setNavMobile(false)}
-        className="text-3xl absolute right-6 top-6 cursor-pointer "
+        className="text-3xl absolute left-6 top-12 cursor-pointer "
       />
 
       <ul className="flex flex-col justify-center space-y-8 h-full items-center capitalize font-secondary">

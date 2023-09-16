@@ -33,13 +33,19 @@ export default function Header() {
 
   return (
     <header className="fixed w-full bg-white h-28 z-50  px-4 md:px-8 overflow-hidden bar py-8">
-      <div className=" flex justify-between items-center gap-x-4">
-        <Link href={`/`}>
+      <div className="flex justify-between items-center gap-x-4">
+        {/* mobile nav functionality */}
+        <HiMenu
+          onClick={() => setNavMobile(true)}
+          className="md:hidden text-black  text-3xl cursor-pointer"
+        />
+
+        <Link href={`/`} className="">
           <Image
             src="/dotf_logo.png"
-            width={70}
-            height={40}
-            className="invert-[10]"
+            width={100}
+            height={100}
+            className="invert-[10] object-contain ml-5 xs:ml-10 md:ml-0 w-44 h-16"
             alt="doctor of the future logo"
           />
         </Link>
@@ -54,16 +60,11 @@ export default function Header() {
               {cart.length}
             </div>
           </button>
-          {/* mobile nav functionality */}
-          <HiMenu
-            onClick={() => setNavMobile(true)}
-            className="md:hidden text-black text-3xl cursor-pointer"
-          />
         </div>
       </div>
 
       {/* mobile */}
-      <div className={`${navMobile ? "right-0" : "-right-full"} toggle `}>
+      <div className={`${navMobile ? "left-0" : "-left-full"} toggle `}>
         <MobileNav setNavMobile={setNavMobile} />
       </div>
     </header>
