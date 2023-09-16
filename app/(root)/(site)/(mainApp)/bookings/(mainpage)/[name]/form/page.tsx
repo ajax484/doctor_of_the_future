@@ -8,9 +8,16 @@ import BookingForm from "./bookingForm";
 import Button from "@/components/ui/customButton";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import useAuthModal from "@/hooks/useAuthModal";
+import { UseInitializeTransaction } from "@/hooks/transactions";
 
 const Page = () => {
-  const { currentBooking: booking, paymentMethod } = useBookingContext();
+  const {
+    currentBooking: booking,
+    paymentMethod,
+    formValues,
+  } = useBookingContext();
+  const { initializeTransaction, performingTransaction, TransactionError } =
+    UseInitializeTransaction();
   const router = useRouter();
   const supabase = useSupabaseClient();
   const user = useUser();
@@ -56,7 +63,10 @@ const Page = () => {
             </div>
           )}
 
-          <BookingForm booking={booking} />
+          <BookingForm
+            booking={booking}
+            initializeTransaction={initializeTransaction}
+          />
         </div>
         <div className="flex-[25%] space-y-4">
           <BookingAccordion />
@@ -66,7 +76,7 @@ const Page = () => {
               type="submit"
               form="booking-form"
               intent="primary"
-              onClick={() => router.push("form")}
+              loading={performingTransaction}
             />
           ) : (
             <div>

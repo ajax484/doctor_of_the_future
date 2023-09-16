@@ -59,3 +59,21 @@ export function convertDateFormat(inputDate: string | number | Date) {
   const formattedDate = `${months[monthIndex]} ${day}`;
   return formattedDate;
 }
+
+export function generateReferenceNumber(productType: string): string {
+  const typeMapping: Record<string, string> = {
+    BKN: "Bookings",
+    PLN: "Plans",
+    PRG: "Programs",
+    SHP: "Shop",
+  };
+
+  if (!(productType in typeMapping)) {
+    throw new Error("Invalid product type");
+  }
+
+  const randomNumbers = () =>
+    Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join("");
+
+  return `${productType}-${randomNumbers()}-${randomNumbers()}-${randomNumbers()}`;
+}

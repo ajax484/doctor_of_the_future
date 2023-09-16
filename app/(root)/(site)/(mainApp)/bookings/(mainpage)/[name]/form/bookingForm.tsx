@@ -12,7 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -27,6 +26,8 @@ import {
 } from "@/components/ui/select";
 import { useEffect } from "react";
 import { useBookingContext } from "../../../layout";
+import { UseInitializeTransaction } from "@/hooks/transactions";
+import { generateReferenceNumber } from "@/utils/helpers";
 
 const phoneNumberRegex = /^\+?[1-9]\d{1,14}$/; // Example regex for phone numbers
 const bookingFormSchema = z.object({
@@ -52,11 +53,17 @@ const bookingFormSchema = z.object({
   paymentType: z.string().optional(),
 });
 
-type BookingFormValues = z.infer<typeof bookingFormSchema>;
+export type BookingFormValues = z.infer<typeof bookingFormSchema>;
 
-export default function BookingForm({ booking }: { booking: BookingProps }) {
+export default function BookingForm({
+  booking,
+  initializeTransaction,
+}: {
+  booking: BookingProps;
+  initializeTransaction: ({ payload }) => void;
+}) {
   const { session } = useSessionContext();
-  const { changeMethod } = useBookingContext();
+  const { changeMethod, changeFormValues } = useBookingContext();
   const email = session?.user.email;
   // This can come from your database or API.
   const defaultValues: Partial<BookingFormValues> = {
@@ -84,7 +91,20 @@ export default function BookingForm({ booking }: { booking: BookingProps }) {
   }, [watch]);
 
   function onSubmit(data: BookingFormValues) {
-    console.log(data);
+    console.log(data, "here");
+    changeFormValues(data);
+    const { email } = data;
+    const amount = booking.price;
+    const reference = generateReferenceNumber("BKN");
+
+    const payload = {
+      email,
+      amount,
+      reference,
+      metadata: { user_id: session?.user?.id },
+    };
+
+    initializeTransaction({ payload });
   }
 
   return (

@@ -8,7 +8,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { IoVideocam } from "react-icons/io5";
-import Button from "@/components/ui/customButton";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
 import { formatDateToHumanReadable } from "@/utils/helpers";
 import { useSessionContext } from "@supabase/auth-helpers-react";
@@ -23,6 +22,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
 };
+import { BookingFormValues } from "./(mainpage)/[name]/form/bookingForm";
 
 interface SiteProps {
   children: React.ReactNode;
@@ -37,6 +37,8 @@ type TBookingContext = {
   changeSlot: (timeSlot: TTimeSlot) => void;
   paymentMethod: string;
   changeMethod: (method: string) => void;
+  formValues: BookingFormValues | {};
+  changeFormValues: (formValues: BookingFormValues) => void;
 };
 
 type TTimeSlot = {
@@ -56,6 +58,8 @@ const BookingContext = createContext<TBookingContext>({
   changeSlot(timeSlot) {},
   paymentMethod: "",
   changeMethod(method) {},
+  formValues: {},
+  changeFormValues(formValues) {},
 });
 
 export const TIMESLOTS: TTimeSlot[] = [
@@ -90,11 +94,14 @@ const BookingLayout = ({ children }: SiteProps) => {
     value: "09:00:00",
   });
   const [paymentMethod, setMethod] = useState<string>("");
+  const [formValues, setValues] = useState<BookingFormValues | {}>({});
 
   const changeBooking = (booking: BookingProps) => setBooking(booking);
   const changeDate = (date: Date) => setDate(date);
   const changeSlot = (newSlot: TTimeSlot) => setTimeSlot(newSlot);
   const changeMethod = (method: string) => setMethod(method);
+  const changeFormValues = (formValues: BookingFormValues) =>
+    setValues(formValues);
 
   const value: TBookingContext = {
     currentBooking,
@@ -105,6 +112,8 @@ const BookingLayout = ({ children }: SiteProps) => {
     changeSlot,
     paymentMethod,
     changeMethod,
+    formValues,
+    changeFormValues,
   };
 
   return (
