@@ -2,7 +2,9 @@
 import { siteConfig } from "@/app/(root)/siteConfig/page";
 import Button from "@/components/ui/customButton";
 import { useCart } from "@/context/CartContext";
+import useAuthModal from "@/hooks/useAuthModal";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
+import { useUser } from "@supabase/auth-helpers-react";
 import { MinusCircle } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -20,6 +22,8 @@ export const metadata: Metadata = {
 const Page = () => {
   const { cart, removeItem, hideCart } = useCart();
   const router = useRouter();
+  const user = useUser()
+  const authModal = useAuthModal()
 
   const total = cart.reduce((total, cartItem) => total + cartItem.price, 0);
 
@@ -70,10 +74,9 @@ const Page = () => {
           <Button
             label="Checkout"
             intent="primary"
-            onClick={() => {
-              router.push("/cart-page");
-              hideCart();
-            }}
+            onClick={() =>
+              user?.email ? "" : authModal.onOpen()
+            }
           />
         )}
       </div>

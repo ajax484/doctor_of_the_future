@@ -33,7 +33,7 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
         console.log(values?.responseData?.data?.authorization_url);
         const redirectUrl = values?.responseData?.data?.authorization_url;
         toast({
-          title: "Transaction Successful!",
+          title: "Processing Transaction...",
         });
 
         window.location.href = redirectUrl;
