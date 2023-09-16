@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 import MobileNav from "./MobileNav";
 
 // icons
-import { HiChevronDown, HiMenu, HiShoppingCart, HiUser } from "react-icons/hi";
+import { HiMenu, HiShoppingCart } from "react-icons/hi";
 import AccountDropDown from "./AccountDropDown";
 // cart context
 import { useCart } from "@/context/CartContext";
