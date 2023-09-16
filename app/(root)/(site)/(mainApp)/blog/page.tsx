@@ -1,11 +1,21 @@
+import { siteConfig } from "@/app/(root)/siteConfig/page";
 import { getPosts } from "@/hooks/posts";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import { HeartIcon } from "lucide-react";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 // do not add use client to this
+
+export const metadata: Metadata = {
+  title: "Blog | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 const Blog = async () => {
   const posts = await getPosts();
@@ -17,7 +27,7 @@ const Blog = async () => {
         <h1 className=" font-black capitalize text-3xl text-center ">blogs</h1>
       </div>
       {posts.map((post) => (
-        <div key={post.id}>
+        <div key={post.id} className=" mb-14">
           <Link href={`/blog/post/${post.slug.current}`}>
             <div className="flex h-[500px] bg-white border-[1px] shadow-md">
               <div className="flex-[50%]  relative bg-black">

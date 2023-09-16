@@ -5,6 +5,19 @@ import { useGetBookings } from "@/hooks/bookings";
 import { BookingProps } from "@/types/products";
 import React, { Suspense } from "react";
 import { useBookingContext } from "../layout";
+import { Metadata } from "next";
+import { siteConfig } from "@/app/(root)/siteConfig/page";
+
+
+export const metadata: Metadata = {
+  title: "Bookings | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+
 
 export const Bookings = () => {
   const { bookings, fetchingbookings, fetchingbookingsError } =

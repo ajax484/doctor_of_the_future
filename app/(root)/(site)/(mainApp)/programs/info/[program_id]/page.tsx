@@ -6,6 +6,22 @@ import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import ProgramsDetails from "@/components/ui/programs/ProgramsDetails";
 import { useGetProgram } from "@/hooks/programs";
 import Loading from "@/components/ui/Loading";
+import { Metadata } from "next";
+import { siteConfig } from "@/app/(root)/siteConfig/page";
+
+
+
+export const metadata: Metadata = {
+  title: "Programs Info | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+
+
+
 
 export default function ProgramInfo({
   params,
@@ -21,7 +37,7 @@ export default function ProgramInfo({
     <Suspense>
       <Loading loading={fetchingProgram}>
         <section className="md:px-4 lg:px-8">
-          <div className=" my-5">
+          <div className=" my-10">
             <h1 className=" text-center text-3xl capitalize font-black">
               program Details
             </h1>

@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: absoluteUrl("/dotf_logo.png"),
+        url: absoluteUrl("/favicon.ico"),
         width: 1200,
         height: 630,
         alt: siteConfig.name,

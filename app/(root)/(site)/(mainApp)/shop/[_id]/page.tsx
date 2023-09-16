@@ -6,6 +6,16 @@ import { useGetItem } from "@/hooks/shop";
 import Loading from "@/components/ui/Loading";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
+import { siteConfig } from "@/app/(root)/siteConfig/page";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Shop Details | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 export default function Item({ params }: { params: { _id: string } }) {
   const { _id } = params;
@@ -17,7 +27,7 @@ export default function Item({ params }: { params: { _id: string } }) {
 
   return (
     <Loading loading={fetchingItem}>
-      <div className=" my-5">
+      <div className=" my-10">
         <h1 className=" text-center font-black text-3xl capitalize ">
           shop product details
         </h1>
