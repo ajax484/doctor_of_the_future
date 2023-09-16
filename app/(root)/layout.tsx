@@ -19,7 +19,7 @@ const layout = ({ children }: SiteProps) => {
         {/* header */}
         <Header />
         <CartScreen />
-        <main className="py-20">{children}</main>
+        <main className="pt-20">{children}</main>
         <Footer />
       </QueryClientProvider>
     </ClientPreventHydration>

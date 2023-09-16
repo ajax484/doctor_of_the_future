@@ -17,7 +17,7 @@ export default function Hero() {
     <section className="h-screen relative max-w-screen overflow-hidden">
       <div className="bg-black opacity-25 absolute inset-0 h-screen w-screen z-10 !overflow-hidden" />
       <Image
-        src={'https://images.pexels.com/photos/793750/pexels-photo-793750.jpeg?auto=compress&cs=tinysrgb&w=800'}
+        src={'https://images.pexels.com/photos/4946589/pexels-photo-4946589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}
         width={1000}
         height={1000}
         className="w-full h-full object-cover"
