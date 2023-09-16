@@ -23,18 +23,26 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
           payload,
         });
         console.log(data);
+
+        if (data?.status !== 200) {
+          throw data?.error;
+        }
+        return data;
       },
       onSuccess: (values) => {
-        console.log(values);
+        console.log(values?.responseData?.data?.authorization_url);
+        const redirectUrl = values?.responseData?.data?.authorization_url;
         toast({
           title: "Transaction Successful!",
         });
+
+        window.location.href = redirectUrl;
       },
-      onError: (error: AxiosError) => {
+      onError: (error) => {
         console.log(error);
 
         toast({
-          title: error.message,
+          title: error,
         });
       },
     });

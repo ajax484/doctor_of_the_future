@@ -21,7 +21,7 @@ const Page = () => {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const user = useUser();
-  const openModal = useAuthModal();
+  const openModal = useAuthModal();  
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

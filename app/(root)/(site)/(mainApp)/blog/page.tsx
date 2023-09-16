@@ -25,13 +25,13 @@ const Blog = async () => {
   return (
     <div className="mt-5 py-8">
       <div className="mb-10">
-        <h1 className=" font-black capitalize text-3xl text-center ">blogs</h1>
+        <h1 className="font-black capitalize text-3xl text-center">Blogs</h1>
       </div>
       {posts.map((post) => (
-        <div key={post.id} className=" mb-14">
+        <div key={post.id} className="mb-14">
           <Link href={`/blog/post/${post.slug.current}`}>
-            <div className="flex h-[500px] bg-white border-[1px] shadow-md">
-              <div className="flex-[50%]  relative bg-black">
+            <div className="flex h-96 bg-white border-1 shadow-md">
+              <div className="w-1/2 relative bg-black">
                 <Image
                   src={post.mainImage || ""}
                   blurDataURL={`data:image/svg+xml;base64,${toBase64(
@@ -43,34 +43,28 @@ const Blog = async () => {
                   objectPosition="center"
                 />
               </div>
-              <div className="flex-[50%] px-8 py-2 flex flex-col justify-between">
+              <div className="w-1/2 px-8 py-2 flex flex-col justify-between">
                 <div>
-                  <h1 className="uppercase">{post.title}</h1>
+                  <h1 className="uppercase text-xl md:text-2xl lg:text-3xl font-semibold">
+                    {post.title}
+                  </h1>
                   <p>{post.description}</p>
                 </div>
-                <div className="flex-[50%] px-8 py-2 flex flex-col justify-start md:justify-between gap-4 md:gap-0">
-                  <div>
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl uppercase">
-                      {post.title}
-                    </h1>
-                    <p>{post.description}</p>
+                <div className="border-t-1 flex justify-between pt-2">
+                  <div className="flex gap-4">
+                    <span>{post.comments} comments</span>
+                    <span>{post.views} views</span>
                   </div>
-                  <div className="border-t-[1px] flex justify-between pt-2">
-                    <div className="flex gap-4">
-                      <span>{post.comments} comments</span>
-                      <span>{post.views} views</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <HeartIcon />
-                      <span>{post.likes}</span>
-                    </div>
+                  <div className="flex gap-2 items-center">
+                    <HeartIcon className="h-5 w-5 text-red-500" />
+                    <span>{post.likes}</span>
                   </div>
                 </div>
               </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+            </div>
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };
