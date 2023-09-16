@@ -8,6 +8,21 @@ import MyBooking from "@/components/account/MyBooking";
 import MySubscriptions from "@/components/account/MySubscriptions";
 import MyOrders from "@/components/account/MyOrders";
 import MyPrograms from "@/components/account/MyPrograms";
+import { siteConfig } from "@/app/(root)/siteConfig/page";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "My Account | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+
+
+
 
 const MyAccount = () => {
   return (

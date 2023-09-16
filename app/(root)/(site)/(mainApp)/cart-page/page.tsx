@@ -1,11 +1,21 @@
 "use client";
+import { siteConfig } from "@/app/(root)/siteConfig/page";
 import Button from "@/components/ui/customButton";
 import { useCart } from "@/context/CartContext";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
 import { MinusCircle } from "lucide-react";
+import { Metadata } from "next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Cart | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 const Page = () => {
   const { cart, removeItem, hideCart } = useCart();

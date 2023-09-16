@@ -1,5 +1,15 @@
+import { siteConfig } from "@/app/(root)/siteConfig/page";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Privacy Policies | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 const Policies = () => {
   return (

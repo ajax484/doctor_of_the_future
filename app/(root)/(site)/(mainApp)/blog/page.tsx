@@ -1,12 +1,22 @@
+import { siteConfig } from "@/app/(root)/siteConfig/page";
 import { getPosts } from "@/hooks/posts";
 import { urlForImage } from "@/sanity/lib/image";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import { HeartIcon } from "lucide-react";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 // do not add use client to this
+
+export const metadata: Metadata = {
+  title: "Blog | " + siteConfig.name,
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 const Blog = async () => {
   const posts = await getPosts();
@@ -17,22 +27,26 @@ const Blog = async () => {
       <div className="mb-10">
         <h1 className=" font-black capitalize text-3xl text-center ">blogs</h1>
       </div>
-      <div className="space-y-4">
-        {posts.map((post) => (
-          <div key={post.id}>
-            <Link href={`/blog/post/${post.slug.current}`}>
-              <div className="flex flex-col md:flex-row bg-white border-[1px] shadow-md">
-                <div className="flex-[50%] relative h-[250px]">
-                  <Image
-                    src={urlForImage(post?.mainImage?.asset?._ref).url()}
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                      shimmer(200, 200)
-                    )}`}
-                    alt={post.title}
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition="center"
-                  />
+      {posts.map((post) => (
+        <div key={post.id} className=" mb-14">
+          <Link href={`/blog/post/${post.slug.current}`}>
+            <div className="flex h-[500px] bg-white border-[1px] shadow-md">
+              <div className="flex-[50%]  relative bg-black">
+                <Image
+                  src={post.mainImage || ""}
+                  blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                    shimmer(200, 200)
+                  )}`}
+                  alt={post.title}
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </div>
+              <div className="flex-[50%] px-8 py-2 flex flex-col justify-between">
+                <div>
+                  <h1 className="uppercase">{post.title}</h1>
+                  <p>{post.description}</p>
                 </div>
                 <div className="flex-[50%] px-8 py-2 flex flex-col justify-start md:justify-between gap-4 md:gap-0">
                   <div>
