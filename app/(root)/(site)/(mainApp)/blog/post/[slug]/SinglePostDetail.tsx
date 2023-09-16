@@ -55,7 +55,7 @@ const SinglePostDetail = ({ post }: Props) => {
 
   return (
     <>
-      <article className="border-[1px] mx-10 my-10 py-10 px-5 space-y-6">
+      <article className="border-[1px] md:mx-10 my-10 py-10 px-5 space-y-6">
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
             <div className="rounded-full h-8 w-8 relative border-2 border-limeGreen">
@@ -113,7 +113,7 @@ const SinglePostDetail = ({ post }: Props) => {
               />;
             },
             p: (props: any) => {
-              <p className="text-base  leading-8 my-5 text-slate-700" {...props} />;
+              <p className="text-base leading-8 my-5 text-slate-700" {...props} />;
             },
             link: ({ href, children }: any) => {
               <a href={href} className="text-limeGreen hover:underline"></a>;
