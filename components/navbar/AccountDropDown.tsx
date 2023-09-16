@@ -48,7 +48,7 @@ const AccountDropDown = () => {
                 <DropdownMenuTrigger>
                   <div className="flex items-center gap-x-2">
                     <Avatar src={user?.user_metadata.avatar_url} />
-                    <p className=" capitalize font-light text-xs">
+                    <p className=" capitalize hidden md:block font-light text-xs">
                       {user?.user_metadata.name}
                     </p>
                   </div>
@@ -116,7 +116,9 @@ const AccountDropDown = () => {
               <div className="flex items-center gap-x-2">
                 <div className="flex items-center gap-x-2" onClick={authModal.onOpen}>
                   <h5 className="text-slate-700 font-normal text-xs lg:text-sm">LOGIN</h5>
-                  <Avatar src={user?.user_metadata.avatar_url} />
+                 <div className="hidden md:block">
+                 <Avatar src={user?.user_metadata.avatar_url} />
+                 </div>
                 </div>
               </div>
             )}

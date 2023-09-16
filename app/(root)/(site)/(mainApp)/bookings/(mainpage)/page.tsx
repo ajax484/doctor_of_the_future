@@ -29,7 +29,7 @@ export const Bookings = () => {
   return (
    <Suspense>
      <Loading loading={fetchingbookings} >
-      <div className=" my-10">
+      <div className=" my-10 mb-20">
       <div className="my-5">
         <h1 className=" text-center text-3xl capitalize font-black">bookings</h1>
       </div>

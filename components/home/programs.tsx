@@ -31,27 +31,8 @@ export default function Programs() {
             alt="image of fit woman"
           />
         </div>
-        <div className="relative">
-          <div className="bg-black opacity-40 absolute inset-0 h-full w-full z-10 !overflow-hidden" />
-          <div className="absolute w-full h-full z-20 flex flex-col justify-center md:justify-end items-center md:[align-items:unset] p-4 md:p-8 text-white gap-4">
-            <h3 className="text-2xl md:text-3xl capitalize font-semibold text-center md:text-start">Sexual health and fertility bootcamp</h3>
-            <p className="w-2/3 text-justify">
-
-            </p>
-            {/* redirects to plans and billing */}
-            <Link href={`/plans`}>
-              <button className="w-fit p-2 bg-slate-900  rounded-md hover:bg-slate-500">View More</button>
-            </Link>
-          </div>
-          <Image
-            src={'https://images.pexels.com/photos/6149232/pexels-photo-6149232.jpeg?auto=compress&cs=tinysrgb&w=800'}
-            fill={true}
-            objectFit="cover"
-            objectPosition="center"
-            alt="image of couple"
-          />
-        </div>
-        <div className="relative">
+   
+        <div className="relative md:row-span-2">
           <div className="bg-black opacity-40 absolute inset-0 h-full w-full z-10 !overflow-hidden" />
           <div className="absolute w-full h-full z-20 flex flex-col justify-center md:justify-end items-center md:[align-items:unset] p-4 md:p-8 text-white gap-4">
             <h3 className="text-2xl md:text-3xl font-semibold capitalize">3-days fertility bootcamp</h3>

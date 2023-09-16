@@ -11,7 +11,7 @@ export default function Section3() {
   const router = useRouter()
 
   const onClick = () => {
-    router.push('/plans')
+    router.push('/blog')
   }
 
 

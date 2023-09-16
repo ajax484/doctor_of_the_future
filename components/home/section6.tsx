@@ -10,7 +10,7 @@ export default function Section6() {
   const router = useRouter()
 
   const onClick = () => {
-    router.push('/blog')
+    router.push('/programs')
   }
 
 

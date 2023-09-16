@@ -12,7 +12,7 @@ const Avatar = ({ src }: AvatarProps) => {
   return (
     <>
       <Image
-        className="rounded-full cursor-pointer w-6 h-6"
+        className="rounded-full cursor-pointer w-8 h-8 lg:w-6 lg:h-6"
         height="200"
         width="200"
         alt="Avatar"
