@@ -60,14 +60,14 @@ export function convertDateFormat(inputDate: string | number | Date) {
   return formattedDate;
 }
 
-export function generateReferenceNumber(productType: string): string {
-  const typeMapping: Record<string, string> = {
-    BKN: "Bookings",
-    PLN: "Plans",
-    PRG: "Programs",
-    SHP: "Shop",
-  };
+export const typeMapping: Record<string, string> = {
+  BKN: "bookings",
+  PLN: "plans",
+  PRG: "programs",
+  SHP: "shop",
+};
 
+export function generateReferenceNumber(productType: string): string {
   if (!(productType in typeMapping)) {
     throw new Error("Invalid product type");
   }

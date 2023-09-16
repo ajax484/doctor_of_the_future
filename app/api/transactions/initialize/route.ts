@@ -15,7 +15,7 @@ export async function POST(req: NextApiRequest) {
         {
           ...params,
           amount: params.amount * 100,
-          callback_url: `http://localhost:3000/api/transactions/verify/${params.reference}`,
+          callback_url: `http://localhost:3000/api/transactions/verify`,
         },
         {
           headers: {

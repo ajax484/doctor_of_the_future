@@ -35,7 +35,7 @@ type TBookingContext = {
   changeDate: (date: Date) => void;
   timeSlot: TTimeSlot;
   changeSlot: (timeSlot: TTimeSlot) => void;
-  paymentMethod: string;
+  payment_method: string;
   changeMethod: (method: string) => void;
   formValues: BookingFormValues | {};
   changeFormValues: (formValues: BookingFormValues) => void;
@@ -56,7 +56,7 @@ const BookingContext = createContext<TBookingContext>({
     value: "09:00:00",
   },
   changeSlot(timeSlot) {},
-  paymentMethod: "",
+  payment_method: "",
   changeMethod(method) {},
   formValues: {},
   changeFormValues(formValues) {},
@@ -93,7 +93,7 @@ const BookingLayout = ({ children }: SiteProps) => {
     label: "9:00 AM",
     value: "09:00:00",
   });
-  const [paymentMethod, setMethod] = useState<string>("");
+  const [payment_method, setMethod] = useState<string>("");
   const [formValues, setValues] = useState<BookingFormValues | {}>({});
 
   const changeBooking = (booking: BookingProps) => setBooking(booking);
@@ -110,7 +110,7 @@ const BookingLayout = ({ children }: SiteProps) => {
     changeDate,
     timeSlot,
     changeSlot,
-    paymentMethod,
+    payment_method,
     changeMethod,
     formValues,
     changeFormValues,

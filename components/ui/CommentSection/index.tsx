@@ -58,13 +58,13 @@ export default function CommentForm({ _id }: { _id: string }) {
   });
 
   //   const { watch } = form;
-  //   const paymentMethod = watch("paymentMethod");
+  //   const payment_method = watch("payment_method");
 
   //   useEffect(() => {
   //     const subscription = watch((value, { name, type }) => {
-  //       if (name !== "paymentMethod") return;
-  //       if (value.paymentMethod) {
-  //         changeMethod(value.paymentMethod);
+  //       if (name !== "payment_method") return;
+  //       if (value.payment_method) {
+  //         changeMethod(value.payment_method);
   //       }
   //     });
   //     return () => subscription.unsubscribe();

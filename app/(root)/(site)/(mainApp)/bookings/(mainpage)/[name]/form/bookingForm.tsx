@@ -29,7 +29,7 @@ import { useBookingContext } from "../../../layout";
 import { UseInitializeTransaction } from "@/hooks/transactions";
 import { generateReferenceNumber } from "@/utils/helpers";
 
-const phoneNumberRegex = /^\+?[1-9]\d{1,14}$/; // Example regex for phone numbers
+const phone_numberRegex = /^\+?[1-9]\d{1,14}$/; // Example regex for phone numbers
 const bookingFormSchema = z.object({
   name: z
     .string()
@@ -44,13 +44,13 @@ const bookingFormSchema = z.object({
       required_error: "Please select an email to display.",
     })
     .email(),
-  phoneNumber: z.string().refine((value) => phoneNumberRegex.test(value), {
+  phone_number: z.string().refine((value) => phone_numberRegex.test(value), {
     message:
       "Invalid phone number format. Please use numbers and optional '+' sign.",
   }),
   message: z.string().optional(),
-  paymentMethod: z.string(),
-  paymentType: z.string().optional(),
+  payment_method: z.string(),
+  payment_type: z.string().optional(),
 });
 
 export type BookingFormValues = z.infer<typeof bookingFormSchema>;
@@ -68,8 +68,8 @@ export default function BookingForm({
   // This can come from your database or API.
   const defaultValues: Partial<BookingFormValues> = {
     email,
-    paymentMethod: "plan",
-    paymentType: "online",
+    payment_method: "plan",
+    payment_type: "online",
   };
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
@@ -78,13 +78,13 @@ export default function BookingForm({
   });
 
   const { watch } = form;
-  const paymentMethod = watch("paymentMethod");
+  const payment_method = watch("payment_method");
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
-      if (name !== "paymentMethod") return;
-      if (value.paymentMethod) {
-        changeMethod(value.paymentMethod);
+      if (name !== "payment_method") return;
+      if (value.payment_method) {
+        changeMethod(value.payment_method);
       }
     });
     return () => subscription.unsubscribe();
@@ -101,7 +101,7 @@ export default function BookingForm({
       email,
       amount,
       reference,
-      metadata: { user_id: session?.user?.id },
+      metadata: { user_id: session?.user?.id, ...data, booking_id: booking.id },
     };
 
     initializeTransaction({ payload });
@@ -148,7 +148,7 @@ export default function BookingForm({
         </div>
         <FormField
           control={form.control}
-          name="phoneNumber"
+          name="phone_number"
           render={({ field }) => (
             <FormItem className="flex-1">
               <FormLabel>Phone Number</FormLabel>
@@ -178,7 +178,7 @@ export default function BookingForm({
         />
         <FormField
           control={form.control}
-          name="paymentMethod"
+          name="payment_method"
           render={({ field }) => (
             <FormItem className="space-y-1">
               <FormLabel>Choose how you want to pay</FormLabel>
@@ -216,10 +216,10 @@ export default function BookingForm({
             </FormItem>
           )}
         />
-        {paymentMethod === "session" && (
+        {payment_method === "session" && (
           <FormField
             control={form.control}
-            name="paymentType"
+            name="payment_type"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>When do you want to pay?</FormLabel>

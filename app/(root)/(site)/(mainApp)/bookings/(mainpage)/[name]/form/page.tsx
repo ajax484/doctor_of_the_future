@@ -13,7 +13,7 @@ import { UseInitializeTransaction } from "@/hooks/transactions";
 const Page = () => {
   const {
     currentBooking: booking,
-    paymentMethod,
+    payment_method,
     formValues,
   } = useBookingContext();
   const { initializeTransaction, performingTransaction, TransactionError } =
@@ -29,7 +29,7 @@ const Page = () => {
     router.push("/login");
   };
 
-  // console.log(paymentMethod, "mehtod");
+  // console.log(payment_method, "mehtod");
 
   return (
     <div className="space-y-8 my-10">
@@ -72,7 +72,7 @@ const Page = () => {
           <BookingAccordion />
           {user ? (
             <Button
-              label={paymentMethod === "plan" ? "Buy a Plan" : "Book Now"}
+              label={payment_method === "plan" ? "Buy a Plan" : "Book Now"}
               type="submit"
               form="booking-form"
               intent="primary"
