@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <header className="fixed w-full bg-white h-28 z-50  px-4 md:px-8 overflow-hidden bar py-8">
-      <div className="flex justify-between items-center gap-x-4">
+      <div className="flex justify-between items-center gap-x-4 md:gap-x-8 lg:gap-x-4">
         {/* mobile nav functionality */}
         <HiMenu
           onClick={() => setNavMobile(true)}
@@ -42,10 +42,10 @@ export default function Header() {
 
         <Link href={`/`} className="">
           <Image
-            src="/dotf_logo.png"
-            width={100}
-            height={100}
-            className="invert-[10] object-contain ml-5 xs:ml-10 md:ml-0 w-44 h-16"
+            src="/logo/mainlogo.png"
+            width={1000}
+            height={1000}
+            className=" object-contain lg:object-fill ml-5 xs:ml-10 lg:ml-0 w-44 md:w-56 h-20 "
             alt="doctor of the future logo"
           />
         </Link>

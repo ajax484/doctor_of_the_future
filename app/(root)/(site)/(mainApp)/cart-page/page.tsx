@@ -11,7 +11,9 @@ import { MinusCircle } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export const metadata: Metadata = {
   title: "Cart | " + siteConfig.name,
@@ -28,6 +30,10 @@ const Page = () => {
   const router = useRouter();
   const user = useUser();
   const authModal = useAuthModal();
+
+  const [payMethod, setMethod] = useState<"paystack" | "lemonSqueezy">(
+    "paystack"
+  );
 
   const total = cart.reduce((total, cartItem) => total + cartItem.price, 0);
 
@@ -88,10 +94,64 @@ const Page = () => {
       </div>
       <div className="flex-[25%] space-y-4">
         <h2 className="border-b-[1px] font-semibold pb-4">Order Summary</h2>
-        <div className="flex justify-between">
+        <div className="flex justify-between border-b-[1px] pb-4">
           <h3 className=" font-semibold">Subtotal:</h3>
-          <span>{formatPriceToNaira(total)}</span>
+          <span className=" font-semibold">{formatPriceToNaira(total)}</span>
         </div>
+
+        {/* payment method */}
+        <div className=" my-4">
+          <h1 className=" capitalize font-semibold">select payment method</h1>
+
+          <div className=" my-5">
+            <RadioGroup
+              onValueChange={(value: "paystack" | "lemonSqueezy") =>
+                setMethod(value)
+              }
+              defaultValue={payMethod}
+              className="flex flex-col w-full"
+            >
+              <Label
+                htmlFor="paystack"
+                className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
+              >
+                <div className="flex items-center w-full gap-x-3 justify-between">
+                  <span className="flex items-center gap-x-4">
+                    <RadioGroupItem value="paystack" id="paystack" />
+                    <span>Pay with PayStack</span>
+                  </span>
+                  <Image
+                    alt="pay stack logo"
+                    src={"https://cdn.worldvectorlogo.com/logos/paystack-2.svg"}
+                    width={100}
+                    height={100}
+                    className="w-20 h-10"
+                  />
+                </div>
+              </Label>
+
+              <Label
+                htmlFor="lemonSqueezy"
+                className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
+              >
+                <div className="flex items-center gap-x-3 w-full justify-between">
+                  <span className="flex items-center gap-x-4">
+                    <RadioGroupItem value="lemonSqueezy" id="lemonSqueezy" />
+                    <span>Pay with Lemon Squeezy</span>
+                  </span>
+                  <Image
+                    alt="Lemon Squeezy"
+                    src={"/paynow.png"}
+                    width={100}
+                    height={100}
+                    className="w-20 h-10"
+                  />
+                </div>
+              </Label>
+            </RadioGroup>
+          </div>
+        </div>
+
         {cart.length > 0 && (
           <Button
             label="Checkout"
