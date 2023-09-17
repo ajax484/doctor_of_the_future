@@ -4,15 +4,19 @@ import Button from "@/components/ui/customButton";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useGetPlan } from "@/hooks/plans";
+import { UseInitializeTransaction } from "@/hooks/transactions";
 import useAuthModal from "@/hooks/useAuthModal";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
+import { generateReferenceNumber } from "@/utils/helpers";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { IoCaretForwardOutline } from "react-icons/io5";
 
 export default function Page({ params }: { params: { _id: string } }) {
+  const { TransactionError, initializeTransaction, performingTransaction } =
+    UseInitializeTransaction();
   const { _id } = params;
   const { fetchingPlan, fetchingPlanError, plan } = useGetPlan({ _id });
   const router = useRouter();
@@ -22,6 +26,25 @@ export default function Page({ params }: { params: { _id: string } }) {
   };
   const user = useUser();
   const authModal = useAuthModal();
+
+  const [payMethod, setMethod] = useState<"paystack" | "lemonSqueezy">(
+    "paystack"
+  );
+
+  function checkout() {
+    const email = user?.email;
+    const amount = plan?.price;
+    const reference = generateReferenceNumber("PLN");
+
+    const payload = {
+      email,
+      amount,
+      reference,
+      metadata: { user_id: user?.id, email, plan_id: plan?.id },
+    };
+
+    initializeTransaction({ payload });
+  }
 
   // console.log(plan);
 
@@ -59,7 +82,7 @@ export default function Page({ params }: { params: { _id: string } }) {
             <h3 className="text-2xl font-normal">Payment</h3>
             <RadioGroup
               onValueChange={(value) => console.log(value)}
-              defaultValue={""}
+              defaultValue={"plan"}
               className="flex flex-col w-full"
             >
               <Label
@@ -86,23 +109,23 @@ export default function Page({ params }: { params: { _id: string } }) {
           {/*PAYMENT METHODS*/}
 
           <div className=" my-4">
-            <h1 className=" capitalize font-semibold">
-              select payment method
-            </h1>
+            <h1 className=" capitalize font-semibold">select payment method</h1>
 
             <div className=" my-5">
               <RadioGroup
-                // onValueChange={(value) => console.log(value)}
-                // defaultValue={""}
+                onValueChange={(value: "paystack" | "lemonSqueezy") =>
+                  setMethod(value)
+                }
+                defaultValue={payMethod}
                 className="flex flex-col w-full"
               >
                 <Label
-                  htmlFor="plan"
+                  htmlFor="paystack"
                   className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
                 >
                   <div className="flex items-center w-full gap-x-3 justify-between">
                     <span className="flex items-center gap-x-4">
-                      <RadioGroupItem value="plan" id="plan" />
+                      <RadioGroupItem value="paystack" id="paystack" />
                       <span>Pay with PayStack</span>
                     </span>
                     <Image
@@ -118,17 +141,17 @@ export default function Page({ params }: { params: { _id: string } }) {
                 </Label>
 
                 <Label
-                  htmlFor="plan"
+                  htmlFor="lemonSqueezy"
                   className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
                 >
-                    <div className="flex items-center gap-x-3 w-full justify-between">
+                  <div className="flex items-center gap-x-3 w-full justify-between">
                     <span className="flex items-center gap-x-4">
-                      <RadioGroupItem value="plan" id="plan" />
+                      <RadioGroupItem value="lemonSqueezy" id="lemonSqueezy" />
                       <span>Pay with Lemon Squeezy</span>
                     </span>
                     <Image
-                      alt="pay stack logo"
-                      src={'/paynow.png'}
+                      alt="Lemon Squeezy"
+                      src={"/paynow.png"}
                       width={100}
                       height={100}
                       className="w-20 h-10"
@@ -139,9 +162,16 @@ export default function Page({ params }: { params: { _id: string } }) {
             </div>
           </div>
           <Button
-            onClick={() => (!user?.email ? authModal.onOpen() : "")}
+            onClick={() => (!user?.email ? authModal.onOpen() : checkout())}
             label="Buy Now"
             intent="primary"
+            loading={fetchingPlan || performingTransaction}
+            disabled={
+              fetchingPlan ||
+              performingTransaction ||
+              !!fetchingPlanError ||
+              !!TransactionError
+            }
           />
         </div>
         <div className="flex-[30%] border-[1px] p-6 border-slate-800 space-y-4 order-1 md:order-2">

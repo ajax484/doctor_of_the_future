@@ -8,8 +8,7 @@ import { useGetProgram } from "@/hooks/programs";
 import Loading from "@/components/ui/Loading";
 import { Metadata } from "next";
 import { siteConfig } from "@/app/(root)/siteConfig/page";
-
-
+import { useUser } from "@supabase/auth-helpers-react";
 
 export const metadata: Metadata = {
   title: "Programs Info | " + siteConfig.name,
@@ -18,10 +17,6 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
 };
-
-
-
-
 
 export default function ProgramInfo({
   params,
