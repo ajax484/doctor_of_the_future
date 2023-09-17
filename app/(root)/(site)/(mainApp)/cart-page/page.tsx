@@ -111,6 +111,7 @@ const Page = () => {
               defaultValue={payMethod}
               className="flex flex-col w-full"
             >
+              {/* paystack */}
               <Label
                 htmlFor="paystack"
                 className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
@@ -129,7 +130,7 @@ const Page = () => {
                   />
                 </div>
               </Label>
-
+              {/* lemon sqezzy */}
               <Label
                 htmlFor="lemonSqueezy"
                 className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
