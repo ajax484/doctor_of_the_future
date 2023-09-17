@@ -2,8 +2,10 @@
 import { siteConfig } from "@/app/(root)/siteConfig/page";
 import Button from "@/components/ui/customButton";
 import { useCart } from "@/context/CartContext";
+import { UseInitializeTransaction } from "@/hooks/transactions";
 import useAuthModal from "@/hooks/useAuthModal";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
+import { generateReferenceNumber } from "@/utils/helpers";
 import { useUser } from "@supabase/auth-helpers-react";
 import { MinusCircle } from "lucide-react";
 import { Metadata } from "next";
@@ -20,12 +22,32 @@ export const metadata: Metadata = {
 };
 
 const Page = () => {
+  const { TransactionError, initializeTransaction, performingTransaction } =
+    UseInitializeTransaction();
   const { cart, removeItem, hideCart } = useCart();
   const router = useRouter();
-  const user = useUser()
-  const authModal = useAuthModal()
+  const user = useUser();
+  const authModal = useAuthModal();
 
   const total = cart.reduce((total, cartItem) => total + cartItem.price, 0);
+
+  function checkout() {
+    const email = user?.email;
+    const amount = total;
+    const books = cart.map((cartItem) => cartItem.id);
+    const reference = generateReferenceNumber("SHP");
+
+    console.log(email, reference, books, amount);
+
+    const payload = {
+      email,
+      amount,
+      reference,
+      metadata: { user_id: user?.id, books, email },
+    };
+
+    initializeTransaction({ payload });
+  }
 
   return (
     <div className="mt-12 flex flex-col md:flex-row gap-x-8 gap-y-12">
@@ -74,9 +96,8 @@ const Page = () => {
           <Button
             label="Checkout"
             intent="primary"
-            onClick={() =>
-              user?.email ? "" : authModal.onOpen()
-            }
+            onClick={() => (user?.email ? checkout() : authModal.onOpen())}
+            loading={performingTransaction}
           />
         )}
       </div>

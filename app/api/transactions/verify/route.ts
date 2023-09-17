@@ -21,7 +21,7 @@ export async function GET(req: NextApiRequest) {
     const { amount, metadata } = paystackResponse.data.data;
     const refThree = reference.split("-")[0];
     const prdtType = typeMapping[refThree];
-    console.log(reference, refThree, prdtType);
+    console.log(metadata);
     let { data, error, status } = await supabase
       .from(`user_${prdtType}`)
       .insert({ amount: amount / 100, ...metadata, reference });

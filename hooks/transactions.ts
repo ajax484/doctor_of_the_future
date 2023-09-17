@@ -1,12 +1,12 @@
 import { toast } from "@/components/ui/use-toast";
 import { postRequest } from "@/utils/api";
 import { AxiosError } from "axios";
-import { useMutation } from "react-query";
+import { UseMutateFunction, useMutation } from "react-query";
 
 type UseInitializeTransactionResult = {
   performingTransaction: boolean;
   TransactionError: unknown;
-  initializeTransaction: () => {};
+  initializeTransaction: UseMutateFunction;
 };
 
 export const UseInitializeTransaction: () => UseInitializeTransactionResult =
