@@ -9,13 +9,13 @@ import { Metadata } from "next";
 import { siteConfig } from "@/app/(root)/siteConfig/page";
 
 
-export const metadata: Metadata = {
-  title: "Bookings | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Bookings | " + siteConfig.name,
+//   description: siteConfig.description,
+//   icons: {
+//     icon: "/favicon.ico",
+//   },
+// };
 
 
 
