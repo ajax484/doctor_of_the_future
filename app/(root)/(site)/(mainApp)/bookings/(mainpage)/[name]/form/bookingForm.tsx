@@ -28,6 +28,7 @@ import { useEffect } from "react";
 import { useBookingContext } from "../../../layout";
 import { UseInitializeTransaction } from "@/hooks/transactions";
 import { generateReferenceNumber } from "@/utils/helpers";
+import Link from "next/link";
 
 const phone_numberRegex = /^\+?[1-9]\d{1,14}$/; // Example regex for phone numbers
 const bookingFormSchema = z.object({
@@ -197,7 +198,9 @@ export default function BookingForm({
                       <FormControl>
                         <RadioGroupItem value="plan" />
                       </FormControl>
-                      <span>Buy a Plan</span>
+                      <Link href={`/plans`}>
+                        <span>Buy a Plan</span>
+                      </Link>
                     </div>
                   </FormLabel>
                 </FormItem>
@@ -233,8 +236,7 @@ export default function BookingForm({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="online">Pay Online</SelectItem>
-                    <SelectItem value="in-person">Pay in Person</SelectItem>
+                    <SelectItem value="online">Pay Now</SelectItem>
                   </SelectContent>
                 </Select>
                 {/* <FormDescription>

@@ -7,6 +7,7 @@ import { useGetPlan } from "@/hooks/plans";
 import useAuthModal from "@/hooks/useAuthModal";
 import { formatPriceToNaira } from "@/utils/FormattedCurrency";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { IoCaretForwardOutline } from "react-icons/io5";
@@ -43,7 +44,12 @@ export default function Page({ params }: { params: { _id: string } }) {
             </div>
             <span className="font-light text-slate-700">
               {user?.email ? (
-                <>Signed in as in <span className=" hover:underline text-neutral-900">{user?.email}</span></>
+                <>
+                  Signed in as in{" "}
+                  <span className=" hover:underline text-neutral-900">
+                    {user?.email}
+                  </span>
+                </>
               ) : (
                 <>Not signed in</>
               )}
@@ -65,7 +71,7 @@ export default function Page({ params }: { params: { _id: string } }) {
                   <span>Buy a Plan</span>
                 </div>
               </Label>
-              <Label
+              {/* <Label
                 htmlFor="session"
                 className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
               >
@@ -73,8 +79,64 @@ export default function Page({ params }: { params: { _id: string } }) {
                   <RadioGroupItem value="session" id="session" />
                   <span>Pay For This Session</span>
                 </div>
-              </Label>
+              </Label> */}
             </RadioGroup>
+          </div>
+
+          {/*PAYMENT METHODS*/}
+
+          <div className=" my-4">
+            <h1 className=" capitalize font-semibold">
+              select payment method
+            </h1>
+
+            <div className=" my-5">
+              <RadioGroup
+                // onValueChange={(value) => console.log(value)}
+                // defaultValue={""}
+                className="flex flex-col w-full"
+              >
+                <Label
+                  htmlFor="plan"
+                  className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
+                >
+                  <div className="flex items-center w-full gap-x-3 justify-between">
+                    <span className="flex items-center gap-x-4">
+                      <RadioGroupItem value="plan" id="plan" />
+                      <span>Pay with PayStack</span>
+                    </span>
+                    <Image
+                      alt="pay stack logo"
+                      src={
+                        "https://cdn.worldvectorlogo.com/logos/paystack-2.svg"
+                      }
+                      width={100}
+                      height={100}
+                      className="w-20 h-10"
+                    />
+                  </div>
+                </Label>
+
+                <Label
+                  htmlFor="plan"
+                  className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
+                >
+                    <div className="flex items-center gap-x-3 w-full justify-between">
+                    <span className="flex items-center gap-x-4">
+                      <RadioGroupItem value="plan" id="plan" />
+                      <span>Pay with Lemon Squeezy</span>
+                    </span>
+                    <Image
+                      alt="pay stack logo"
+                      src={'/paynow.png'}
+                      width={100}
+                      height={100}
+                      className="w-20 h-10"
+                    />
+                  </div>
+                </Label>
+              </RadioGroup>
+            </div>
           </div>
           <Button
             onClick={() => (!user?.email ? authModal.onOpen() : "")}
