@@ -22,13 +22,38 @@ export const useGetBookings: () => UseGetbookingsResult = () => {
     onError: (error) => {
       alert(error);
     },
-    staleTime: 1000, 
+    staleTime: 1000,
   });
 
   return {
     bookings: bookings || [],
     fetchingbookings,
     fetchingbookingsError,
+  };
+};
+
+export const useGetUsersBookings = () => {
+  const {
+    data: usersBookings,
+    isFetching: fetchingUsersBookings,
+    error: fetchingUsersBookingsError,
+  } = useQuery({
+    queryKey: "get users bookings data",
+    queryFn: async () => {
+      const { data } = await getRequest({ endpoint: "/api/users/bookings" });
+      console.log(data);
+      return data.map((timeSlot) => new Date(timeSlot.time_of_session).toISOString());
+    },
+    onError: (error) => {
+      alert(error);
+    },
+    staleTime: 1000,
+  });
+
+  return {
+    usersBookings: usersBookings || [],
+    fetchingUsersBookings,
+    fetchingUsersBookingsError,
   };
 };
 

@@ -41,7 +41,7 @@ type TBookingContext = {
   changeFormValues: (formValues: BookingFormValues) => void;
 };
 
-type TTimeSlot = {
+export type TTimeSlot = {
   label: string;
   value: string;
 };

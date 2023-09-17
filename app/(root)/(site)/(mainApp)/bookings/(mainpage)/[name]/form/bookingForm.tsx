@@ -27,7 +27,7 @@ import {
 import { useEffect } from "react";
 import { useBookingContext } from "../../../layout";
 import { UseInitializeTransaction } from "@/hooks/transactions";
-import { generateReferenceNumber } from "@/utils/helpers";
+import { combineDateAndTime, generateReferenceNumber } from "@/utils/helpers";
 import Link from "next/link";
 
 const phone_numberRegex = /^\+?[1-9]\d{1,14}$/; // Example regex for phone numbers
@@ -64,7 +64,8 @@ export default function BookingForm({
   initializeTransaction: ({ payload }) => void;
 }) {
   const { session } = useSessionContext();
-  const { changeMethod, changeFormValues } = useBookingContext();
+  const { changeMethod, changeFormValues, date, timeSlot } =
+    useBookingContext();
   const email = session?.user.email;
   // This can come from your database or API.
   const defaultValues: Partial<BookingFormValues> = {
@@ -102,8 +103,20 @@ export default function BookingForm({
       email,
       amount,
       reference,
-      metadata: { user_id: session?.user?.id, ...data, booking_id: booking.id },
+      metadata: {
+        user_id: session?.user?.id,
+        ...data,
+        booking_id: booking.id,
+        time_of_session: combineDateAndTime(date, timeSlot.value),
+      },
     };
+
+    console.log({
+      user_id: session?.user?.id,
+      ...data,
+      booking_id: booking.id,
+      time_of_session: date,
+    });
 
     initializeTransaction({ payload });
   }

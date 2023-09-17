@@ -36,6 +36,16 @@ export function formatDateToHumanReadable(date: Date | undefined): string {
   return date.toLocaleDateString(undefined, options);
 }
 
+export function combineDateAndTimeToISO(date: Date, time: string): string {
+  // Convert the Date object to an ISO string without the timezone information
+  const datePart = date.toISOString().split("T")[0];
+
+  // Combine the date part and the time string
+  const combinedString = `${datePart}T${time}`;
+
+  return combinedString;
+}
+
 export function convertDateFormat(inputDate: string | number | Date) {
   const months = [
     "January",
