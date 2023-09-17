@@ -43,13 +43,3 @@ export async function POST(req: NextApiRequest) {
 }
 
 export const dynamic = "force-dynamic";
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "1mb",
-    },
-  },
-  // Specifies the maximum allowed duration for this function to execute (in seconds)
-  maxDuration: 5,
-};
