@@ -17,7 +17,7 @@ export async function GET(
   const prdtType = params.prdtType;
   const supabase = createRouteHandlerClient({ cookies });
 
-  console.log(reference, prdtType);
+  // console.log(reference, prdtType);
 
   try {
     let { data, error, status } = await supabase
