@@ -1,7 +1,12 @@
 import { toast } from "@/components/ui/use-toast";
-import { postRequest } from "@/utils/api";
+import {
+  bookingTransaction,
+  planTransaction,
+  shopTransaction,
+} from "@/types/transactions";
+import { getRequest, postRequest } from "@/utils/api";
 import { AxiosError } from "axios";
-import { UseMutateFunction, useMutation } from "react-query";
+import { UseMutateFunction, useMutation, useQuery } from "react-query";
 
 type UseInitializeTransactionResult = {
   performingTransaction: boolean;
@@ -53,3 +58,47 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
       initializeTransaction,
     };
   };
+
+type IUseGetTransaction = {
+  (params: { reference: string; prdtType: string }): {
+    transaction: shopTransaction | bookingTransaction | planTransaction;
+    fetchingTransactionError: unknown;
+    fetchingTransaction: boolean;
+  };
+};
+
+export const useGetTransaction: IUseGetTransaction = ({
+  reference,
+  prdtType,
+}) => {
+  const {
+    data: transaction,
+    isFetching: fetchingTransaction,
+    error: fetchingTransactionError,
+  } = useQuery({
+    queryKey: ["get transaction", reference, prdtType],
+    queryFn: async () => {
+      const { data, status } = await getRequest({
+        endpoint: `/api/transactions/${prdtType}/${reference}`,
+      });
+
+      if (status !== 200) throw data;
+
+      return data as unknown as
+        | shopTransaction
+        | bookingTransaction
+        | planTransaction;
+    },
+    onError: (error) => {
+      console.log(error);
+
+      // alert(error.message);
+    },
+  });
+
+  return {
+    transaction: transaction || {},
+    fetchingTransaction,
+    fetchingTransactionError,
+  };
+};
