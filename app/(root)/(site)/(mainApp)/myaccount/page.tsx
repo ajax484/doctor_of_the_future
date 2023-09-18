@@ -12,13 +12,13 @@ import { siteConfig } from "@/app/(root)/siteConfig/page";
 import { Metadata } from "next";
 
 
-export const metadata: Metadata = {
-  title: "My Account | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "My Account | " + siteConfig.name,
+//   description: siteConfig.description,
+//   icons: {
+//     icon: "/favicon.ico",
+//   },
+// };
 
 
 

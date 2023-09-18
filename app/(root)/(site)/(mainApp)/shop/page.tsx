@@ -7,13 +7,13 @@ import { ProductProps } from "@/types/products";
 import { Metadata } from "next";
 import React, { Fragment, Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "Shop | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Shop | " + siteConfig.name,
+//   description: siteConfig.description,
+//   icons: {
+//     icon: "/favicon.ico",
+//   },
+// };
 
 const Page = () => {
   const { shop, fetchingShop } = useGetShop();

@@ -15,13 +15,13 @@ import { useLocalState } from "@/hooks/useLocalStorage";
 import { siteConfig } from "@/app/(root)/siteConfig/page";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Booking Online | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Booking Online | " + siteConfig.name,
+//   description: siteConfig.description,
+//   icons: {
+//     icon: "/favicon.ico",
+//   },
+// };
 import { BookingFormValues } from "./(mainpage)/[name]/form/bookingForm";
 
 interface SiteProps {

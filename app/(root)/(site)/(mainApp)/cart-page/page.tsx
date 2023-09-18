@@ -15,13 +15,13 @@ import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export const metadata: Metadata = {
-  title: "Cart | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Cart | " + siteConfig.name,
+//   description: siteConfig.description,
+//   icons: {
+//     icon: "/favicon.ico",
+//   },
+// };
 
 const Page = () => {
   const { TransactionError, initializeTransaction, performingTransaction } =

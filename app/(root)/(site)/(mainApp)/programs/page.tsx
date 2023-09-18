@@ -7,13 +7,13 @@ import { ProgramProps } from "@/types/products";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "Programs | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Programs | " + siteConfig.name,
+//   description: siteConfig.description,
+//   icons: {
+//     icon: "/favicon.ico",
+//   },
+// };
 
 export default function Page() {
   const { programs, fetchingprograms, fetchingprogramsError } =

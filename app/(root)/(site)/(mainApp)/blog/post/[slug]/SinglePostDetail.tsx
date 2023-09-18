@@ -318,7 +318,7 @@ const SinglePostDetail = ({ post }: Props) => {
           </div>
         </main>
       </section>
-      <Toaster />
+  
     </main>
   );
 };

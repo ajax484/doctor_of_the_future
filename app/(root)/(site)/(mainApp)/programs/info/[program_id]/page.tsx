@@ -10,13 +10,13 @@ import { Metadata } from "next";
 import { siteConfig } from "@/app/(root)/siteConfig/page";
 import { useUser } from "@supabase/auth-helpers-react";
 
-export const metadata: Metadata = {
-  title: "Programs Info | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Programs Info | " + siteConfig.name,
+//   description: siteConfig.description,
+//   icons: {
+//     icon: "/favicon.ico",
+//   },
+// };
 
 export default function ProgramInfo({
   params,
