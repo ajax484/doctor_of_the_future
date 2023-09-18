@@ -4,7 +4,7 @@ Adding the webhook url
 
 //Which could be a Nextjs API route like 
 ??api route
-localhost:3000/api/lemonsqueezy.com
+localhost:3000/api/lemonsqueezy
 
 inside the api, u throw this code
 

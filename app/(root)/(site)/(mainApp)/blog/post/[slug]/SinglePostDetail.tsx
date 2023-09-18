@@ -1,7 +1,7 @@
 "use client";
 import { Post } from "@/typings/typings";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import PortableText from "react-portable-text";
 import { SubmitHandler } from "react-hook-form";
@@ -12,7 +12,7 @@ import { HeartIcon } from "lucide-react";
 import CommentForm from "@/components/ui/CommentSection";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import { toast } from "@/components/ui/use-toast";
-
+import { client } from "@/sanity/lib/client";
 
 interface Props {
   post: Post;
@@ -42,16 +42,16 @@ const SinglePostDetail = ({ post }: Props) => {
     })
       .then(() => {
         setSubmitted(true);
-       toast({
-        title: "comment submitted for approval"
-        })
+        toast({
+          title: "comment submitted for approval",
+        });
       })
       .catch((err) => {
         setSubmitted(false);
       });
   };
 
-  console.log(post);
+  // console.log(post);
 
   return (
     <>
@@ -113,7 +113,10 @@ const SinglePostDetail = ({ post }: Props) => {
               />;
             },
             p: (props: any) => {
-              <p className="text-base leading-8 my-5 text-slate-700" {...props} />;
+              <p
+                className="text-base leading-8 my-5 text-slate-700"
+                {...props}
+              />;
             },
             link: ({ href, children }: any) => {
               <a href={href} className="text-limeGreen hover:underline"></a>;
@@ -135,7 +138,7 @@ const SinglePostDetail = ({ post }: Props) => {
         <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
           <div className="flex gap-4">
             <span>{post.commentNumber} comments</span>
-            <span>{post.views} views</span>
+            <span>{post.views}</span>
           </div>
           <div className="flex gap-2">
             <HeartIcon />
