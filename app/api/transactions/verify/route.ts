@@ -18,20 +18,30 @@ export async function GET(req: NextApiRequest) {
       },
     });
 
-    const { amount, metadata } = paystackResponse.data.data;
+    const { amount, metadata, status: trxStatus } = paystackResponse.data.data;
     const refThree = reference.split("-")[0];
     const prdtType = typeMapping[refThree];
-    console.log(metadata);
+    console.log(metadata, trxStatus);
     let { data, error, status } = await supabase
       .from(`user_${prdtType}`)
-      .insert({ amount: amount / 100, ...metadata, reference });
+      .insert({
+        amount: amount / 100,
+        ...metadata,
+        reference,
+        status: trxStatus,
+      });
 
     if (error) {
       throw error;
     }
 
-    // return NextResponse.redirect(new URL("/", "http://localhost:3000"));
-    return NextResponse.json({ amount: amount / 100, ...metadata, reference });
+    return NextResponse.redirect(
+      new URL(
+        `/transaction/result?status=${trxStatus}&reference=${reference}&prdtType=${prdtType}`,
+        process.env.NEXT_PUBLIC_APP_URL
+      )
+    );
+    // return NextResponse.json({ amount: amount / 100, ...metadata, reference });
   } catch (error) {
     // Handle the error here if needed
     console.log(error);
