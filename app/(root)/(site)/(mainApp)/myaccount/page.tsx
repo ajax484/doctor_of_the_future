@@ -26,7 +26,7 @@ import { Metadata } from "next";
 
 const MyAccount = () => {
   return (
-    <div className=" mt-12">
+    <div className="mt-12">
       <div>
         <Image
           alt="image"
@@ -39,7 +39,7 @@ const MyAccount = () => {
         />
       </div>
 
-      <Tabs defaultValue="account" className="w-full lg:container">
+      <Tabs defaultValue="account" className="w-full">
         <TabsList className="flex flex-wrap items-center justify-between text-xs bar">
           <TabsTrigger value="account">Profile</TabsTrigger>
           <TabsTrigger value="bookings">Bookings</TabsTrigger>

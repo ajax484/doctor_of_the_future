@@ -23,7 +23,6 @@ const MyOrders = () => {
     <Loading loading={fetchingTransactions} error={!!fetchingTransactionsError}>
       <div className="w-[250px] xs:w-[340px] md:w-full">
         <Table className="py-5 text-xs ">
-          <TableCaption>Your transaction data.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="">Reference</TableHead>
