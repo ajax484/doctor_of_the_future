@@ -21,7 +21,11 @@ export const getPosts = async () => {
     "likes": count(*[_type == "like" && references(^._id)])
   }
   `;
-  const posts = await client.fetch(queryPosts);
+  const posts = await client.fetch(
+    queryPosts,
+    { cache: "no-store" },
+    { next: { revalidate: 3600 } }
+  );
   return posts;
 };
 

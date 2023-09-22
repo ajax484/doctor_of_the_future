@@ -71,7 +71,7 @@ export async function GET(req: NextApiRequest) {
         from: "Doctor of The Future <onboarding@resend.dev>",
         to: [email],
         subject: `Booking confirmed for ${metadata.name}`,
-        react: CustomerBookingEmail({
+        react: ({
           name,
           email,
           message,
@@ -86,7 +86,7 @@ export async function GET(req: NextApiRequest) {
 
       const vendorResendData = await resend.emails.send({
         from: "Doctor of The Future <onboarding@resend.dev>",
-        to: ["ubahyusuf484@gmail.com"],
+        to: ["gidietsworld@gmail.com"],
         subject: `Booking confirmed for ${metadata.name}`,
         react: VendorBookingEmail({
           name,

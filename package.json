@@ -38,7 +38,7 @@
     "eslint-config-next": "13.4.12",
     "groq": "^3.16.7",
     "lucide-react": "^0.274.0",
-    "next": "13.4.12",
+    "next": "^13.5.2",
     "next-sanity": "^5.4.6",
     "nextjs": "^0.0.3",
     "postcss": "8.4.27",
