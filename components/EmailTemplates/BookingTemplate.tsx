@@ -10,6 +10,7 @@ type BookingDetails = {
   payment_type: string;
   time_of_session: string; // You may consider using a Date type here for better type checking
   reference: string;
+  bookingName: string;
 };
 
 export const CustomerBookingEmail: React.FC<BookingDetails> = ({
@@ -21,6 +22,7 @@ export const CustomerBookingEmail: React.FC<BookingDetails> = ({
   phone_number,
   reference,
   time_of_session,
+  bookingName,
 }) => {
   return (
     <div className="bg-gray-100 p-4">
@@ -34,6 +36,7 @@ export const CustomerBookingEmail: React.FC<BookingDetails> = ({
           <li>Message: {message}</li>
           <li>Payment Method: {payment_method}</li>
           <li>Payment Type: {payment_type}</li>
+          <li>Booking: {bookingName}</li>
           <li>Reference: {reference}</li>
           <li>Time of Session: {formatDate(time_of_session)}</li>
         </ul>
@@ -57,6 +60,7 @@ export const VendorBookingEmail: React.FC<BookingDetails> = ({
   phone_number,
   reference,
   time_of_session,
+  bookingName,
 }) => {
   return (
     <div className="bg-gray-100 p-4">
@@ -71,6 +75,7 @@ export const VendorBookingEmail: React.FC<BookingDetails> = ({
           <li>Message: {message}</li>
           <li>Payment Method: {payment_method}</li>
           <li>Payment Type: {payment_type}</li>
+          <li>Booking: {bookingName}</li>
           <li>Reference: {reference}</li>
           <li>Time of Session: {formatDate(time_of_session)}</li>
         </ul>

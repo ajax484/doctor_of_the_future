@@ -9,6 +9,8 @@ import {
   CustomerBookingEmail,
   VendorBookingEmail,
 } from "@/components/EmailTemplates/BookingTemplate";
+import { getRequest } from "@/utils/api";
+import { BookingProps } from "@/types/products";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -52,7 +54,18 @@ export async function GET(req: NextApiRequest) {
         phone_number,
         reference,
         time_of_session,
+        booking_id,
       } = metadata;
+
+      const {
+        data: booking,
+        error,
+        status,
+      } = (await supabase
+        .from("bookings")
+        .select("*")
+        .eq("id", booking_id)
+        .maybeSingle()) as unknown as BookingProps;
 
       const customerResendData = await resend.emails.send({
         from: "Doctor of The Future <onboarding@resend.dev>",
@@ -66,6 +79,7 @@ export async function GET(req: NextApiRequest) {
           payment_type,
           phone_number,
           reference,
+          bookingName: booking.name,
           time_of_session,
         }),
       });
@@ -81,6 +95,7 @@ export async function GET(req: NextApiRequest) {
           payment_method,
           payment_type,
           phone_number,
+          bookingName: booking.name,
           reference,
           time_of_session,
         }),
