@@ -15,11 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import SpecificResult from "./SpecificResult";
 
 const Page = () => {
   const searchParams = useSearchParams();
   const reference = searchParams.get("reference");
-  const prdtType = searchParams.get("prdtType");
+  const prdtType = searchParams.get("prdtType") || "";
   const status = searchParams.get("status");
 
   const { transaction, fetchingTransaction, fetchingTransactionError } =
@@ -27,7 +28,8 @@ const Page = () => {
 
   // Convert the created_at and expire_at strings to Date objects
   const createdDate = new Date(transaction.created_at);
-  const expireDate = new Date(transaction.expire_at);
+  const expireDate = new Date(transaction?.expire_at);
+  const timeOfSession = new Date(transaction?.time_of_session);
 
   // Format the dates as localized strings
   const formattedCreatedDate = createdDate.toLocaleDateString(undefined, {
@@ -40,6 +42,14 @@ const Page = () => {
     year: "numeric",
     month: "long",
     day: "numeric",
+  });
+
+  const formattedTimeOfSession = timeOfSession.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
   console.log(transaction);
@@ -68,7 +78,10 @@ const Page = () => {
                 <TableHead>Created At</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">Expires On</TableHead>
+                {prdtType === "plans" && <TableHead>Expires On</TableHead>}
+                {prdtType === "bookings" && (
+                  <TableHead>Time of Session</TableHead>
+                )}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -81,18 +94,21 @@ const Page = () => {
                 <TableCell>{formattedCreatedDate}</TableCell>
                 <TableCell>{transaction.email}</TableCell>
                 <TableCell>{transaction.status}</TableCell>
-
-                <TableCell className="text-right">
-                  {" "}
-                  {formattedExpireDate}
-                </TableCell>
+                {prdtType === "plans" && (
+                  <TableCell className="text-right">
+                    {" "}
+                    {formattedExpireDate}
+                  </TableCell>
+                )}
+                {prdtType === "bookings" && (
+                  <TableCell> {formattedTimeOfSession}</TableCell>
+                )}
               </TableRow>
             </TableBody>
           </Table>
         </div>
+        <SpecificResult prdtType={prdtType} transaction={transaction} />
       </div>
-
-    
     </Loading>
   );
 };
