@@ -4,6 +4,13 @@ import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { typeMapping } from "@/utils/helpers";
+import { Resend } from "resend";
+import {
+  CustomerBookingEmail,
+  VendorBookingEmail,
+} from "@/components/EmailTemplates/BookingTemplate";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function GET(req: NextApiRequest) {
   try {
@@ -35,17 +42,62 @@ export async function GET(req: NextApiRequest) {
       throw error;
     }
 
-     // Determine the redirect URL conditionally
-     let redirectURL;
-     if (process.env.NODE_ENV === 'production') {
-       // Use the production public_url
-       redirectURL = process.env.NEXT_PUBLIC_APP_URL;
-     } else {
-       // Use localhost:3000 for development
-       redirectURL = 'http://localhost:3000';
-     }
+    if (prdtType === "bookings") {
+      const {
+        name,
+        email,
+        message,
+        payment_method,
+        payment_type,
+        phone_number,
+        reference,
+        time_of_session,
+      } = metadata;
 
-     return NextResponse.redirect(
+      const customerResendData = await resend.emails.send({
+        from: "Doctor of The Future <onboarding@resend.dev>",
+        to: [email],
+        subject: `Booking confirmed for ${metadata.name}`,
+        react: CustomerBookingEmail({
+          name,
+          email,
+          message,
+          payment_method,
+          payment_type,
+          phone_number,
+          reference,
+          time_of_session,
+        }),
+      });
+
+      const vendorResendData = await resend.emails.send({
+        from: "Doctor of The Future <onboarding@resend.dev>",
+        to: ["ubahyusuf484@gmail.com"],
+        subject: `Booking confirmed for ${metadata.name}`,
+        react: VendorBookingEmail({
+          name,
+          email,
+          message,
+          payment_method,
+          payment_type,
+          phone_number,
+          reference,
+          time_of_session,
+        }),
+      });
+    }
+
+    // Determine the redirect URL conditionally
+    let redirectURL;
+    if (process.env.NODE_ENV === "production") {
+      // Use the production public_url
+      redirectURL = process.env.NEXT_PUBLIC_APP_URL;
+    } else {
+      // Use localhost:3000 for development
+      redirectURL = "http://localhost:3000";
+    }
+
+    return NextResponse.redirect(
       new URL(
         `/transaction/result?status=${trxStatus}&reference=${reference}&prdtType=${prdtType}`,
         redirectURL
