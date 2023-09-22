@@ -6,6 +6,7 @@ import {
   planTransaction,
   shopTransaction,
 } from "@/types/transactions";
+import { DownloadIcon } from "lucide-react";
 import React from "react";
 
 const SpecificResult = ({
@@ -17,8 +18,9 @@ const SpecificResult = ({
 }) => {
   if (prdtType === "bookings" || prdtType === "plans") {
     return (
-      <div>
-        Link to whatsapp: <WhatsAppLink phoneNumber="+2348029336571" />
+      <div className=" flex flex-col md:flex-row gap-y-4 items-center gap-x-4">
+        Send a message on whatsapp:{" "}
+        <WhatsAppLink phoneNumber="+2348104375180" />
       </div>
     );
   }
@@ -28,17 +30,31 @@ const SpecificResult = ({
 
 export default SpecificResult;
 
+// for shop items
 const BookLinks = ({ ids }: { ids: string }) => {
-  const { links, fetchingLinks, fetchingLinksError } = useGetItemLinks({ ids });
+  const { links, fetchingLinks } = useGetItemLinks({ ids });
   console.log(links);
 
   return (
-    <Loading loading={fetchingLinks} error={!!fetchingLinksError}>
+    <Loading loading={fetchingLinks}>
       <ul className="space-y-4">
         {links?.map((link) => (
-          <li className="space-x-2" key={link.id}>
-            <span>{link.item.name}</span>
-            <a href={link.link}>Link</a>
+          <li className=" flex flex-col items-center gap-y-4" key={link.id}>
+            <span className=" text-center">
+              Congratulations on you order for book{" "}
+              <span className=" font-semibold capitalize">
+                "{link.item.name}"
+              </span>
+            </span>
+            <a
+              className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full inline-flex gap-x-3 items-center"
+              href={link.link}
+            >
+              <span>
+                <DownloadIcon size={16} />
+              </span>
+              Download Now
+            </a>
           </li>
         ))}
       </ul>
