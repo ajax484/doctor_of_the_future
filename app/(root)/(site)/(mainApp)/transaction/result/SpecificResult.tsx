@@ -72,7 +72,7 @@ const WhatsAppLink: React.FC<WhatsAppLinkProps> = ({ phoneNumber }) => {
   const formattedPhoneNumber = phoneNumber.replace(/\D/g, "");
 
   // Create the WhatsApp message if provided
-  const whatsappMessage = "";
+  const whatsappMessage = "hello doctor,";
 
   // WhatsApp link URL
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}${whatsappMessage}`;
