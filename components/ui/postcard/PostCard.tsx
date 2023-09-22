@@ -1,35 +1,19 @@
-import { siteConfig } from "@/app/(root)/siteConfig/page";
-import PostCard from "@/components/ui/postcard/PostCard";
-import { getPosts } from "@/hooks/posts";
+"use client";
+
+import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import { HeartIcon } from "lucide-react";
-import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-// do not add use client to this
+const PostCard = ({ post }) => {
 
-export const metadata: Metadata = {
-  title: "Blog | " + siteConfig.name,
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
-
-const Blog = async () => {
-  const posts = await getPosts();
-  // console.log(posts);
 
   return (
-    <div className="mt-5 mb-14 py-8">
-    <div className="mb-10">
-      <h1 className="font-black capitalize text-3xl text-center">Blogs</h1>
-    </div>
-    {posts.map((post) => (
-      <div key={post.id} className="mb-14 border">
+    <div key={post.id} className="mb-14 border">
       <Link href={`/blog/post/${post.slug.current}`}>
         <div className="flex h-96 bg-white border-1 shadow-md">
           <div className="w-1/2 relative bg-black">
@@ -67,9 +51,7 @@ const Blog = async () => {
         </div>
       </Link>
     </div>
-    ))}
-  </div>
   );
 };
 
-export default Blog;
+export default PostCard;

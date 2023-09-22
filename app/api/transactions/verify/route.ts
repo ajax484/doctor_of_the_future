@@ -35,10 +35,20 @@ export async function GET(req: NextApiRequest) {
       throw error;
     }
 
-    return NextResponse.redirect(
+     // Determine the redirect URL conditionally
+     let redirectURL;
+     if (process.env.NODE_ENV === 'production') {
+       // Use the production public_url
+       redirectURL = process.env.NEXT_PUBLIC_APP_URL;
+     } else {
+       // Use localhost:3000 for development
+       redirectURL = 'http://localhost:3000';
+     }
+
+     return NextResponse.redirect(
       new URL(
         `/transaction/result?status=${trxStatus}&reference=${reference}&prdtType=${prdtType}`,
-        process.env.NEXT_PUBLIC_APP_URL
+        redirectURL
       )
     );
     // return NextResponse.json({ amount: amount / 100, ...metadata, reference });
