@@ -130,25 +130,6 @@ const Page = () => {
                   />
                 </div>
               </Label>
-              {/* lemon sqezzy */}
-              <Label
-                htmlFor="lemonSqueezy"
-                className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
-              >
-                <div className="flex items-center gap-x-3 w-full justify-between">
-                  <span className="flex items-center gap-x-4">
-                    <RadioGroupItem value="lemonSqueezy" id="lemonSqueezy" />
-                    <span>Pay with Lemon Squeezy</span>
-                  </span>
-                  <Image
-                    alt="Lemon Squeezy"
-                    src={"/paynow.png"}
-                    width={100}
-                    height={100}
-                    className="w-20 h-10"
-                  />
-                </div>
-              </Label>
             </RadioGroup>
           </div>
         </div>
