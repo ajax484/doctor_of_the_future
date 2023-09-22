@@ -1,6 +1,6 @@
 "use client";
 import Loading from "@/components/ui/Loading";
-import { useGetTransaction } from "@/hooks/transactions";
+import { useGetUserTransaction } from "@/hooks/transactions";
 import { CheckCircle, FlagTriangleLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import React from "react";
@@ -24,7 +24,7 @@ const Page = () => {
   const status = searchParams.get("status");
 
   const { transaction, fetchingTransaction, fetchingTransactionError } =
-    useGetTransaction({ reference, prdtType });
+    useGetUserTransaction({ reference, prdtType });
 
   // Convert the created_at and expire_at strings to Date objects
   const createdDate = new Date(transaction.created_at);

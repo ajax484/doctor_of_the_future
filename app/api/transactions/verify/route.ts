@@ -9,7 +9,6 @@ import {
   CustomerBookingEmail,
   VendorBookingEmail,
 } from "@/components/EmailTemplates/BookingTemplate";
-import { getRequest } from "@/utils/api";
 import { BookingProps } from "@/types/products";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -48,7 +47,6 @@ export async function GET(req: NextApiRequest) {
       const {
         name,
         email,
-        message,
         payment_method,
         payment_type,
         phone_number,
@@ -56,6 +54,8 @@ export async function GET(req: NextApiRequest) {
         time_of_session,
         booking_id,
       } = metadata;
+
+      const message = metadata.message || "";
 
       const {
         data: booking,
@@ -71,7 +71,7 @@ export async function GET(req: NextApiRequest) {
         from: "Doctor of The Future <onboarding@resend.dev>",
         to: [email],
         subject: `Booking confirmed for ${metadata.name}`,
-        react: ({
+        react: CustomerBookingEmail({
           name,
           email,
           message,

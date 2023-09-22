@@ -23,12 +23,18 @@ export async function GET(
   // console.log(reference, prdtType);
 
   try {
+    let query = "*";
+
+    if (prdtType === "bookings") {
+      query += ", booking:bookings!inner(*)";
+    }
+
     let { data, error, status } = await supabase
       .from(`user_${prdtType}`)
-      .select("*")
+      .select(query)
       .eq("user_id", userId);
 
-    // console.log(data);
+    console.log(data);
 
     if (error && status !== 200) {
       throw error;

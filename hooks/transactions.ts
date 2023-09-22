@@ -59,7 +59,15 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
     };
   };
 
-type IUseGetTransaction = {
+type IuseGetUserTransactions = {
+  (params: { prdtType: string }): {
+    transactions: shopTransaction[] | bookingTransaction[] | planTransaction[];
+    fetchingTransactionsError: unknown;
+    fetchingTransactions: boolean;
+  };
+};
+
+type IuseGetUserTransaction = {
   (params: { reference: string; prdtType: string }): {
     transaction: shopTransaction | bookingTransaction | planTransaction;
     fetchingTransactionError: unknown;
@@ -67,7 +75,42 @@ type IUseGetTransaction = {
   };
 };
 
-export const useGetTransaction: IUseGetTransaction = ({
+export const useGetUserTransactions: IuseGetUserTransactions = ({
+  prdtType,
+}) => {
+  const {
+    data: transactions,
+    isFetching: fetchingTransactions,
+    error: fetchingTransactionsError,
+  } = useQuery({
+    queryKey: ["get transactions", prdtType],
+    queryFn: async () => {
+      const { data, status } = await getRequest({
+        endpoint: `/api/transactions/${prdtType}`,
+      });
+
+      if (status !== 200) throw data;
+
+      return data as unknown as
+        | shopTransaction[]
+        | bookingTransaction[]
+        | planTransaction[];
+    },
+    onError: (error) => {
+      console.log(error);
+
+      // alert(error.message);
+    },
+  });
+
+  return {
+    transactions: transactions || [],
+    fetchingTransactions,
+    fetchingTransactionsError,
+  };
+};
+
+export const useGetUserTransaction: IuseGetUserTransaction = ({
   reference,
   prdtType,
 }) => {
