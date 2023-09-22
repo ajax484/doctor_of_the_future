@@ -19,7 +19,7 @@ const SpecificResult = ({
   if (prdtType === "bookings" || prdtType === "plans") {
     return (
       <div className=" flex flex-col md:flex-row gap-y-4 items-center gap-x-4">
-        Send a message on whatsapp:{" "}
+        Congrats on choosing a plan, Send a message on whatsapp:{" "}
         <WhatsAppLink phoneNumber="+2348104375180" />
       </div>
     );
