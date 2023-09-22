@@ -7,6 +7,12 @@ export async function POST(req: NextApiRequest) {
     const params = await req.json();
     const paystackUrl = "https://api.paystack.co/transaction/initialize";
 
+    // Determine the base URL for the callback URL based on the environment
+    const baseURL =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_APP_URL // Production URL
+        : "http://localhost:3000"; // Development URL
+
     try {
       console.log(params);
 
@@ -15,7 +21,7 @@ export async function POST(req: NextApiRequest) {
         {
           ...params,
           amount: params.amount * 100,
-          callback_url: `http://localhost:3000/api/transactions/verify`,
+          callback_url: `${baseURL}/api/transactions/verify`,
         },
         {
           headers: {
