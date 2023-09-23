@@ -1,49 +1,63 @@
-import { subscriptionTransaction } from "@/types/transactions";
 import { getRequest } from "@/utils/api";
-import { useQuery, useQueryErrorResetBoundary } from "react-query";
+import { useQuery } from "react-query";
+import { SubscriptionProps } from "@/types/products";
 
-interface SubscriptionError {
-  // Define the structure of the error object here
-  // For example:
-  message: string;
-  // ... other properties
+interface UseGetSubscriptionsResult {
+  subscriptions: SubscriptionProps[];
+  fetchingSubscriptions: boolean;
+  fetchingSubscriptionsError: unknown; // Adjust this type as needed for error handling
 }
 
-interface UseGetUserCurrentSubscriptionResult {
-  subscription: subscriptionTransaction | {};
-  fetchingSubscription: boolean;
-  fetchingSubscriptionError: SubscriptionError | null;
-}
+export const useGetSubscriptions: () => UseGetSubscriptionsResult = () => {
+  const {
+    data: subscriptions,
+    isFetching: fetchingSubscriptions,
+    error: fetchingSubscriptionsError,
+  } = useQuery({
+    queryKey: "get subscriptions",
+    queryFn: async () => {
+      const { data, status } = await getRequest({
+        endpoint: "/api/subscriptions",
+      });
 
-export const useGetUserCurrentSubscription =
-  (): UseGetUserCurrentSubscriptionResult => {
-    const {
-      data: subscription,
-      isFetching: fetchingSubscription,
-      error: fetchingSubscriptionError,
-    } = useQuery<subscriptionTransaction, SubscriptionError>(
-      ["get subscription"],
-      async () => {
-        const { data, status } = await getRequest({
-          endpoint: `/api/blog/subscriptions`,
-        });
+      console.log(status);
+      if (status !== 200) throw "something went wrong";
+      return data as unknown as SubscriptionProps[];
+    },
+    onError: (error) => {
+      alert(error);
+    },
+  });
 
-        if (status !== 200) throw data;
-
-        return data;
-      },
-      {
-        onError: (error) => {
-          console.log(error);
-
-          // alert(error.message);
-        },
-      }
-    );
-
-    return {
-      subscription: subscription || ({} as subscriptionTransaction),
-      fetchingSubscription,
-      fetchingSubscriptionError,
-    };
+  return {
+    subscriptions: subscriptions || [],
+    fetchingSubscriptions,
+    fetchingSubscriptionsError,
   };
+};
+
+export const useGetSubscription = ({ _id }: { _id: string }) => {
+  const {
+    data: subscription,
+    isFetching: fetchingSubscription,
+    error: fetchingSubscriptionError,
+  } = useQuery({
+    queryKey: "get subscriptions data",
+    queryFn: async () => {
+      const { data } = await getRequest({
+        endpoint: `/api/subscriptions/${_id}`,
+      });
+      return data as unknown as SubscriptionProps;
+    },
+    onError: (error) => {
+      alert(error);
+    },
+    staleTime: 1000,
+  });
+
+  return {
+    subscription,
+    fetchingSubscription,
+    fetchingSubscriptionError,
+  };
+};

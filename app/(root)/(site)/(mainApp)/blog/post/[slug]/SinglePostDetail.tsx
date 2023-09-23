@@ -12,6 +12,10 @@ import { HeartIcon } from "lucide-react";
 import CommentForm from "@/components/ui/CommentSection";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import { toast } from "@/components/ui/use-toast";
+import Loading from "@/components/ui/Loading";
+import { useRouter } from "next/navigation";
+import Button from "@/components/ui/customButton";
+import { useGetUserCurrentSubscription } from "@/hooks/transactions";
 
 interface Props {
   post: Post;
@@ -31,6 +35,7 @@ const SinglePostDetail = ({ post }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const router = useRouter();
 
   // submitted
   const onsubmit: SubmitHandler<Inputs> = (data) => {
@@ -50,10 +55,20 @@ const SinglePostDetail = ({ post }: Props) => {
       });
   };
 
-  // console.log(post);
+  const { subscription, fetchingSubscription, fetchingSubscriptionError } =
+    useGetUserCurrentSubscription();
+
+  console.log(subscription);
+
+  const expirydate = new Date(subscription?.expire_at || null).getTime();
+  const now = new Date().getTime();
+
+  const subscription_valid = expirydate > 0 && expirydate > now;
+
+  console.log(subscription_valid, expirydate, now);
 
   return (
-    <>
+    <Loading loading={fetchingSubscription} error={!!fetchingSubscriptionError}>
       <article className="border-[1px] md:mx-10 my-10 py-10 px-5 space-y-6">
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
@@ -91,59 +106,78 @@ const SinglePostDetail = ({ post }: Props) => {
         </div>
         <p className="text-center text-slate-600">{post.description}...</p>
 
-        <PortableText
-          dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
-          projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"}
-          content={post.body}
-          serializers={{
-            h1: (props: any) => {
-              <h1
-                className="text-3xl font-semibold py-5 text-slate-700"
-                {...props}
-              />;
-            },
-            h2: (props: any) => {
-              <h2 className="text-2xl font-semibold py-5 " {...props} />;
-            },
-            h3: (props: any) => {
-              <h3
-                className="text-2xl font-semibold my-5 text-slate-800"
-                {...props}
-              />;
-            },
-            p: (props: any) => {
-              <p
-                className="text-base leading-8 my-5 text-slate-700"
-                {...props}
-              />;
-            },
-            link: ({ href, children }: any) => {
-              <a href={href} className="text-limeGreen hover:underline"></a>;
-            },
-          }}
-        />
-        {post.categories && (
-          <div className="flex gap-2 flex-wrap">
-            {post.categories.map((category) => (
-              <div
-                className="border-[1px] px-3 py-0.5 text-slate-700 capitalize"
-                key={category.title}
-              >
-                {category.title}
+        {subscription_valid ? (
+          <>
+            <PortableText
+              dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
+              projectId={
+                process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"
+              }
+              content={post.body}
+              serializers={{
+                h1: (props: any) => {
+                  <h1
+                    className="text-3xl font-semibold py-5 text-slate-700"
+                    {...props}
+                  />;
+                },
+                h2: (props: any) => {
+                  <h2 className="text-2xl font-semibold py-5 " {...props} />;
+                },
+                h3: (props: any) => {
+                  <h3
+                    className="text-2xl font-semibold my-5 text-slate-800"
+                    {...props}
+                  />;
+                },
+                p: (props: any) => {
+                  <p
+                    className="text-base leading-8 my-5 text-slate-700"
+                    {...props}
+                  />;
+                },
+                link: ({ href, children }: any) => {
+                  <a
+                    href={href}
+                    className="text-limeGreen hover:underline"
+                  ></a>;
+                },
+              }}
+            />
+            {post.categories && (
+              <div className="flex gap-2 flex-wrap">
+                {post.categories.map((category) => (
+                  <div
+                    className="border-[1px] px-3 py-0.5 text-slate-700 capitalize"
+                    key={category.title}
+                  >
+                    {category.title}
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
+            <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
+              <div className="flex gap-4">
+                <span>{post.commentNumber} comments</span>
+                <span>{post.views} views</span>
+              </div>
+              <div className="flex gap-2">
+                <HeartIcon />
+                <span>{post.likes}</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="p-12 flex flex-col items-center gap-8">
+            <b>Want to read more?</b>
+            <p>Subscribe to our blog to keep reading this exclusive post.</p>
+            <Button
+              onClick={() => router.push("../subscribe")}
+              label="Subscribe"
+              intent="primary"
+            />
           </div>
         )}
-        <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
-          <div className="flex gap-4">
-            <span>{post.commentNumber} comments</span>
-            <span>{post.views} views</span>
-          </div>
-          <div className="flex gap-2">
-            <HeartIcon />
-            <span>{post.likes}</span>
-          </div>
-        </div>
       </article>
       <div className="flex flex-col-reverse gap-y-20 w-full gap-x-20 px-10">
         <div className="w-full order-2 md:order-1">
@@ -171,7 +205,7 @@ const SinglePostDetail = ({ post }: Props) => {
           </div>
         </div>
       </div>
-    </>
+    </Loading>
   );
 };
 

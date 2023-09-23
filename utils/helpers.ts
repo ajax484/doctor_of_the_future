@@ -75,6 +75,7 @@ export const typeMapping: Record<string, string> = {
   PLN: "plans",
   PRG: "programs",
   SHP: "shop",
+  SUB: "subscriptions",
 };
 
 export function generateReferenceNumber(productType: string): string {

@@ -7,6 +7,7 @@ import {
 import { getRequest, postRequest } from "@/utils/api";
 import { AxiosError } from "axios";
 import { UseMutateFunction, useMutation, useQuery } from "react-query";
+import { subscriptionTransaction } from "@/types/transactions";
 
 type UseInitializeTransactionResult = {
   performingTransaction: boolean;
@@ -145,3 +146,50 @@ export const useGetUserTransaction: IuseGetUserTransaction = ({
     fetchingTransactionError,
   };
 };
+
+interface SubscriptionError {
+  // Define the structure of the error object here
+  // For example:
+  message: string;
+  // ... other properties
+}
+
+interface UseGetUserCurrentSubscriptionResult {
+  subscription: subscriptionTransaction | {};
+  fetchingSubscription: boolean;
+  fetchingSubscriptionError: SubscriptionError | null;
+}
+
+export const useGetUserCurrentSubscription =
+  (): UseGetUserCurrentSubscriptionResult => {
+    const {
+      data: subscription,
+      isFetching: fetchingSubscription,
+      error: fetchingSubscriptionError,
+    } = useQuery<subscriptionTransaction, SubscriptionError>(
+      ["get subscription"],
+      async () => {
+        const { data, status } = await getRequest({
+          endpoint: `/api/blog/subscriptions`,
+        });
+
+        if (status !== 200) throw data;
+
+        return data.data;
+      },
+      {
+        onError: (error) => {
+          console.log(error);
+
+          // alert(error.message);
+        },
+      }
+    );
+
+    return {
+      subscription: subscription || ({} as subscriptionTransaction),
+      fetchingSubscription,
+      fetchingSubscriptionError,
+    };
+  };
+

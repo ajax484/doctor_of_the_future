@@ -17,3 +17,9 @@ export interface ProgramProps extends CommonProps {
 export interface ProductProps extends CommonProps {}
 
 export interface BookingProps extends CommonProps {}
+
+export interface SubscriptionProps {
+  id: string;
+  duration: string;
+  price: number;
+}
