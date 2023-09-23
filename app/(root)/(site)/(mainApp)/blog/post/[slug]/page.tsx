@@ -64,9 +64,9 @@ const BlogDetails = async ({ params }: BlogProps) => {
   // console.log(post);
 
   const comments = await client.fetch(querycomments);
-  // console.log(comments)
+  console.log(comments)
 
-
+  
 
   return <SinglePostDetail post={post} comments={comments} />;
 };

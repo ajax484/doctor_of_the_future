@@ -17,6 +17,7 @@ import { useSessionContext } from "@supabase/auth-helpers-react";
 import Button from "../customButton";
 import { useState } from "react";
 import { toast } from "../use-toast";
+import { usePostComment } from "@/hooks/posts";
 
 interface FormData {
   _id: string;
@@ -47,7 +48,6 @@ type CommentFormValues = z.infer<typeof CommentFormSchema>;
 
 export default function CommentForm({ _id }: { _id: string }) {
   const { session } = useSessionContext();
-  const [submitted, setSubmitted] = useState(false);
   const email = session?.user.email;
   // This can come from your database or API.
   const defaultValues: Partial<CommentFormValues> = {
@@ -60,46 +60,14 @@ export default function CommentForm({ _id }: { _id: string }) {
     mode: "onChange",
   });
 
-  //   const { watch } = form;
-  //   const payment_method = watch("payment_method");
-
-  //   useEffect(() => {
-  //     const subscription = watch((value, { name, type }) => {
-  //       if (name !== "payment_method") return;
-  //       if (value.payment_method) {
-  //         changeMethod(value.payment_method);
-  //       }
-  //     });
-  //     return () => subscription.unsubscribe();
-  //   }, [watch]);
-
-  function onSubmit(data: CommentFormValues) {
-    // console.log(data);
-    // console.log(data);
-    fetch("/api/comments", {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then(() => {
-        setSubmitted(true);
-        toast({
-          title: "Comment Submitted",
-          description: "your comment will appear after approval by the team",
-        });
-      })
-      .catch((err) => {
-        toast({
-          description: "Sorry, couldnt post comment, try again",
-        });
-        setSubmitted(false);
-      });
-  }
+  const { postComment, postCommentError, postCommentIsLoading } =
+    usePostComment();
 
   return (
     <Form {...form}>
       <form
         id="comment-form"
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(postComment)}
         className="space-y-8"
       >
         <div className="flex gap-4">
@@ -168,7 +136,12 @@ export default function CommentForm({ _id }: { _id: string }) {
             </FormItem>
           )}
         />
-        <Button type="submit" intent="primary" label="Submit Comment" />
+        <Button
+          type="submit"
+          intent="primary"
+          label="Submit Comment"
+          isLoading={postCommentIsLoading}
+        />
       </form>
     </Form>
   );

@@ -7,7 +7,11 @@ import PortableText from "react-portable-text";
 import { SubmitHandler } from "react-hook-form";
 
 import { urlForImage } from "@/sanity/lib/image";
-import { convertDateFormat } from "@/utils/helpers";
+import {
+  convertDateFormat,
+  formatDate,
+  formatDateToHumanReadable,
+} from "@/utils/helpers";
 import { HeartIcon } from "lucide-react";
 import CommentForm from "@/components/ui/CommentSection";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
@@ -21,12 +25,13 @@ import { useUser } from "@supabase/auth-helpers-react";
 
 interface Props {
   post: Post;
+  comments: IComments[];
 }
 interface CommentI {
   comments: "";
 }
 
-type Inputs = {
+type IComments = {
   _id: string;
   name: string;
   email: string;
@@ -34,7 +39,7 @@ type Inputs = {
 };
 
 const SinglePostDetail = ({ post, comments }: Props) => {
-  // console.log(post);
+  console.log(comments);
   const user = useUser();
   const authmodal = useAuthModal();
   const [submitted, setSubmitted] = useState(false);
@@ -42,10 +47,8 @@ const SinglePostDetail = ({ post, comments }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<IComments>();
   const router = useRouter();
-
-
 
   const { subscription, fetchingSubscription, fetchingSubscriptionError } =
     useGetUserCurrentSubscription();
@@ -57,10 +60,10 @@ const SinglePostDetail = ({ post, comments }: Props) => {
 
   const subscription_valid = expirydate > 0 && expirydate > now;
 
-  // console.log(subscription_valid, expirydate, now);
+  console.log(subscription_valid, expirydate, now);
 
   return (
-    <Loading loading={fetchingSubscription} >
+    <Loading loading={fetchingSubscription}>
       <article className="border-[1px] md:mx-10 my-10 py-10 px-5 space-y-6">
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
@@ -183,7 +186,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
         <div className="w-full order-2 md:order-1">
           <h1 className="capitalize text-sm text-slate-700">comment section</h1>
           <p>leave a comment below and join the discussion</p>
-          <CommentForm _id={post._id}  />
+          <CommentForm _id={post._id} />
         </div>
         <div className="w-full order-1 md:order-2 space-y-2">
           <h2 className="capitalize text-sm text-slate-700">
@@ -191,16 +194,18 @@ const SinglePostDetail = ({ post, comments }: Props) => {
           </h2>
 
           <div className="border my-5 py-5 h-max">
-
-            {post.comments?.map((comment) => (
+            {comments?.map((comment) => (
               <div
-                className="flex flex-col gap-y-4 text-white"
+                className="flex flex-col gap-y-4 p-4 border-b border-gray-300 pb-2"
                 key={comment._id}
               >
-                <span>
-                  <p>{comment.name}</p>
-                  <p>{comment.comment}</p>
-                </span>
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold">{comment.name}</h3>
+                  <p className="text-gray-500 text-sm">
+                    {formatDate(comment._createdAt)}
+                  </p>
+                </div>
+                <p className="text-gray-700">{comment.comment}</p>
               </div>
             ))}
           </div>
