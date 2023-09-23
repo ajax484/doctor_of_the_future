@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import Button from "../customButton";
+import { useState } from "react";
+import { toast } from "../use-toast";
 
 interface FormData {
   _id: string;
@@ -45,6 +47,7 @@ type CommentFormValues = z.infer<typeof CommentFormSchema>;
 
 export default function CommentForm({ _id }: { _id: string }) {
   const { session } = useSessionContext();
+  const [submitted, setSubmitted] = useState(false);
   const email = session?.user.email;
   // This can come from your database or API.
   const defaultValues: Partial<CommentFormValues> = {
@@ -72,6 +75,24 @@ export default function CommentForm({ _id }: { _id: string }) {
 
   function onSubmit(data: CommentFormValues) {
     // console.log(data);
+    // console.log(data);
+    fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+      .then(() => {
+        setSubmitted(true);
+        toast({
+          title: "Comment Submitted",
+          description: "your comment will appear after approval by the team",
+        });
+      })
+      .catch((err) => {
+        toast({
+          description: "Sorry, couldnt post comment, try again",
+        });
+        setSubmitted(false);
+      });
   }
 
   return (

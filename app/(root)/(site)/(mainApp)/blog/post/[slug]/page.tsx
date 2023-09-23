@@ -27,6 +27,10 @@ interface BlogProps {
 
 const BlogDetails = async ({ params }: BlogProps) => {
   // const query = groq`*[_type == "post" && slug.current == '${params.slug}'][0]{title, "name": author->name}`;
+  // get comments
+  const querycomments = groq`*[_type == "comment"]`
+
+
   const query = groq`*[_type == "post" && slug.current == '${params.slug}'][0]{
     _id,
     title,
@@ -59,7 +63,12 @@ const BlogDetails = async ({ params }: BlogProps) => {
   const post = await client.fetch(query);
   // console.log(post);
 
-  return <SinglePostDetail post={post} />;
+  const comments = await client.fetch(querycomments);
+  // console.log(comments)
+
+
+
+  return <SinglePostDetail post={post} comments={comments} />;
 };
 
 export default BlogDetails;
