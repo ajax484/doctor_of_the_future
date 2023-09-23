@@ -17,7 +17,7 @@ export async function GET(request: Request) {
       .eq("is_current", true)
       .maybeSingle();
 
-    console.log(data, error);
+    // console.log(data, error);
 
     if (error && status !== 200) {
       throw error;

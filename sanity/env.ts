@@ -13,7 +13,7 @@ export const projectId = assertValue(
 
 export const useCdn = false
 
-console.log(apiVersion, dataset, projectId);
+// console.log(apiVersion, dataset, projectId);
 
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {

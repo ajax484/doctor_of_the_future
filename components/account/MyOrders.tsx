@@ -17,7 +17,7 @@ const MyOrders = () => {
   const { fetchingTransactions, fetchingTransactionsError, transactions } =
     useGetUserTransactions({ prdtType: "shop" });
 
-  console.log(transactions);
+  // console.log(transactions);
 
   return (
     <Loading loading={fetchingTransactions} error={!!fetchingTransactionsError}>

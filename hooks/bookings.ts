@@ -41,7 +41,7 @@ export const useGetUsersBookings = () => {
     queryKey: "get users bookings data",
     queryFn: async () => {
       const { data } = await getRequest({ endpoint: "/api/users/bookings" });
-      console.log(data);
+      // console.log(data);
       return data.map((timeSlot) => new Date(timeSlot.time_of_session).toISOString());
     },
     onError: (error) => {

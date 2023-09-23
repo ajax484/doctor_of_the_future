@@ -34,7 +34,7 @@ export default SpecificResult;
 // for shop items
 const BookLinks = ({ ids }: { ids: string }) => {
   const { links, fetchingLinks } = useGetItemLinks({ ids });
-  console.log(links);
+  // console.log(links);
 
   return (
     <Loading loading={fetchingLinks}>

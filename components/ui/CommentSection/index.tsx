@@ -71,7 +71,7 @@ export default function CommentForm({ _id }: { _id: string }) {
   //   }, [watch]);
 
   function onSubmit(data: CommentFormValues) {
-    console.log(data);
+    // console.log(data);
   }
 
   return (

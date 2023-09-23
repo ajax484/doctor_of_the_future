@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     return NextResponse.json("comment created", { status: 200 });
   } catch (error) {
     //error
-    console.log("Post error", error);
+    // console.log("Post error", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }

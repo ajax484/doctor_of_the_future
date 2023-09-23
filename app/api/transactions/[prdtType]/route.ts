@@ -34,7 +34,7 @@ export async function GET(
       .select(query)
       .eq("user_id", userId);
 
-    console.log(data);
+    // console.log(data);
 
     if (error && status !== 200) {
       throw error;

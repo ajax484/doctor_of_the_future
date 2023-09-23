@@ -43,7 +43,7 @@ const Page = () => {
     const books = cart.map((cartItem) => cartItem.id);
     const reference = generateReferenceNumber("SHP");
 
-    console.log(email, reference, books, amount);
+    // console.log(email, reference, books, amount);
 
     const payload = {
       email,

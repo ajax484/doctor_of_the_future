@@ -58,14 +58,14 @@ const SinglePostDetail = ({ post }: Props) => {
   const { subscription, fetchingSubscription, fetchingSubscriptionError } =
     useGetUserCurrentSubscription();
 
-  console.log(subscription);
+  // console.log(subscription);
 
   const expirydate = new Date(subscription?.expire_at || null).getTime();
   const now = new Date().getTime();
 
   const subscription_valid = expirydate > 0 && expirydate > now;
 
-  console.log(subscription_valid, expirydate, now);
+  // console.log(subscription_valid, expirydate, now);
 
   return (
     <Loading loading={fetchingSubscription} error={!!fetchingSubscriptionError}>

@@ -23,12 +23,12 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
       error: TransactionError,
     } = useMutation({
       mutationFn: async ({ payload }) => {
-        console.log(payload);
+        // console.log(payload);
         const { data } = await postRequest({
           endpoint: "/api/transactions/initialize",
           payload,
         });
-        console.log(data);
+        // console.log(data);
 
         if (data?.status !== 200) {
           throw data?.error;
@@ -36,7 +36,7 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
         return data;
       },
       onSuccess: (values) => {
-        console.log(values?.responseData?.data?.authorization_url);
+        // console.log(values?.responseData?.data?.authorization_url);
         const redirectUrl = values?.responseData?.data?.authorization_url;
         toast({
           title: "Processing Transaction...",
@@ -45,7 +45,7 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
         window.location.href = redirectUrl;
       },
       onError: (error) => {
-        console.log(error);
+        // console.log(error);
 
         toast({
           title: error,
@@ -98,7 +98,7 @@ export const useGetUserTransactions: IuseGetUserTransactions = ({
         | planTransaction[];
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
 
       // alert(error.message);
     },
@@ -134,7 +134,7 @@ export const useGetUserTransaction: IuseGetUserTransaction = ({
         | planTransaction;
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
 
       // alert(error.message);
     },
@@ -179,7 +179,7 @@ export const useGetUserCurrentSubscription =
       },
       {
         onError: (error) => {
-          console.log(error);
+          // console.log(error);
 
           // alert(error.message);
         },

@@ -16,10 +16,10 @@ const MyBooking = () => {
   const { fetchingTransactions, fetchingTransactionsError, transactions } =
     useGetUserTransactions({ prdtType: "bookings" });
 
-  console.log(transactions);
+  // console.log(transactions);
 
   return (
-    <Loading loading={fetchingTransactions} error={!!fetchingTransactionsError}>
+    <Loading loading={fetchingTransactions} >
       <div className="w-[250px] xs:w-[340px] md:w-full">
         <Table className="py-5 text-xs ">
           <TableHeader>

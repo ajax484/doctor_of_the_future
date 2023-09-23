@@ -12,7 +12,7 @@ export async function GET(): Promise<NextResponse> {
       .select("time_of_session")
       .gt("time_of_session", date);
 
-    console.log(data, error, status);
+    // console.log(data, error, status);
 
     if (error) {
       throw error;

@@ -16,7 +16,7 @@ export async function GET(
       .eq("id", _id)
       .maybeSingle();
 
-    console.log(data);
+    // console.log(data);
 
     if (error && status !== 200) {
       throw error;
