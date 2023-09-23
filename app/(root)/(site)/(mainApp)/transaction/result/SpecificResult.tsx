@@ -20,7 +20,7 @@ const SpecificResult = ({
     
     return (
       <div className=" flex flex-col gap-y-4 items-center gap-x-4">
-        Congrats on choosing a plan, Send a message on whatsapp:{" "}
+        Send a message on whatsapp:{" "}
         <WhatsAppLink phoneNumber="+23409123185655" />
       </div>
     );
@@ -73,7 +73,7 @@ const WhatsAppLink: React.FC<WhatsAppLinkProps> = ({ phoneNumber }) => {
   const formattedPhoneNumber = phoneNumber.replace(/\D/g, "");
 
   // Create the WhatsApp message if provided
-  const whatsappMessage = "hello doctor of the future,";
+  const whatsappMessage = "";
 
   // WhatsApp link URL
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}${whatsappMessage}`;
