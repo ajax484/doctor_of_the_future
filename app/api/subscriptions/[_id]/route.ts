@@ -2,32 +2,31 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: { _id: string } }
+) {
+  const _id = params._id;
   const supabase = createRouteHandlerClient({ cookies });
-
-  const { data } = await supabase.auth.getSession();
-
-  const userId = data.session?.user.id;
 
   try {
     let { data, error, status } = await supabase
-      .from(`user_subscriptions`)
+      .from("blog_subscriptions")
       .select("*")
-      .eq("user_id", userId)
-      .eq("is_current", true)
+      .eq("id", _id)
       .maybeSingle();
 
-    console.log(data, error);
+    console.log(data);
 
     if (error && status !== 200) {
       throw error;
     }
 
-    return NextResponse.json({ data, status: 200 });
+    return NextResponse.json(data);
   } catch (error) {
     // Handle the error here if needed
     return NextResponse.json({ error, status: 500 });
   }
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic'

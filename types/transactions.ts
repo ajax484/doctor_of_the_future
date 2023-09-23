@@ -8,6 +8,12 @@ export interface Transaction {
   status: string;
 }
 
+export interface subscriptionTransaction extends Transaction {
+  subscription_id: string;
+  expire_at: Date;
+  is_current: boolean;
+}
+
 export interface shopTransaction extends Transaction {
   books: string[];
 }
