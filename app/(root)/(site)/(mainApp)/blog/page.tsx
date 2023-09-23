@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const Blog = async () => {
   const posts = await getPosts();
-  // console.log(posts);
+  console.log(posts);
 
   return (
     <div className="mt-5 mb-14 py-8">

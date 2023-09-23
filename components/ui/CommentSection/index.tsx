@@ -60,18 +60,7 @@ export default function CommentForm({ _id }: { _id: string }) {
     mode: "onChange",
   });
 
-  //   const { watch } = form;
-  //   const payment_method = watch("payment_method");
 
-  //   useEffect(() => {
-  //     const subscription = watch((value, { name, type }) => {
-  //       if (name !== "payment_method") return;
-  //       if (value.payment_method) {
-  //         changeMethod(value.payment_method);
-  //       }
-  //     });
-  //     return () => subscription.unsubscribe();
-  //   }, [watch]);
 
   function onSubmit(data: CommentFormValues) {
     // console.log(data);

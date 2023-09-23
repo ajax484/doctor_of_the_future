@@ -45,8 +45,6 @@ const SinglePostDetail = ({ post, comments }: Props) => {
   } = useForm<Inputs>();
   const router = useRouter();
 
-
-
   const { subscription, fetchingSubscription, fetchingSubscriptionError } =
     useGetUserCurrentSubscription();
 
@@ -60,7 +58,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
   // console.log(subscription_valid, expirydate, now);
 
   return (
-    <Loading loading={fetchingSubscription} >
+    <Loading loading={fetchingSubscription}>
       <article className="border-[1px] md:mx-10 my-10 py-10 px-5 space-y-6">
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
@@ -183,7 +181,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
         <div className="w-full order-2 md:order-1">
           <h1 className="capitalize text-sm text-slate-700">comment section</h1>
           <p>leave a comment below and join the discussion</p>
-          <CommentForm _id={post._id}  />
+          <CommentForm _id={post._id} />
         </div>
         <div className="w-full order-1 md:order-2 space-y-2">
           <h2 className="capitalize text-sm text-slate-700">
@@ -191,18 +189,18 @@ const SinglePostDetail = ({ post, comments }: Props) => {
           </h2>
 
           <div className="border my-5 py-5 h-max">
-
-            {post.comments?.map((comment) => (
-              <div
-                className="flex flex-col gap-y-4 text-white"
-                key={comment._id}
-              >
-                <span>
-                  <p>{comment.name}</p>
-                  <p>{comment.comment}</p>
-                </span>
-              </div>
-            ))}
+            {comments?.map((comment) =>
+              comment.post && comment.post._ref === post._id ? (
+                <div className="flex flex-col gap-y-4 p-4" key={comment._id}>
+                  <span>
+                    <p>{comment.name}</p>
+                    <p>{comment.comment}</p>
+                  </span>
+                </div>
+              ) : (
+                <p className="p-4">no comments</p>
+              )
+            )}
           </div>
         </div>
       </div>
