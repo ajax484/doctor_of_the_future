@@ -52,11 +52,10 @@ export default function ProgramInfo({
             </div>
             <div className="space-y-2 text-slate-800">
               <p className=" text-slate-800">
-                Get a certificate by completing the program.
+                join a weightloss group challenge
               </p>
               <p className=" text-slate-800">
-                Everyone who has completed all the steps will get a badge when
-                the program ends.
+               get a mini diet plan, follow up and accountability partners
               </p>
             </div>
           </div>

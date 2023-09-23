@@ -2,6 +2,12 @@ import { Facebook, Mail, PhoneCall, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Footer() {
   return (
@@ -23,10 +29,16 @@ export default function Footer() {
             Bassey
           </span>
         </div>
-        <span className="text-sm flex items-center gap-x-1">
+        <a
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm flex items-center gap-x-1 hover:text-neutral-400"
+        >
           <Facebook size={16} />
-          <p> Doctor Of The Future</p>
-        </span>
+          <p>Doctor Of The Future</p>
+        </a>
+
         <span className="text-sm flex gap-x-1 items-center cursor-pointer">
           <Twitter size={16} />
           <a href="https://x.com/g_diets_" className="hover:text-neutral-400">
@@ -43,10 +55,22 @@ export default function Footer() {
               gidietsworld@gmail.com
             </a>
           </p>
-          <span className="flex items-center gap-x-1">
-            <PhoneCall size={15} />
-            <p> +234 912 318 5655 </p>
-          </span>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <a
+                  href="https://wa.me/2349123185655"
+                  className="flex items-center gap-x-1"
+                >
+                  <PhoneCall size={15} />
+                  <p className="hover:text-neutral-400">+234 912 318 5655</p>
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Message on whatsapp</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
           <span className="flex items-center gap-x-1">
             <PhoneCall size={15} />
