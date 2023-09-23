@@ -24,9 +24,9 @@ export default defineType({
       type: "text",
     }),
     defineField({
-        name: 'shop',
+        name: 'post',
         type: 'reference',
-        to: {type: 'shop'},
+        to: {type: 'post'},
       }),
   ],
 });

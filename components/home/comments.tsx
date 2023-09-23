@@ -13,7 +13,7 @@ export default function Comments() {
       {/* first */}
       <div className="flex my-5  flex-col md:flex-row gap-8 md:gap-12 px-4 md:px-8">
         <div className="flex border-b border-slate-400 py-5 md:border-none md:py-0 flex-col items-center gap-4 px-4">
-          <p className="md-8 md:mb-12 text-center leading-loose text-sm md:text-base">
+          <p className="md-8 md:mb-12 max-w-3xl text-center leading-loose text-sm md:text-base">
             I follow Doctor of the future meal plan and lost alot of weight, no
             more low libido due to hormonal imbalance.
           </p>
@@ -33,7 +33,7 @@ export default function Comments() {
         </div>
         {/* second */}
         <div className="flex flex-col border-b border-slate-400 py-5 md:border-none md:py-0 items-center gap-4 px-4">
-          <p className="md-8 md:mb-12 text-center leading-loose text-sm md:text-base">
+          <p className="md-8 md:mb-12 max-w-3xl text-center leading-loose text-sm md:text-base">
             Thank you so much Doctor of the future for the amazing work you are
             doing in changing our eating habits.
           </p>
@@ -54,7 +54,7 @@ export default function Comments() {
 
         {/* third */}
         <div className="flex py-5 md:py-0 flex-col items-center gap-4 px-4">
-          <p className="md-8 md:mb-12 text-center  leading-loose text-sm md:text-base">
+          <p className="md-8 md:mb-12 text-center max-w-3xl  leading-loose text-sm md:text-base">
             Thank you so much Doctor of the future. I no longer have ulcer after
             following your advice and changing my eating habits.
           </p>

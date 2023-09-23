@@ -8,7 +8,7 @@ export async function GET(): Promise<NextResponse> { // Specify the return type 
   try {
     let { data, error, status } = await supabase.from("bookings").select("*");
 
-    console.log(data);
+    // console.log(data);
 
     if (error && status !== 406) {
       throw error;

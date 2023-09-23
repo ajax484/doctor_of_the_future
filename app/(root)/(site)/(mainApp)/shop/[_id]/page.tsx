@@ -21,7 +21,7 @@ export default function Item({ params }: { params: { _id: string } }) {
   const { _id } = params;
   const { item, fetchingItem, fetchingItemError } = useGetItem({ _id });
 
-  console.log(item);
+  // console.log(item);
 
   const { isAdded, addItem, removeItem } = useCart();
 

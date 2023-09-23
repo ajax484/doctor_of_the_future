@@ -8,14 +8,16 @@ import React, { Suspense } from "react";
 export default function Page() {
   const { subscriptions, fetchingSubscriptions, fetchingSubscriptionsError } =
     useGetSubscriptions();
-  console.log(subscriptions);
+  // console.log(subscriptions);
 
   return (
     <Suspense>
-      <Loading
-        loading={fetchingSubscriptions}
-        error={!!fetchingSubscriptionsError}
-      >
+      <div className=" my-10">
+        <h1 className=" font-semibold text-start md:text-center capitalize text-2xl md:text-3xl">
+          Select a subscription plan
+        </h1>
+      </div>
+      <Loading loading={fetchingSubscriptions}>
         <div className="grid lg:grid-cols-3 gap-4 h-max mt-12">
           {subscriptions?.map((subscription: SubscriptionProps) => (
             <SubscriptionCard key={subscription.id} {...subscription} />

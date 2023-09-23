@@ -2,7 +2,9 @@ import React from 'react'
 
 const MyPrograms = () => {
   return (
-    <div>MyPrograms</div>
+    <div>
+      <h1 className=' font-semibold capitalize text-center'>coming soon!!!</h1>
+    </div>
   )
 }
 

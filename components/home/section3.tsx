@@ -21,8 +21,8 @@ export default function Section3() {
     <section className="flex flex-col md:flex-row">
       <div className="flex-[50%] bg-orange text-white px-8 md:px-24 flex flex-col gap-8 py-8 md:py-12 space-y-6 md:space-y-12">
         <h2 className="space-y-3 flex flex-col text-2xl md:text-4xl">
-          <span>Healthy Life, </span>
-          <span>Healthy Diet.</span>
+          <span>Healthy Diet, </span>
+          <span>Healthy Life.</span>
         </h2>
         <p className="text-white leading-loose text-justify">
         Embracing a healthy life goes hand in hand with adopting a nourishing diet. Your journey to well-being begins by making mindful choices in what you eat and how you live. Discover the keys to a healthier, happier life through a balanced diet and a lifestyle that prioritizes your well-being.

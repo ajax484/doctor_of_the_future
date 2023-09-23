@@ -20,7 +20,7 @@ export const useGetSubscriptions: () => UseGetSubscriptionsResult = () => {
         endpoint: "/api/subscriptions",
       });
 
-      console.log(status);
+      // console.log(status);
       if (status !== 200) throw "something went wrong";
       return data as unknown as SubscriptionProps[];
     },

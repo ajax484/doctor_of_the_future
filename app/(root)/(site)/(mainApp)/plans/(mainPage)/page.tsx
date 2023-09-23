@@ -6,7 +6,7 @@ import React, { Suspense } from "react";
 
 export default function Page() {
   const { plans, fetchingPlans, fetchingPlansError } = useGetPlans();
-  console.log(plans);
+  // console.log(plans);
 
   return (
    <Suspense>

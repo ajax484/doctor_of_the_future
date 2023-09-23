@@ -35,8 +35,8 @@ const Page = ({ params }: { params: { _id: string } }) => {
       const timeSlotDate = new Date(
         combineDateAndTime(date, slot.value)
       ).toISOString();
-      console.log(timeSlotDate, usersBookings);
-      console.log(usersBookings?.includes(timeSlotDate));
+      // console.log(timeSlotDate, usersBookings);
+      // console.log(usersBookings?.includes(timeSlotDate));
       return !usersBookings?.includes(timeSlotDate);
     });
     setAvailableSlots(newAvailableTimeSlots);

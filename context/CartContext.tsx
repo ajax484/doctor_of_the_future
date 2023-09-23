@@ -43,7 +43,7 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
   const hideCart = () => setShowCart(false);
 
   const addItem = (product: any) => {
-    console.log(product);
+    // console.log(product);
 
     if (cart.find((cartItem: { id: string }) => cartItem.id === product.id))
       return;

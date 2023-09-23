@@ -46,7 +46,7 @@ export const useGetItem = ({ _id }: { _id: string }) => {
       return data as unknown as ProductProps;
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
 
       // alert(error.message);
     },
@@ -77,7 +77,7 @@ export const useGetItemLinks = ({ ids }: { ids: string }) => {
       return data;
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
 
       // alert(error.message);
     },

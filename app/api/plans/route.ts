@@ -10,7 +10,7 @@ export async function GET(): Promise<NextResponse> {
   try {
     let { data, error, status } = await supabase.from("plans").select("*");
 
-    console.log(data);
+    // console.log(data);
 
     if (error && status !== 406) {
       throw error;

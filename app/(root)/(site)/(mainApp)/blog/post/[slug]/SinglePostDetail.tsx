@@ -16,19 +16,27 @@ import Loading from "@/components/ui/Loading";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/customButton";
 import { useGetUserCurrentSubscription } from "@/hooks/transactions";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@supabase/auth-helpers-react";
 
 interface Props {
   post: Post;
+}
+interface CommentI {
+  comments: "";
 }
 
 type Inputs = {
   _id: string;
   name: string;
   email: string;
-  comment: string;
+  comment: CommentI;
 };
 
-const SinglePostDetail = ({ post }: Props) => {
+const SinglePostDetail = ({ post, comments }: Props) => {
+  // console.log(post);
+  const user = useUser();
+  const authmodal = useAuthModal();
   const [submitted, setSubmitted] = useState(false);
   const {
     register,
@@ -37,38 +45,22 @@ const SinglePostDetail = ({ post }: Props) => {
   } = useForm<Inputs>();
   const router = useRouter();
 
-  // submitted
-  const onsubmit: SubmitHandler<Inputs> = (data) => {
-    // console.log(data);
-    fetch("/api/comments", {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then(() => {
-        setSubmitted(true);
-        toast({
-          title: "comment submitted for approval",
-        });
-      })
-      .catch((err) => {
-        setSubmitted(false);
-      });
-  };
+
 
   const { subscription, fetchingSubscription, fetchingSubscriptionError } =
     useGetUserCurrentSubscription();
 
-  console.log(subscription);
+  // console.log(subscription);
 
   const expirydate = new Date(subscription?.expire_at || null).getTime();
   const now = new Date().getTime();
 
   const subscription_valid = expirydate > 0 && expirydate > now;
 
-  console.log(subscription_valid, expirydate, now);
+  // console.log(subscription_valid, expirydate, now);
 
   return (
-    <Loading loading={fetchingSubscription} error={!!fetchingSubscriptionError}>
+    <Loading loading={fetchingSubscription} >
       <article className="border-[1px] md:mx-10 my-10 py-10 px-5 space-y-6">
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
@@ -171,11 +163,19 @@ const SinglePostDetail = ({ post }: Props) => {
           <div className="p-12 flex flex-col items-center gap-8">
             <b>Want to read more?</b>
             <p>Subscribe to our blog to keep reading this exclusive post.</p>
-            <Button
-              onClick={() => router.push("../subscribe")}
-              label="Subscribe"
-              intent="primary"
-            />
+            {user ? (
+              <Button
+                onClick={() => router.push("../subscribe")}
+                label="Subscribe"
+                intent="primary"
+              />
+            ) : (
+              <Button
+                onClick={authmodal.onOpen}
+                label="Subscribe"
+                intent="primary"
+              />
+            )}
           </div>
         )}
       </article>
@@ -183,7 +183,7 @@ const SinglePostDetail = ({ post }: Props) => {
         <div className="w-full order-2 md:order-1">
           <h1 className="capitalize text-sm text-slate-700">comment section</h1>
           <p>leave a comment below and join the discussion</p>
-          <CommentForm _id={post._id} onSubmit={onsubmit} />
+          <CommentForm _id={post._id}  />
         </div>
         <div className="w-full order-1 md:order-2 space-y-2">
           <h2 className="capitalize text-sm text-slate-700">
@@ -191,6 +191,7 @@ const SinglePostDetail = ({ post }: Props) => {
           </h2>
 
           <div className="border my-5 py-5 h-max">
+
             {post.comments?.map((comment) => (
               <div
                 className="flex flex-col gap-y-4 text-white"
