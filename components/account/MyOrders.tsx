@@ -20,8 +20,8 @@ const MyOrders = () => {
   // console.log(transactions);
 
   return (
-    <Loading loading={fetchingTransactions} error={!!fetchingTransactionsError}>
-      <div className="w-[250px] xs:w-[340px] md:w-full">
+    <Loading loading={fetchingTransactions}>
+      <div className="w-full">
         <Table className="py-5 text-xs ">
           <TableHeader>
             <TableRow>

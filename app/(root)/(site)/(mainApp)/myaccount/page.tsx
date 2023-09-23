@@ -8,35 +8,38 @@ import MyBooking from "@/components/account/MyBooking";
 import MySubscriptions from "@/components/account/MySubscriptions";
 import MyOrders from "@/components/account/MyOrders";
 import MyPrograms from "@/components/account/MyPrograms";
-import { siteConfig } from "@/app/(root)/siteConfig/page";
-import { Metadata } from "next";
-
-
-// export const metadata: Metadata = {
-//   title: "My Account | " + siteConfig.name,
-//   description: siteConfig.description,
-//   icons: {
-//     icon: "/favicon.ico",
-//   },
-// };
-
-
-
-
+import { useUser } from "@supabase/auth-helpers-react";
 
 const MyAccount = () => {
+  const user = useUser();
+  console.log(user);
   return (
     <div className="mt-12">
-      <div>
+      <div className=" relative">
         <Image
           alt="image"
           src={
-            "https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=800"
+            "https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=800"
           }
           width={500}
           height={500}
           className=" w-full h-56 object-cover"
         />
+
+        <div className=" absolute bottom-10 left-5">
+          <div className=" flex flex-col items-end md:flex-row gap-x-4 gap-y-3">
+            <Image
+              alt="user image"
+              src={user?.user_metadata.avatar_url}
+              className="w-32 h-32 object-cover rounded-full"
+              width={500}
+              height={500}
+            />
+            <div>
+              <h1 className=" text-white capitalize font-semibold">{user?.user_metadata.name}</h1>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Tabs defaultValue="account" className="w-full">
@@ -49,7 +52,7 @@ const MyAccount = () => {
         </TabsList>
         <div className="my-16 xs:my-10">
           <TabsContent value="account">
-            <Profile />
+            <Profile user={user} />
           </TabsContent>
           <TabsContent value="bookings">
             <MyBooking />

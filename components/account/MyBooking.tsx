@@ -20,7 +20,7 @@ const MyBooking = () => {
 
   return (
     <Loading loading={fetchingTransactions} >
-      <div className="w-[250px] xs:w-[340px] md:w-full">
+      <div className="w-full">
         <Table className="py-5 text-xs ">
           <TableHeader>
             <TableRow>
