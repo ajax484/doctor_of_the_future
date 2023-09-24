@@ -100,7 +100,7 @@ dependencies:
     version: 13.5.2(@babel/core@7.22.17)(react-dom@18.2.0)(react@18.2.0)
   next-sanity:
     specifier: ^5.4.6
-    version: 5.4.6(@sanity/client@6.4.12)(@sanity/icons@2.4.1)(@sanity/types@3.16.4)(@sanity/ui@1.8.2)(next@13.5.2)(react@18.2.0)(sanity@3.16.4)(styled-components@5.2.0)
+    version: 5.4.6(@sanity/client@6.4.12)(@sanity/icons@2.4.1)(@sanity/types@3.16.7)(@sanity/ui@1.8.2)(next@13.5.2)(react@18.2.0)(sanity@3.16.4)(styled-components@5.2.0)
   nextjs:
     specifier: ^0.0.3
     version: 0.0.3
@@ -2351,6 +2351,15 @@ packages:
 
   /@sanity/types@3.16.4:
     resolution: {integrity: sha512-hucdBktsM9dPtKNQmAKeBF2pVa81YZ2oJ5+IQbRsnzEKRl5UJEGb6HQ9u/qHr/0Sg4WJzi+RrjltOO7HqZ+rHg==}
+    dependencies:
+      '@sanity/client': 6.4.12
+      '@types/react': 18.2.17
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@sanity/types@3.16.7:
+    resolution: {integrity: sha512-IQBrZiIE3/SePLmS8gl5elOZh0mtzM6QteG07KN+X23qkw7JTAvJC+/u5YnwAm+yyoWBzzBDPAlHpP4aXNricA==}
     dependencies:
       '@sanity/client': 6.4.12
       '@types/react': 18.2.17
@@ -5727,7 +5736,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: false
 
-  /next-sanity@5.4.6(@sanity/client@6.4.12)(@sanity/icons@2.4.1)(@sanity/types@3.16.4)(@sanity/ui@1.8.2)(next@13.5.2)(react@18.2.0)(sanity@3.16.4)(styled-components@5.2.0):
+  /next-sanity@5.4.6(@sanity/client@6.4.12)(@sanity/icons@2.4.1)(@sanity/types@3.16.7)(@sanity/ui@1.8.2)(next@13.5.2)(react@18.2.0)(sanity@3.16.4)(styled-components@5.2.0):
     resolution: {integrity: sha512-VgbLxYfgzLETNXKuvShhtaYKlz7DDb5QlFvvjf0eF82lIevI1c0jGHgPRhOTRuv0csvy9FVFCyMlxoc+BkAVmQ==}
     engines: {node: '>=16.14'}
     peerDependencies:
@@ -5743,7 +5752,7 @@ packages:
       '@sanity/client': 6.4.12
       '@sanity/icons': 2.4.1(react@18.2.0)
       '@sanity/preview-kit': 3.1.6(@sanity/client@6.4.12)(react@18.2.0)
-      '@sanity/types': 3.16.4
+      '@sanity/types': 3.16.7
       '@sanity/ui': 1.8.2(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.2.0)
       '@sanity/webhook': 3.0.1
       groq: 3.16.7
