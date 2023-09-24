@@ -1,12 +1,9 @@
-
-
 import { toast } from "@/components/ui/use-toast";
 import { client } from "@/sanity/lib/client";
 import groq from "groq";
 
-
 export const getPosts = async () => {
-  const queryPosts = groq`*[_type == "post"]{
+  const queryPosts = groq`*[_type == "post" && publishedAt < now()] | order(publishedAt asc){
     _id,
     title,
     author -> {
