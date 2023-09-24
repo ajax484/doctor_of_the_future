@@ -20,6 +20,7 @@ import Button from "@/components/ui/customButton";
 import { useGetUserCurrentSubscription } from "@/hooks/transactions";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@supabase/auth-helpers-react";
+import useCardViewsStore from "@/context/useViews";
 
 interface Props {
   post: Post;
@@ -37,10 +38,10 @@ type IComments = {
 };
 
 const SinglePostDetail = ({ post, comments }: Props) => {
-  console.log(comments);
+  // console.log(comments);
   const user = useUser();
   const authmodal = useAuthModal();
- 
+
   const {
     register,
     handleSubmit,
@@ -58,25 +59,17 @@ const SinglePostDetail = ({ post, comments }: Props) => {
 
   const subscription_valid = expirydate > 0 && expirydate > now;
 
-  console.log(subscription_valid, expirydate, now);
+  // console.log(subscription_valid, expirydate, now);
 
-  const [views, setViews] = useState(post.views || 0);
+  // views
+  const viewCount = useCardViewsStore((state) => state.cardViews[post._id] || 0);
+  const incrementCardViewCount = useCardViewsStore((state) => state.incrementCardViewCount);
 
   useEffect(() => {
-    // Increment the views count when the component mounts
-    fetch(`/api/comments/increment-views?postId=${post._id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the local state with the new views count
-        setViews(data.views);
-      })
-      .catch((error) => {
-        console.error('Error incrementing views:', error);
-      });
-  }, []);
-
-
-
+    // console.log(`Incrementing view count for post ${post._id}`);
+    incrementCardViewCount(post._id);
+  }, [incrementCardViewCount, post._id]);
+  
 
   return (
     <Loading loading={fetchingSubscription}>
@@ -170,18 +163,56 @@ const SinglePostDetail = ({ post, comments }: Props) => {
             <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
               <div className="flex gap-4">
                 <span>{post.commentNumber} comments</span>
-                <span>{views} views</span>
+                <span>{viewCount} views</span>
               </div>
               <div className="flex gap-2">
                 <HeartIcon />
                 <span>{post.likes}</span>
               </div>
             </div>
+
+            <div className="flex flex-col-reverse gap-y-20 w-full gap-x-20 md:px-10">
+              <div className="w-full order-2 md:order-1">
+                <h1 className="capitalize text-sm text-slate-700">
+                  comment section
+                </h1>
+                <p>leave a comment below and join the discussion</p>
+                <CommentForm _id={post._id} />
+              </div>
+              <div className="w-full order-1 md:order-2 space-y-2">
+                <h2 className="capitalize text-sm text-slate-700">
+                  all comments on this post
+                </h2>
+
+                <div className="border my-5 py-5 h-max">
+                  {comments?.map((comment) =>
+                    comment.post && comment.post._ref === post._id ? (
+                      <div
+                        className="flex flex-col gap-y-4 p-4"
+                        key={comment._id}
+                      >
+                        <span className=" flex flex-col md:flex-row items-start md:items-center gap-x-10 gap-y-5 justify-between py-5 border-b">
+                          <p className=" capitalize font-semibold text-lg ">
+                            {comment.name}
+                          </p>
+
+                          <p className=" italic text-sm text-neutral-600 max-w-3xl">
+                            {comment.comment}
+                          </p>
+                        </span>
+                      </div>
+                    ) : null
+                  )}
+                </div>
+              </div>
+            </div>
           </>
         ) : (
+          // if not subscribed
           <div className="p-12 flex flex-col items-center gap-8">
             <b>Want to read more?</b>
             <p>Subscribe to our blog to keep reading this exclusive post.</p>
+
             {user ? (
               <Button
                 onClick={() => router.push("../subscribe")}
@@ -198,34 +229,6 @@ const SinglePostDetail = ({ post, comments }: Props) => {
           </div>
         )}
       </article>
-      <div className="flex flex-col-reverse gap-y-20 w-full gap-x-20 md:px-10">
-        <div className="w-full order-2 md:order-1">
-          <h1 className="capitalize text-sm text-slate-700">comment section</h1>
-          <p>leave a comment below and join the discussion</p>
-          <CommentForm _id={post._id} />
-        </div>
-        <div className="w-full order-1 md:order-2 space-y-2">
-          <h2 className="capitalize text-sm text-slate-700">
-            all comments on this post
-          </h2>
-
-          <div className="border my-5 py-5 h-max">
-            {comments?.map((comment) =>
-              comment.post && comment.post._ref === post._id ? (
-                <div className="flex flex-col gap-y-4 p-4" key={comment._id}>
-                  <span className=" flex flex-col md:flex-row items-start md:items-center gap-x-10 gap-y-5 justify-between py-5 border-b">
-                    <p className=" capitalize font-semibold text-lg ">{comment.name}</p>
-                  
-                    <p className=" italic text-sm text-neutral-600 max-w-3xl">{comment.comment}</p>
-                  </span>
-                </div>
-              ) : (
-                null
-              )
-            )}
-          </div>
-        </div>
-      </div>
     </Loading>
   );
 };
