@@ -20,7 +20,7 @@ import Button from "@/components/ui/customButton";
 import { useGetUserCurrentSubscription } from "@/hooks/transactions";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@supabase/auth-helpers-react";
-import useCardViewsStore from "@/context/useViews";
+
 
 interface Props {
   post: Post;
@@ -59,20 +59,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
 
   const subscription_valid = expirydate > 0 && expirydate > now;
 
-  // console.log(subscription_valid, expirydate, now);
-
-  // views
-  const viewCount = useCardViewsStore(
-    (state) => state.cardViews[post._id] || 0
-  );
-  const incrementCardViewCount = useCardViewsStore(
-    (state) => state.incrementCardViewCount
-  );
-
-  useEffect(() => {
-    // console.log(`Incrementing view count for post ${post._id}`);
-    incrementCardViewCount(post._id);
-  }, [incrementCardViewCount, post._id]);
+ 
 
   return (
     <Loading loading={fetchingSubscription}>
@@ -164,7 +151,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
             <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
               <div className="flex gap-4">
                 <span>{post.commentNumber} comments</span>
-                <span>{viewCount} views</span>
+                {/* <span>{viewCount} views</span> */}
               </div>
               <div className="flex gap-2">
                 <HeartIcon />
