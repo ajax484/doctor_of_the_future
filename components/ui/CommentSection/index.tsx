@@ -17,7 +17,7 @@ import { useSessionContext } from "@supabase/auth-helpers-react";
 import Button from "../customButton";
 import { useState } from "react";
 import { toast } from "../use-toast";
-import { usePostComment } from "@/hooks/posts";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   _id: string;
@@ -47,6 +47,7 @@ const CommentFormSchema = z.object({
 type CommentFormValues = z.infer<typeof CommentFormSchema>;
 
 export default function CommentForm({ _id }: { _id: string }) {
+  const router = useRouter();
   const { session } = useSessionContext();
   const email = session?.user.email;
   // This can come from your database or API.
@@ -60,8 +61,33 @@ export default function CommentForm({ _id }: { _id: string }) {
     mode: "onChange",
   });
 
-  const { postComment, postCommentError, postCommentIsLoading } =
-    usePostComment();
+  function onSubmit(data: CommentFormValues) {
+    // console.log(data);
+    // console.log(data);
+    const commentData = {
+      ...data,
+      postId: _id, // Automatically associate the comment with the post
+    };
+
+    fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify(commentData),
+    })
+      .then(() => {
+        setSubmitted(true);
+        router.refresh();
+        toast({
+          title: "Comment Submitted",
+          description: "your comment will appear after approval by the team",
+        });
+      })
+      .catch((err) => {
+        toast({
+          description: "Sorry, couldnt post comment, try again",
+        });
+        setSubmitted(false);
+      });
+  }
 
   return (
     <Form {...form}>
@@ -70,7 +96,7 @@ export default function CommentForm({ _id }: { _id: string }) {
         onSubmit={form.handleSubmit(postComment)}
         className="space-y-8"
       >
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row my-5 gap-4">
           <FormField
             control={form.control}
             name="_id"
