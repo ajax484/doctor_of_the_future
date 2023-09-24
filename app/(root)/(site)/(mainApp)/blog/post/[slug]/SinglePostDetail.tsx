@@ -62,14 +62,17 @@ const SinglePostDetail = ({ post, comments }: Props) => {
   // console.log(subscription_valid, expirydate, now);
 
   // views
-  const viewCount = useCardViewsStore((state) => state.cardViews[post._id] || 0);
-  const incrementCardViewCount = useCardViewsStore((state) => state.incrementCardViewCount);
+  const viewCount = useCardViewsStore(
+    (state) => state.cardViews[post._id] || 0
+  );
+  const incrementCardViewCount = useCardViewsStore(
+    (state) => state.incrementCardViewCount
+  );
 
   useEffect(() => {
     // console.log(`Incrementing view count for post ${post._id}`);
     incrementCardViewCount(post._id);
   }, [incrementCardViewCount, post._id]);
-  
 
   return (
     <Loading loading={fetchingSubscription}>
@@ -110,44 +113,42 @@ const SinglePostDetail = ({ post, comments }: Props) => {
         </div>
         <p className="text-center text-slate-600">{post.description}...</p>
 
+        <div className={subscription_valid ? "h-max" : "h-20 overflow-hidden"}>
+          <PortableText
+            dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
+            projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"}
+            content={post.body}
+            serializers={{
+              h1: (props: any) => {
+                <h1
+                  className="text-3xl font-semibold py-5 text-slate-700"
+                  {...props}
+                />;
+              },
+              h2: (props: any) => {
+                <h2 className="text-2xl font-semibold py-5 " {...props} />;
+              },
+              h3: (props: any) => {
+                <h3
+                  className="text-2xl font-semibold my-5 text-slate-800"
+                  {...props}
+                />;
+              },
+              p: (props: any) => {
+                <p
+                  className="text-base leading-8 my-5 text-slate-700"
+                  {...props}
+                />;
+              },
+              link: ({ href, children }: any) => {
+                <a href={href} className="text-limeGreen hover:underline"></a>;
+              },
+            }}
+          />
+        </div>
+
         {subscription_valid ? (
           <>
-            <PortableText
-              dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
-              projectId={
-                process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"
-              }
-              content={post.body}
-              serializers={{
-                h1: (props: any) => {
-                  <h1
-                    className="text-3xl font-semibold py-5 text-slate-700"
-                    {...props}
-                  />;
-                },
-                h2: (props: any) => {
-                  <h2 className="text-2xl font-semibold py-5 " {...props} />;
-                },
-                h3: (props: any) => {
-                  <h3
-                    className="text-2xl font-semibold my-5 text-slate-800"
-                    {...props}
-                  />;
-                },
-                p: (props: any) => {
-                  <p
-                    className="text-base leading-8 my-5 text-slate-700"
-                    {...props}
-                  />;
-                },
-                link: ({ href, children }: any) => {
-                  <a
-                    href={href}
-                    className="text-limeGreen hover:underline"
-                  ></a>;
-                },
-              }}
-            />
             {post.categories && (
               <div className="flex gap-2 flex-wrap">
                 {post.categories.map((category) => (
@@ -209,7 +210,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
           </>
         ) : (
           // if not subscribed
-          <div className="p-12 flex flex-col items-center gap-8">
+          <div className="px-12 pb-12 flex flex-col items-center gap-8">
             <b>Want to read more?</b>
             <p>Subscribe to our blog to keep reading this exclusive post.</p>
 
