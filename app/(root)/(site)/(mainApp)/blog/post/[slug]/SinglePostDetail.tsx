@@ -20,7 +20,7 @@ import Button from "@/components/ui/customButton";
 import { useGetUserCurrentSubscription } from "@/hooks/transactions";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@supabase/auth-helpers-react";
-import useCardViewsStore from "@/context/useViews";
+
 
 interface Props {
   post: Post;
@@ -59,25 +59,12 @@ const SinglePostDetail = ({ post, comments }: Props) => {
 
   const subscription_valid = expirydate > 0 && expirydate > now;
 
-  // console.log(subscription_valid, expirydate, now);
-
-  // views
-  const viewCount = useCardViewsStore(
-    (state) => state.cardViews[post._id] || 0
-  );
-  const incrementCardViewCount = useCardViewsStore(
-    (state) => state.incrementCardViewCount
-  );
-
-  useEffect(() => {
-    // console.log(`Incrementing view count for post ${post._id}`);
-    incrementCardViewCount(post._id);
-  }, [incrementCardViewCount, post._id]);
+ 
 
   return (
     <Loading loading={fetchingSubscription}>
       <article className="border-[1px] md:mx-10 my-10 py-10 px-5 space-y-6">
-        <div className="flex justify-between">
+        <div className="flex items-center gap-x-2 justify-between">
           <div className="flex gap-2 items-center">
             <div className="rounded-full h-8 w-8 relative border-2 border-limeGreen">
               <Image
@@ -91,7 +78,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
                 objectPosition="center"
               />
             </div>
-            <span className="uppercase">{post.author.name}</span>
+            <span className="uppercase text-sm md:text-base">{post.author.name}</span>
           </div>
           <div className="flex gap-2">
             <span className="text-sm text-slate-700">
@@ -113,7 +100,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
         </div>
         <p className="text-center text-slate-600">{post.description}...</p>
 
-        <div className={subscription_valid ? "h-max" : "h-20 overflow-hidden"}>
+        <div className={subscription_valid ? "h-max mt-5 leading-9 text-justify" : "h-44 leading-9 text-justify mt-5 overflow-hidden"}>
           <PortableText
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"}
@@ -136,7 +123,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
               },
               p: (props: any) => {
                 <p
-                  className="text-base leading-8 my-5 text-slate-700"
+                  className="text-base  text-justify  leading-8 my-5 text-slate-700"
                   {...props}
                 />;
               },
@@ -164,7 +151,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
             <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
               <div className="flex gap-4">
                 <span>{post.commentNumber} comments</span>
-                <span>{viewCount} views</span>
+                {/* <span>{viewCount} views</span> */}
               </div>
               <div className="flex gap-2">
                 <HeartIcon />

@@ -40,7 +40,7 @@ const AuthModal = () => {
       {/* Full-screen container to center the panel */}
       <div className="fixed inset-0 flex items-center justify-center p-7">
         {/* The actual dialog panel  */}
-        <Dialog.Panel className="mx-auto p-4  w-[500px] rounded bg-white">
+        <Dialog.Panel className="mx-auto p-4 w-[500px] rounded bg-white">
           <Dialog.Title className="text-black text-center font-semibold capitalize">
             <div>
               <h1 className="mb-3">Hey There, Welcome</h1>
