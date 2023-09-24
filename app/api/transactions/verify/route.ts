@@ -22,7 +22,7 @@ export async function GET(req: NextApiRequest) {
     const paystackUrl = `https://api.paystack.co/transaction/verify/${reference}`;
     const paystackResponse = await axios.get(paystackUrl, {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_TEST_KEY}`, // Replace with your actual Paystack API secret key
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_LIVE_KEY}`, // Replace with your actual Paystack API secret key
       },
     });
 

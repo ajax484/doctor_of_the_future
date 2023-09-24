@@ -31,6 +31,11 @@ module.exports = {
         protocol: "https",
         hostname: "kvxotdwrwawhcmehobmj.supabase.co",
       },
+
+      {
+        protocol:"https",
+        hostname: 'platform-lookaside.fbsbx.com'
+      },
     ],
   },
 

@@ -25,7 +25,7 @@ export async function POST(req: NextApiRequest) {
         },
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_TEST_KEY}`, // Replace with your actual Paystack API secret key
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_LIVE_KEY}`, // Replace with your actual Paystack API secret key
             "Content-Type": "application/json",
           },
         }

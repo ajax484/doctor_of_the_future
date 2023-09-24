@@ -30,7 +30,7 @@ import {
             <DialogDescription className=" text-center">{description}</DialogDescription>
           </DialogHeader>
           {/* supabase ui login */}
-          <div>{children}</div>
+          <div className=" h-[450px]">{children}</div>
         </DialogContent>
       </Dialog>
     );
