@@ -17,6 +17,7 @@ import { useSessionContext } from "@supabase/auth-helpers-react";
 import Button from "../customButton";
 import { useState } from "react";
 import { toast } from "../use-toast";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   _id: string;
@@ -46,6 +47,7 @@ const CommentFormSchema = z.object({
 type CommentFormValues = z.infer<typeof CommentFormSchema>;
 
 export default function CommentForm({ _id }: { _id: string }) {
+  const router = useRouter();
   const { session } = useSessionContext();
   const [submitted, setSubmitted] = useState(false);
   const email = session?.user.email;
@@ -60,28 +62,21 @@ export default function CommentForm({ _id }: { _id: string }) {
     mode: "onChange",
   });
 
-  //   const { watch } = form;
-  //   const payment_method = watch("payment_method");
-
-  //   useEffect(() => {
-  //     const subscription = watch((value, { name, type }) => {
-  //       if (name !== "payment_method") return;
-  //       if (value.payment_method) {
-  //         changeMethod(value.payment_method);
-  //       }
-  //     });
-  //     return () => subscription.unsubscribe();
-  //   }, [watch]);
-
   function onSubmit(data: CommentFormValues) {
     // console.log(data);
     // console.log(data);
+    const commentData = {
+      ...data,
+      postId: _id, // Automatically associate the comment with the post
+    };
+
     fetch("/api/comments", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(commentData),
     })
       .then(() => {
         setSubmitted(true);
+        router.refresh();
         toast({
           title: "Comment Submitted",
           description: "your comment will appear after approval by the team",
@@ -102,7 +97,7 @@ export default function CommentForm({ _id }: { _id: string }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8"
       >
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row my-5 gap-4">
           <FormField
             control={form.control}
             name="_id"

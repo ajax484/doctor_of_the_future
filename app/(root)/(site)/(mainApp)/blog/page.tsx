@@ -56,7 +56,7 @@ const Blog = async () => {
                 <span className=" text-xs md:text-sm">
                   {post.comments} comments
                 </span>
-                <span className=" text-xs md:text-sm">{''} views</span>
+                {/* <span className=" text-xs md:text-sm">{''} views</span> */}
               </div>
               <div className="flex gap-2 items-center">
                 <HeartIcon className="h-5 w-5 text-red-500" />
