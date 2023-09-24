@@ -16,7 +16,7 @@ export default function Programs() {
           <div className="absolute w-full h-full z-20 flex flex-col justify-center md:justify-end items-center md:[align-items:unset] p-4 md:p-8 text-white gap-4">
             <h3 className="text-2xl md:text-3xl capitalize font-semibold">Knightup Challenge 2.0</h3>
             <p className="w-2/3 text-center lg:text-start text-sm md:text-base">
-              A 3-days bootcamp for people interested in loosing wight and optimizing their metabolic health
+              A 3-days bootcamp for people interested in loosing weight and optimizing their metabolic health
             </p>
 
             {/* redirects to plans and billing */}
