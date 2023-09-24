@@ -22,6 +22,7 @@ export default defineType({
     defineField({
       name: "comment",
       type: "text",
+      validation: rule=> rule.max(500),
     }),
     defineField({
         name: 'post',

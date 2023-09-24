@@ -1,17 +1,14 @@
 "use client";
 import { Post } from "@/typings/typings";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import PortableText from "react-portable-text";
-import { SubmitHandler } from "react-hook-form";
-
 import { urlForImage } from "@/sanity/lib/image";
 import { convertDateFormat } from "@/utils/helpers";
 import { HeartIcon } from "lucide-react";
 import CommentForm from "@/components/ui/CommentSection";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
-import { toast } from "@/components/ui/use-toast";
 import Loading from "@/components/ui/Loading";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/customButton";
@@ -37,7 +34,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
   // console.log(post);
   const user = useUser();
   const authmodal = useAuthModal();
-  const [submitted, setSubmitted] = useState(false);
+ 
   const {
     register,
     handleSubmit,
@@ -56,6 +53,24 @@ const SinglePostDetail = ({ post, comments }: Props) => {
   const subscription_valid = expirydate > 0 && expirydate > now;
 
   // console.log(subscription_valid, expirydate, now);
+
+  const [views, setViews] = useState(post.views || 0);
+
+  useEffect(() => {
+    // Increment the views count when the component mounts
+    fetch(`/api/comments/increment-views?postId=${post._id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the local state with the new views count
+        setViews(data.views);
+      })
+      .catch((error) => {
+        console.error('Error incrementing views:', error);
+      });
+  }, []);
+
+
+
 
   return (
     <Loading loading={fetchingSubscription}>
@@ -149,7 +164,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
             <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
               <div className="flex gap-4">
                 <span>{post.commentNumber} comments</span>
-                <span>{post.views} views</span>
+                <span>{views} views</span>
               </div>
               <div className="flex gap-2">
                 <HeartIcon />
@@ -177,7 +192,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
           </div>
         )}
       </article>
-      <div className="flex flex-col-reverse gap-y-20 w-full gap-x-20 px-10">
+      <div className="flex flex-col-reverse gap-y-20 w-full gap-x-20 md:px-10">
         <div className="w-full order-2 md:order-1">
           <h1 className="capitalize text-sm text-slate-700">comment section</h1>
           <p>leave a comment below and join the discussion</p>
@@ -192,13 +207,14 @@ const SinglePostDetail = ({ post, comments }: Props) => {
             {comments?.map((comment) =>
               comment.post && comment.post._ref === post._id ? (
                 <div className="flex flex-col gap-y-4 p-4" key={comment._id}>
-                  <span>
-                    <p>{comment.name}</p>
-                    <p>{comment.comment}</p>
+                  <span className=" flex flex-col md:flex-row items-start md:items-center gap-x-10 gap-y-5 justify-between py-5 border-b">
+                    <p className=" capitalize font-semibold text-lg ">{comment.name}</p>
+                  
+                    <p className=" italic text-sm text-neutral-600 max-w-3xl">{comment.comment}</p>
                   </span>
                 </div>
               ) : (
-                <p className="p-4">no comments</p>
+                null
               )
             )}
           </div>

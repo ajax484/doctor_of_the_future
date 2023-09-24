@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const Blog = async () => {
   const posts = await getPosts();
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <div className="mt-5 mb-14 py-8">
@@ -56,7 +56,7 @@ const Blog = async () => {
                 <span className=" text-xs md:text-sm">
                   {post.comments} comments
                 </span>
-                <span className=" text-xs md:text-sm">{''} views</span>
+                {/* <span className=" text-xs md:text-sm">{''} views</span> */}
               </div>
               <div className="flex gap-2 items-center">
                 <HeartIcon className="h-5 w-5 text-red-500" />

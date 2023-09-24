@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import SpecificResult from "./SpecificResult";
+import Confetti from "@/components/ui/confetti";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -109,6 +110,8 @@ const Page = () => {
         </div>
         <SpecificResult prdtType={prdtType} transaction={transaction} />
       </div>
+
+      <Confetti />
     </Loading>
   );
 };
