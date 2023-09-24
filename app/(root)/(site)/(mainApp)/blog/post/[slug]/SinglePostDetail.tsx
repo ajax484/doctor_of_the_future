@@ -64,7 +64,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
   return (
     <Loading loading={fetchingSubscription}>
       <article className="border-[1px] md:mx-10 my-10 py-10 px-5 space-y-6">
-        <div className="flex justify-between">
+        <div className="flex items-center gap-x-2 justify-between">
           <div className="flex gap-2 items-center">
             <div className="rounded-full h-8 w-8 relative border-2 border-limeGreen">
               <Image
@@ -78,7 +78,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
                 objectPosition="center"
               />
             </div>
-            <span className="uppercase">{post.author.name}</span>
+            <span className="uppercase text-sm md:text-base">{post.author.name}</span>
           </div>
           <div className="flex gap-2">
             <span className="text-sm text-slate-700">
@@ -100,7 +100,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
         </div>
         <p className="text-center text-slate-600">{post.description}...</p>
 
-        <div className={subscription_valid ? "h-max" : "h-20 overflow-hidden"}>
+        <div className={subscription_valid ? "h-max" : "h-32 overflow-hidden"}>
           <PortableText
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"}
@@ -123,7 +123,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
               },
               p: (props: any) => {
                 <p
-                  className="text-base leading-8 my-5 text-slate-700"
+                  className="text-base  text-justify  leading-8 my-5 text-slate-700"
                   {...props}
                 />;
               },
