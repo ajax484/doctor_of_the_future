@@ -20,7 +20,7 @@ import Button from "@/components/ui/customButton";
 import { useGetUserCurrentSubscription } from "@/hooks/transactions";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@supabase/auth-helpers-react";
-import BlockContent from "react-portable-text";
+import useCardViewsStore from "@/context/useViews";
 
 interface Props {
   post: Post;
@@ -61,20 +61,15 @@ const SinglePostDetail = ({ post, comments }: Props) => {
 
   // console.log(subscription_valid, expirydate, now);
 
-  const [views, setViews] = useState(post.views || 0);
+  // views
+  const viewCount = useCardViewsStore((state) => state.cardViews[post._id] || 0);
+  const incrementCardViewCount = useCardViewsStore((state) => state.incrementCardViewCount);
 
   useEffect(() => {
-    // Increment the views count when the component mounts
-    fetch(`/api/comments/increment-views?postId=${post._id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the local state with the new views count
-        setViews(data.views);
-      })
-      .catch((error) => {
-        console.error("Error incrementing views:", error);
-      });
-  }, []);
+    // console.log(`Incrementing view count for post ${post._id}`);
+    incrementCardViewCount(post._id);
+  }, [incrementCardViewCount, post._id]);
+  
 
   return (
     <Loading loading={fetchingSubscription}>
@@ -168,7 +163,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
             <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
               <div className="flex gap-4">
                 <span>{post.commentNumber} comments</span>
-                <span>{views} views</span>
+                <span>{viewCount} views</span>
               </div>
               <div className="flex gap-2">
                 <HeartIcon />

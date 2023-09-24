@@ -1,11 +1,19 @@
+"use client"
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlForImage } from "@/sanity/lib/image";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import { HeartIcon } from "lucide-react";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import useCardViewsStore from '@/context/useViews';
+
 
 const BlogCard = ({post}) => {
+ 
+  
+
+  
+
   return (
     <div key={post.id} className="mb-14 border">
     <Link href={`/blog/post/${post.slug.current}`}>
@@ -34,7 +42,7 @@ const BlogCard = ({post}) => {
               <span className=" text-xs md:text-sm">
                 {post.comments} comments
               </span>
-              {/* <span className=" text-xs md:text-sm">{''} views</span> */}
+              {/* <span className=" text-xs md:text-sm">{viewCount} views</span> */}
             </div>
             <div className="flex gap-2 items-center">
               <HeartIcon className="h-5 w-5 text-red-500" />
