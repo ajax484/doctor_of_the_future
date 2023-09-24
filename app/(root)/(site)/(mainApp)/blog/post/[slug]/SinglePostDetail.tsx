@@ -100,7 +100,7 @@ const SinglePostDetail = ({ post, comments }: Props) => {
         </div>
         <p className="text-center text-slate-600">{post.description}...</p>
 
-        <div className={subscription_valid ? "h-max" : "h-32 overflow-hidden"}>
+        <div className={subscription_valid ? "h-max mt-5 leading-9 text-justify" : "h-44 leading-9 text-justify mt-5 overflow-hidden"}>
           <PortableText
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"}
