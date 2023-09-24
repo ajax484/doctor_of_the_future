@@ -1,4 +1,5 @@
 "use client";
+
 import { Post } from "@/typings/typings";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";

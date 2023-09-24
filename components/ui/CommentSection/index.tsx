@@ -50,6 +50,8 @@ export default function CommentForm({ _id }: { _id: string }) {
   const router = useRouter();
   const { session } = useSessionContext();
   const email = session?.user.email;
+  const [submitted, setSubmitted] = useState(false);
+
   // This can come from your database or API.
   const defaultValues: Partial<CommentFormValues> = {
     _id,
@@ -93,7 +95,7 @@ export default function CommentForm({ _id }: { _id: string }) {
     <Form {...form}>
       <form
         id="comment-form"
-        onSubmit={form.handleSubmit(postComment)}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8"
       >
         <div className="flex flex-col md:flex-row my-5 gap-4">
@@ -106,10 +108,6 @@ export default function CommentForm({ _id }: { _id: string }) {
                 <FormControl>
                   <Input placeholder="enter name" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                This is your public display name. It can be your real name or a
-                pseudonym. You can only change this once every 30 days.
-              </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -123,10 +121,6 @@ export default function CommentForm({ _id }: { _id: string }) {
                 <FormControl>
                   <Input placeholder="enter name" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                This is your public display name. It can be your real name or a
-                pseudonym. You can only change this once every 30 days.
-              </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -162,12 +156,7 @@ export default function CommentForm({ _id }: { _id: string }) {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          intent="primary"
-          label="Submit Comment"
-          isLoading={postCommentIsLoading}
-        />
+        <Button type="submit" intent="primary" label="Submit Comment" />
       </form>
     </Form>
   );
