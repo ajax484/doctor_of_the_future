@@ -4,6 +4,7 @@ export interface CommonProps {
   price: number;
   description: string;
   id: string;
+  bg_colors: string
 }
 
 export interface PlanProps extends CommonProps {
@@ -22,4 +23,5 @@ export interface SubscriptionProps {
   id: string;
   duration: string;
   price: number;
+
 }
