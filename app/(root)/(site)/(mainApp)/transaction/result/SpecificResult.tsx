@@ -1,5 +1,6 @@
 "use client";
 import Loading from "@/components/ui/Loading";
+import { useCart } from "@/context/CartContext";
 import { useGetItemLinks } from "@/hooks/shop";
 import {
   bookingTransaction,
@@ -7,7 +8,7 @@ import {
   shopTransaction,
 } from "@/types/transactions";
 import { DownloadIcon } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 
 const SpecificResult = ({
   prdtType,
@@ -17,7 +18,6 @@ const SpecificResult = ({
   transaction: shopTransaction | bookingTransaction | planTransaction;
 }) => {
   if (prdtType === "bookings" || prdtType === "plans") {
-    
     return (
       <div className=" flex flex-col gap-y-4 items-center gap-x-4">
         Send a message on whatsapp:{" "}
@@ -34,6 +34,12 @@ export default SpecificResult;
 // for shop items
 const BookLinks = ({ ids }: { ids: string }) => {
   const { links, fetchingLinks } = useGetItemLinks({ ids });
+  const { resetCart } = useCart();
+
+  useEffect(() => {
+    resetCart();
+  }, []);
+
   // console.log(links);
 
   return (
