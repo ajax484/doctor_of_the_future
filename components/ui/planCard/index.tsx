@@ -20,13 +20,13 @@ const PlanCard: React.FC<PlanProps> = ({
     <div
       className={`py-4 px-2 border-[1px] border-gray-200 shadow-md text-center h-full flex flex-col justify-between gap-4 my-4 relative`}
     >
-      {tag && (
+      {/* {tag && (
          <div className="absolute bg-red-600 p-1 w-60  md:w-44 h-10 left-16 md:left-20 lg:w-32 lg:left-16 -top-6 md:-top-8 flex items-center justify-center z-20">
          <span className="text-white capitalize font-semibold">
            {tag}
          </span>
        </div>
-      )}
+      )} */}
       <div className="space-y-4">
         <h1 className="text-xl font-bold text-slate-900">{name}</h1>
         <div className="space-y-2 text-slate-500">
