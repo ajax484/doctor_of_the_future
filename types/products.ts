@@ -5,6 +5,7 @@ export interface CommonProps {
   description: string;
   id: string;
   bg_colors: string
+  tag: string
 }
 
 export interface PlanProps extends CommonProps {
