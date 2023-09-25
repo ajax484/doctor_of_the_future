@@ -38,16 +38,18 @@ export default function CartScreen() {
             </p>
           )}
         </div>
-        {cart.length > 0 && (
-          <Button
-            label="Go To Cart"
-            intent="primary"
-            onClick={() => {
-              router.push("/cart-page");
-              hideCart();
-            }}
-          />
-        )}
+        <div className=" h-20 md:h-14">
+          {cart.length > 0 && (
+            <Button
+              label="Go To Cart"
+              intent="primary"
+              onClick={() => {
+                router.push("/cart-page");
+                hideCart();
+              }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
