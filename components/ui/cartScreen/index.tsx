@@ -21,7 +21,7 @@ export default function CartScreen() {
         <button onClick={hideCart}>
           <IoClose className="ml-auto text-black text-2xl hover:font-light" />
         </button>
-        <div className="h-[601px] md:h-full py-4 flex flex-col gap-8 overflow-auto">
+        <div className="h-[500px] md:h-full py-4 flex flex-col gap-8 overflow-auto">
           {cart.length > 0 ? (
             cart.map((cartItem) => (
               <CartCard
