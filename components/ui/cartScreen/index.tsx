@@ -17,7 +17,7 @@ export default function CartScreen() {
         cartVisible ? "" : "hidden"
       }`}
     >
-      <div className="h-full bg-white w-full md:w-1/2 lg:w-1/3 ml-auto pt-8 pb-4 flex flex-col px-4">
+      <div className="h-screen bg-white w-full md:w-1/2 lg:w-1/3 ml-auto pt-8 pb-4 flex flex-col px-4">
         <button onClick={hideCart}>
           <IoClose className="ml-auto text-black text-2xl hover:font-light" />
         </button>
@@ -39,14 +39,16 @@ export default function CartScreen() {
           )}
         </div>
         {cart.length > 0 && (
-          <Button
-            label="Go To Cart"
-            intent="primary"
-            onClick={() => {
-              router.push("/cart-page");
-              hideCart();
-            }}
-          />
+          <div className="flex-[10%]">
+            <Button
+              label="Go To Cart"
+              intent="primary"
+              onClick={() => {
+                router.push("/cart-page");
+                hideCart();
+              }}
+            />
+          </div>
         )}
       </div>
     </div>
