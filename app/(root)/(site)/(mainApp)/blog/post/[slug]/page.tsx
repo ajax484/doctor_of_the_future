@@ -15,11 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-
-
-
-
-interface BlogProps {
+export interface BlogProps {
   params: {
     slug: string;
   };
@@ -28,8 +24,7 @@ interface BlogProps {
 const BlogDetails = async ({ params }: BlogProps) => {
   // const query = groq`*[_type == "post" && slug.current == '${params.slug}'][0]{title, "name": author->name}`;
   // get comments
-  const querycomments = groq`*[_type == "comment"]`
-
+  const querycomments = groq`*[_type == "comment"]`;
 
   const query = groq`*[_type == "post" && slug.current == '${params.slug}'][0]{
     _id,
@@ -64,11 +59,11 @@ const BlogDetails = async ({ params }: BlogProps) => {
   // console.log(post);
 
   const comments = await client.fetch(querycomments);
-  console.log(comments)
+  console.log(comments);
 
-  
-
-  return <SinglePostDetail post={post} comments={comments} />;
+  return (
+    <SinglePostDetail slug={params.slug} post={post} comments={comments} />
+  );
 };
 
 export default BlogDetails;

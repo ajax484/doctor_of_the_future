@@ -1,6 +1,8 @@
 import { toast } from "@/components/ui/use-toast";
 import { client } from "@/sanity/lib/client";
+import { getRequest, postRequest } from "@/utils/api";
 import groq from "groq";
+import { useMutation, useQuery } from "react-query";
 
 export const getPosts = async () => {
   const queryPosts = groq`*[_type == "post" && publishedAt < now()] | order(publishedAt asc){
@@ -90,4 +92,157 @@ export const getCategoriesLists = async ({ params }) => {
 
   const categoryList = await client.fetch(query);
   return categoryList;
+};
+
+export const useGetPostLike = ({ slug }: { slug: string }) => {
+  const {
+    data: postLike,
+    isFetching: fetchingPostLike,
+    error: fetchingPostLikeError,
+    refetch: refetchPostLike,
+  } = useQuery({
+    queryKey: ["get postlikes data", slug],
+    queryFn: async () => {
+      const { data } = await getRequest({
+        endpoint: `/api/blog/postActions/${slug}/likes`,
+      });
+      console.log(data);
+
+      return data.data;
+    },
+    onError: (error) => {
+      alert(error);
+    },
+    staleTime: 1000,
+  });
+
+  return {
+    postLike: postLike || { data: [], count: 0 },
+    fetchingPostLike,
+    fetchingPostLikeError,
+    refetchPostLike,
+  };
+};
+
+export const UseToggleLikes = ({
+  slug,
+  refetchPostLike,
+}: {
+  slug: string;
+  refetchPostLike: () => {};
+}) => {
+  const {
+    mutate: toggleLikes,
+    isLoading: performingToggleLikes,
+    error: toggleLikesError,
+  } = useMutation({
+    mutationFn: async ({ is_liked }: { is_liked: boolean }) => {
+      console.log(is_liked, slug);
+      const { data } = await postRequest({
+        endpoint: `/api/blog/postActions/${slug}/likes`,
+        payload: { is_liked },
+      });
+      console.log(data);
+
+      if (data?.status !== 200) {
+        throw data?.error;
+      }
+      return data;
+    },
+    onSuccess: (values) => {
+      console.log(values.data, "returned like");
+      const { is_liked } = values.data;
+      toast({
+        title: !is_liked ? "Post Liked" : "Post Unliked",
+      });
+      refetchPostLike();
+    },
+    onError: (error) => {
+      console.log(error);
+
+      toast({
+        title: "An error has occurred",
+      });
+    },
+  });
+
+  return {
+    performingToggleLikes,
+    toggleLikesError,
+    toggleLikes,
+  };
+};
+
+export const useGetPostViews = ({ slug }: { slug: string }) => {
+  const {
+    data: postViews,
+    isFetching: fetchingPostViews,
+    error: fetchingPostViewsError,
+    refetch: refetchPostViews,
+  } = useQuery({
+    queryKey: ["get postviews data", slug],
+    queryFn: async () => {
+      const { data } = await getRequest({
+        endpoint: `/api/blog/postActions/${slug}/views`,
+      });
+      console.log(data);
+
+      return data.data;
+    },
+    onError: (error) => {
+      alert(error);
+    },
+    staleTime: 1000,
+  });
+
+  return {
+    postViews: postViews || { data: [], count: 0 },
+    fetchingPostViews,
+    fetchingPostViewsError,
+    refetchPostViews,
+  };
+};
+
+export const UseAddViews = ({
+  slug,
+  refetchPostViews,
+}: {
+  slug: string;
+  refetchPostViews: () => {};
+}) => {
+  const {
+    mutate: addViews,
+    isLoading: performingAddViews,
+    error: addViewsError,
+  } = useMutation({
+    mutationFn: async () => {
+      console.log(slug);
+      const { data } = await postRequest({
+        endpoint: `/api/blog/postActions/${slug}/views`,
+        payload: {},
+      });
+      console.log(data);
+
+      if (data?.status !== 200) {
+        throw data?.error;
+      }
+      return data;
+    },
+    onSuccess: (values) => {
+      refetchPostViews();
+    },
+    onError: (error) => {
+      console.log(error);
+
+      toast({
+        title: "An error has occurred",
+      });
+    },
+  });
+
+  return {
+    performingAddViews,
+    addViewsError,
+    addViews,
+  };
 };

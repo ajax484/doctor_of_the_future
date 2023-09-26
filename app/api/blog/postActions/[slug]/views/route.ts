@@ -7,8 +7,6 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   const slug = params.slug;
-  console.log(slug);
-
   const supabase = createRouteHandlerClient({ cookies });
 
   const { data } = await supabase.auth.getSession();
@@ -17,7 +15,7 @@ export async function GET(
 
   try {
     let { data, error, status, count } = await supabase
-      .from(`post_likes`)
+      .from(`post_views`)
       .select("*", { count: "exact" })
       .eq("slug", slug);
 
@@ -39,8 +37,7 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   const slug = params.slug;
-  const { is_liked } = await request.json();
-  console.log(is_liked, slug);
+  console.log(slug);
 
   const supabase = createRouteHandlerClient({ cookies });
 
@@ -49,21 +46,10 @@ export async function POST(
   const user_id = data.session?.user.id;
 
   try {
-    let query;
-    if (is_liked) {
-      query = await supabase
-        .from(`post_likes`)
-        .delete()
-        .eq("slug", slug)
-        .eq("user_id", user_id);
-    } else {
-      query = await supabase
-        .from(`post_likes`)
-        .insert({ slug, user_id })
-        .select();
-    }
-
-    const { data, error, status } = query;
+    const { data, error, status } = await supabase
+      .from(`post_views`)
+      .upsert({ slug, user_id })
+      .select();
 
     console.log(data, error);
 
@@ -71,7 +57,7 @@ export async function POST(
       throw error;
     }
 
-    return NextResponse.json({ data: { is_liked }, status: 200 });
+    return NextResponse.json({ status: 200 });
   } catch (error) {
     // Handle the error here if needed
     console.log(error);

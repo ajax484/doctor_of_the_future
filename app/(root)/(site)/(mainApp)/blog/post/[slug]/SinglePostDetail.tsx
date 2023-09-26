@@ -1,5 +1,4 @@
 "use client";
-
 import { Post } from "@/typings/typings";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -11,7 +10,7 @@ import {
   formatDate,
   formatDateToHumanReadable,
 } from "@/utils/helpers";
-import { HeartIcon } from "lucide-react";
+import { HeartIcon, Loader2Icon } from "lucide-react";
 import CommentForm from "@/components/ui/CommentSection";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import Loading from "@/components/ui/Loading";
@@ -20,11 +19,17 @@ import Button from "@/components/ui/customButton";
 import { useGetUserCurrentSubscription } from "@/hooks/transactions";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@supabase/auth-helpers-react";
-
+import {
+  UseAddViews,
+  UseToggleLikes,
+  useGetPostLike,
+  useGetPostViews,
+} from "@/hooks/posts";
 
 interface Props {
   post: Post;
   comments: IComments[];
+  slug: string;
 }
 interface CommentI {
   comments: "";
@@ -37,10 +42,34 @@ type IComments = {
   comment: CommentI;
 };
 
-const SinglePostDetail = ({ post, comments }: Props) => {
+const SinglePostDetail = ({ post, comments, slug }: Props) => {
   // console.log(comments);
   const user = useUser();
   const authmodal = useAuthModal();
+  const { postLike, fetchingPostLike, fetchingPostLikeError, refetchPostLike } =
+    useGetPostLike({
+      slug,
+    });
+  const { toggleLikes, performingToggleLikes, toggleLikesError } =
+    UseToggleLikes({ slug, refetchPostLike });
+
+  const {
+    postViews,
+    fetchingPostViews,
+    fetchingPostViewsError,
+    refetchPostViews,
+  } = useGetPostViews({ slug });
+  const { addViews, performingAddViews, addViewsError } = UseAddViews({
+    slug,
+    refetchPostViews,
+  });
+
+  useEffect(() => {
+    if (!!postViews?.data?.find((like) => like.user_id === user?.id) || fetchingPostViews) return;
+    addViews();
+  }, [postViews]);
+
+  console.log(postLike);
 
   const {
     register,
@@ -59,7 +88,15 @@ const SinglePostDetail = ({ post, comments }: Props) => {
 
   const subscription_valid = expirydate > 0 && expirydate > now;
 
- 
+  const performToggleLike = () => {
+    console.log(postLike?.data?.find((like) => like.user_id === user?.id));
+
+    const is_liked = !!postLike?.data?.find(
+      (like) => like.user_id === user?.id
+    );
+
+    toggleLikes({ is_liked });
+  };
 
   return (
     <Loading loading={fetchingSubscription}>
@@ -78,7 +115,9 @@ const SinglePostDetail = ({ post, comments }: Props) => {
                 objectPosition="center"
               />
             </div>
-            <span className="uppercase text-sm md:text-base">{post.author.name}</span>
+            <span className="uppercase text-sm md:text-base">
+              {post.author.name}
+            </span>
           </div>
           <div className="flex gap-2">
             <span className="text-sm text-slate-700">
@@ -100,7 +139,13 @@ const SinglePostDetail = ({ post, comments }: Props) => {
         </div>
         <p className="text-center text-slate-600">{post.description}...</p>
 
-        <div className={subscription_valid ? "h-max mt-5 leading-9 text-justify" : "h-44 leading-9 text-justify mt-5 overflow-hidden"}>
+        <div
+          className={
+            subscription_valid
+              ? "h-max mt-5 leading-9 text-justify"
+              : "h-44 leading-9 text-justify mt-5 overflow-hidden"
+          }
+        >
           <PortableText
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET || "production"}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "cze1d23v"}
@@ -148,16 +193,37 @@ const SinglePostDetail = ({ post, comments }: Props) => {
                 ))}
               </div>
             )}
-            <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
-              <div className="flex gap-4">
-                <span>{post.commentNumber} comments</span>
-                {/* <span>{viewCount} views</span> */}
+            <Loading
+              loading={
+                fetchingPostLike || fetchingPostViews || performingAddViews
+              }
+              error={!!(fetchingPostLikeError || fetchingPostViewsError)}
+            >
+              <div className="border-t-[1px] flex justify-between pt-2 text-slate-600 text-sm">
+                <div className="flex gap-4">
+                  <span>{post.commentNumber} comments</span>
+                  <span>{postViews.count} views</span>
+                </div>
+                <button className="flex gap-2" onClick={performToggleLike}>
+                  {performingToggleLikes ? (
+                    <Loader2Icon className="animate-spin" />
+                  ) : (
+                    <span
+                      className={
+                        postLike?.data?.find(
+                          (like) => like.user_id === user?.id
+                        )
+                          ? "text-pink-700"
+                          : ""
+                      }
+                    >
+                      <HeartIcon />
+                    </span>
+                  )}
+                  <span>{postLike.count || 0}</span>
+                </button>
               </div>
-              <div className="flex gap-2">
-                <HeartIcon />
-                <span>{post.likes}</span>
-              </div>
-            </div>
+            </Loading>
 
             <div className="flex flex-col-reverse gap-y-20 w-full gap-x-20 md:px-10">
               <div className="w-full order-2 md:order-1">
