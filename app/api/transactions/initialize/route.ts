@@ -14,7 +14,7 @@ export async function POST(req: NextApiRequest) {
         : "http://localhost:3000"; // Development URL
 
     try {
-      console.log(params);
+      // console.log(params);
 
       const paystackResponse = await axios.post(
         paystackUrl,
