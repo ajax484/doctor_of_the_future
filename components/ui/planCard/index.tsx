@@ -44,7 +44,7 @@ const PlanCard: React.FC<PlanProps> = ({
               className="flex justify-start items-center gap-0.5"
             >
               <IoCaretForwardOutline className=" text-black" />
-              <span className="first-letter:uppercase text-black">
+              <span className="first-letter:uppercase text-start text-base text-black">
                 {benefit}
               </span>
             </li>
