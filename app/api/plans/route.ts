@@ -8,7 +8,7 @@ export async function GET(): Promise<NextResponse> {
   const supabase = createRouteHandlerClient({ cookies });
 
   try {
-    let { data, error, status } = await supabase.from("plans").select("*");
+    let { data, error, status } = await supabase.from("plans").select("*").order("name", { ascending: true });
 
     // console.log(data);
 
