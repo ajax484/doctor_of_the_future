@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   const slug = params.slug;
-  console.log(slug);
+  // console.log(slug);
 
   const supabase = createRouteHandlerClient({ cookies });
 
@@ -21,7 +21,7 @@ export async function GET(
       .select("*", { count: "exact" })
       .eq("slug", slug);
 
-    console.log(data, error);
+    // console.log(data, error);
 
     if (error && status !== 200) {
       throw error;
@@ -40,7 +40,7 @@ export async function POST(
 ) {
   const slug = params.slug;
   const { is_liked } = await request.json();
-  console.log(is_liked, slug);
+  // console.log(is_liked, slug);
 
   const supabase = createRouteHandlerClient({ cookies });
 
@@ -65,7 +65,7 @@ export async function POST(
 
     const { data, error, status } = query;
 
-    console.log(data, error);
+    // console.log(data, error);.
 
     if (error) {
       throw error;

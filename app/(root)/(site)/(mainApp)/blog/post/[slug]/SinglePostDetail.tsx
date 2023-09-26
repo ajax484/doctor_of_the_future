@@ -25,6 +25,7 @@ import {
   useGetPostLike,
   useGetPostViews,
 } from "@/hooks/posts";
+import { IoHeart } from "react-icons/io5";
 
 interface Props {
   post: Post;
@@ -69,7 +70,7 @@ const SinglePostDetail = ({ post, comments, slug }: Props) => {
     addViews();
   }, [postViews]);
 
-  console.log(postLike);
+  // console.log(postLike);
 
   const {
     register,
@@ -209,16 +210,18 @@ const SinglePostDetail = ({ post, comments, slug }: Props) => {
                     <Loader2Icon className="animate-spin" />
                   ) : (
                     <span
-                      className={
-                        postLike?.data?.find(
-                          (like) => like.user_id === user?.id
-                        )
-                          ? "text-pink-700"
-                          : ""
-                      }
-                    >
-                      <HeartIcon />
+                    className={
+                      postLike?.data?.find(
+                        (like) => like.user_id === user?.id
+                      )
+                        ? "text-pink-700  flex items-center gap-x-2"
+                        : ""
+                    }
+                  >
+                    <span className=" text-2xl">
+                      <IoHeart />
                     </span>
+                  </span>
                   )}
                   <span>{postLike.count || 0}</span>
                 </button>

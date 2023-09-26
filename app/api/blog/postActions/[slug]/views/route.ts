@@ -19,7 +19,7 @@ export async function GET(
       .select("*", { count: "exact" })
       .eq("slug", slug);
 
-    console.log(data, error);
+    // console.log(data, error);
 
     if (error && status !== 200) {
       throw error;
@@ -37,7 +37,7 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   const slug = params.slug;
-  console.log(slug);
+  // console.log(slug);
 
   const supabase = createRouteHandlerClient({ cookies });
 
@@ -51,7 +51,7 @@ export async function POST(
       .upsert({ slug, user_id })
       .select();
 
-    console.log(data, error);
+    // console.log(data, error);
 
     if (error) {
       throw error;
@@ -60,7 +60,7 @@ export async function POST(
     return NextResponse.json({ status: 200 });
   } catch (error) {
     // Handle the error here if needed
-    console.log(error);
+    // console.log(error);
 
     return NextResponse.json({ error, status: 500 });
   }

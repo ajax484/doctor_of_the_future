@@ -33,13 +33,13 @@ export const getPosts = async () => {
 };
 
 export const useGetPost = ({ slug }: { slug: string }) => {
-  console.log(slug);
+  // console.log(slug);
   const {
     data: post,
     isFetching: postIsFetching,
     error: postError,
   } = useQuery(["post", slug], async () => {
-    console.log(slug);
+    // console.log(slug);
     const query = groq`*[_type == "post" && slug.current == '${slug}'][0]{
         _id,
         title,
@@ -70,7 +70,7 @@ export const useGetPost = ({ slug }: { slug: string }) => {
       }  
       `;
     const post = await client.fetch(query);
-    console.log(post);
+    // console.log(post);
     return post;
   });
 
@@ -106,7 +106,7 @@ export const useGetPostLike = ({ slug }: { slug: string }) => {
       const { data } = await getRequest({
         endpoint: `/api/blog/postActions/${slug}/likes`,
       });
-      console.log(data);
+      // console.log(data);
 
       return data.data;
     },
@@ -137,12 +137,12 @@ export const UseToggleLikes = ({
     error: toggleLikesError,
   } = useMutation({
     mutationFn: async ({ is_liked }: { is_liked: boolean }) => {
-      console.log(is_liked, slug);
+      // console.log(is_liked, slug);
       const { data } = await postRequest({
         endpoint: `/api/blog/postActions/${slug}/likes`,
         payload: { is_liked },
       });
-      console.log(data);
+      // console.log(data);
 
       if (data?.status !== 200) {
         throw data?.error;
@@ -150,7 +150,7 @@ export const UseToggleLikes = ({
       return data;
     },
     onSuccess: (values) => {
-      console.log(values.data, "returned like");
+      // console.log(values.data, "returned like");
       const { is_liked } = values.data;
       toast({
         title: !is_liked ? "Post Liked" : "Post Unliked",
@@ -158,11 +158,11 @@ export const UseToggleLikes = ({
       refetchPostLike();
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
 
-      toast({
-        title: "An error has occurred",
-      });
+      // toast({
+      //   title: "An error has occurred",
+      // });
     },
   });
 
@@ -185,7 +185,7 @@ export const useGetPostViews = ({ slug }: { slug: string }) => {
       const { data } = await getRequest({
         endpoint: `/api/blog/postActions/${slug}/views`,
       });
-      console.log(data);
+      // console.log(data);
 
       return data.data;
     },
@@ -216,12 +216,12 @@ export const UseAddViews = ({
     error: addViewsError,
   } = useMutation({
     mutationFn: async () => {
-      console.log(slug);
+      // console.log(slug);
       const { data } = await postRequest({
         endpoint: `/api/blog/postActions/${slug}/views`,
         payload: {},
       });
-      console.log(data);
+      // console.log(data);
 
       if (data?.status !== 200) {
         throw data?.error;
@@ -232,11 +232,11 @@ export const UseAddViews = ({
       refetchPostViews();
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
 
-      toast({
-        title: "An error has occurred",
-      });
+      // toast({
+      //   title: "An error has occurred",
+      // });
     },
   });
 

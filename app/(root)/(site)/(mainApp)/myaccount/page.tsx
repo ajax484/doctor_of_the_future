@@ -12,7 +12,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 
 const MyAccount = () => {
   const user = useUser();
-  console.log(user);
+  // console.log(user);
   return (
     <div className="mt-12">
       <div className=" relative">
