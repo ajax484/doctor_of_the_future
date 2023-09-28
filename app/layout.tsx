@@ -41,11 +41,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "codingossy",
-      url: "https://ossy.vercel.app",
+      name: "Gideon Bassey",
+      url: "https://mydoctorofthefuture.com",
     },
   ],
-  creator: "codingossy",
+  creator: "Gideon Bassey",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
