@@ -55,7 +55,7 @@ const BlogCard = ({ post, slug }) => {
               objectPosition="center"
             />
           </div>
-          <div className="w-1/2 px-4 md:px-8 p-2 flex flex-col justify-between">
+          <div className="w-1/2 px-4 md:px-8 p-2 flex flex-col justify-between hover:cursor-pointer hover:bg-gray-200 transition duration-200">
             <div>
               <h1 className="uppercase text-base md:text-2xl lg:text-3xl font-semibold">
                 {post.title}
