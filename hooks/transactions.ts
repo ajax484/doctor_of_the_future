@@ -22,10 +22,10 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
       isLoading: performingTransaction,
       error: TransactionError,
     } = useMutation({
-      mutationFn: async ({ payload }) => {
+      mutationFn: async ({ payload, paymentPlatform }) => {
         // console.log(payload);
         const { data } = await postRequest({
-          endpoint: "/api/transactions/initialize",
+          endpoint: `/api/transactions/initialize/${paymentPlatform}`,
           payload,
         });
         // console.log(data);
@@ -99,7 +99,6 @@ export const useGetUserTransactions: IuseGetUserTransactions = ({
     },
     onError: (error) => {
       // console.log(error);
-
       // alert(error.message);
     },
   });
@@ -135,7 +134,6 @@ export const useGetUserTransaction: IuseGetUserTransaction = ({
     },
     onError: (error) => {
       // console.log(error);
-
       // alert(error.message);
     },
   });
@@ -180,7 +178,6 @@ export const useGetUserCurrentSubscription =
       {
         onError: (error) => {
           // console.log(error);
-
           // alert(error.message);
         },
       }
@@ -192,4 +189,3 @@ export const useGetUserCurrentSubscription =
       fetchingSubscriptionError,
     };
   };
-

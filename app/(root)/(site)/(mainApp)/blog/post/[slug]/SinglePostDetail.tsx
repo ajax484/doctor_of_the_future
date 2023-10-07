@@ -7,8 +7,6 @@ import PortableText from "react-portable-text";
 import { urlForImage } from "@/sanity/lib/image";
 import {
   convertDateFormat,
-  formatDate,
-  formatDateToHumanReadable,
 } from "@/utils/helpers";
 import { HeartIcon, Loader2Icon } from "lucide-react";
 import CommentForm from "@/components/ui/CommentSection";

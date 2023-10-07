@@ -21,7 +21,7 @@ export async function POST(req: NextApiRequest) {
         {
           ...params,
           amount: params.amount * 100,
-          callback_url: `${baseURL}/api/transactions/verify`,
+          callback_url: `${baseURL}/api/transactions/verify/paystack`,
         },
         {
           headers: {
