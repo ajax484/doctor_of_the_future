@@ -22,10 +22,10 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
       isLoading: performingTransaction,
       error: TransactionError,
     } = useMutation({
-      mutationFn: async ({ payload, paymentPlatform }) => {
+      mutationFn: async ({ payload, payMethod }) => {
         // console.log(payload);
         const { data } = await postRequest({
-          endpoint: `/api/transactions/initialize/${paymentPlatform}`,
+          endpoint: `/api/transactions/initialize/${payMethod}`,
           payload,
         });
         // console.log(data);
@@ -36,8 +36,8 @@ export const UseInitializeTransaction: () => UseInitializeTransactionResult =
         return data;
       },
       onSuccess: (values) => {
-        // console.log(values?.responseData?.data?.authorization_url);
-        const redirectUrl = values?.responseData?.data?.authorization_url;
+        console.log(values);
+        const redirectUrl = values?.data?.link;
         toast({
           title: "Processing Transaction...",
         });

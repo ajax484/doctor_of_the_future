@@ -18,7 +18,8 @@ export default function Page({ params }: { params: { _id: string } }) {
   const { TransactionError, initializeTransaction, performingTransaction } =
     UseInitializeTransaction();
   const { _id } = params;
-  const { fetchingSubscription, fetchingSubscriptionError, subscription } = useGetSubscription({ _id });
+  const { fetchingSubscription, fetchingSubscriptionError, subscription } =
+    useGetSubscription({ _id });
   const router = useRouter();
   const supabase = useSupabaseClient();
   const handleLogout = async () => {
@@ -27,7 +28,7 @@ export default function Page({ params }: { params: { _id: string } }) {
   const user = useUser();
   const authModal = useAuthModal();
 
-  const [payMethod, setMethod] = useState<"paystack" | "lemonSqueezy">(
+  const [payMethod, setMethod] = useState<"paystack" | "flutterwave">(
     "paystack"
   );
 
@@ -40,10 +41,15 @@ export default function Page({ params }: { params: { _id: string } }) {
       email,
       amount,
       reference,
-      metadata: { user_id: user?.id, email, subscription_id: subscription?.id },
+      metadata: {
+        user_id: user?.id,
+        email,
+        subscription_id: subscription?.id,
+        payment_method: payMethod,
+      },
     };
 
-    initializeTransaction({ payload });
+    initializeTransaction({ payload, payMethod });
   }
 
   // console.log(subscription);
@@ -113,12 +119,34 @@ export default function Page({ params }: { params: { _id: string } }) {
 
             <div className=" my-5">
               <RadioGroup
-                onValueChange={(value: "paystack" | "lemonSqueezy") =>
+                onValueChange={(value: "paystack" | "flutterwave") =>
                   setMethod(value)
                 }
                 defaultValue={payMethod}
                 className="flex flex-col w-full"
               >
+                {/* paystack */}
+                <Label
+                  htmlFor="flutterwave"
+                  className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
+                >
+                  <div className="flex items-center w-full gap-x-3 justify-between">
+                    <span className="flex items-center gap-x-4">
+                      <RadioGroupItem value="flutterwave" id="flutterwave" />
+                      <span>Pay with Flutterwave</span>
+                    </span>
+                    <Image
+                      alt="flutterwave logo"
+                      src={
+                        "https://cdn.worldvectorlogo.com/logos/flutterwave-2.svg"
+                      }
+                      width={100}
+                      height={100}
+                      className="w-20 h-10"
+                    />
+                  </div>
+                </Label>
+                {/* paystack */}
                 <Label
                   htmlFor="paystack"
                   className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
@@ -179,7 +207,8 @@ export default function Page({ params }: { params: { _id: string } }) {
               <div className="flex justify-between">
                 <span className=" font-semibold">TOTAL</span>
                 <span className=" font-semibold">
-                  {subscription?.price && formatPriceToNaira(subscription?.price)}
+                  {subscription?.price &&
+                    formatPriceToNaira(subscription?.price)}
                 </span>
               </div>
             </>

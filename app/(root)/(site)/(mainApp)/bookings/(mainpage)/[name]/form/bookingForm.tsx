@@ -50,8 +50,8 @@ const bookingFormSchema = z.object({
       "Invalid phone number format. Please use numbers and optional '+' sign.",
   }),
   message: z.string().optional(),
+  payment_type: z.string(),
   payment_method: z.string(),
-  payment_type: z.string().optional(),
 });
 
 export type BookingFormValues = z.infer<typeof bookingFormSchema>;
@@ -70,8 +70,8 @@ export default function BookingForm({
   // This can come from your database or API.
   const defaultValues: Partial<BookingFormValues> = {
     email,
-    payment_method: "plan",
-    payment_type: "online",
+    payment_type: "plan",
+    payment_method: "paystack",
   };
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
@@ -80,13 +80,13 @@ export default function BookingForm({
   });
 
   const { watch } = form;
-  const payment_method = watch("payment_method");
+  const payment_type = watch("payment_type");
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
-      if (name !== "payment_method") return;
-      if (value.payment_method) {
-        changeMethod(value.payment_method);
+      if (name !== "payment_type") return;
+      if (value.payment_type) {
+        changeMethod(value.payment_type);
       }
     });
     return () => subscription.unsubscribe();
@@ -95,7 +95,7 @@ export default function BookingForm({
   function onSubmit(data: BookingFormValues) {
     console.log(data, "here");
     changeFormValues(data);
-    const { email } = data;
+    const { email, payment_method } = data;
     const amount = booking.price;
     const reference = generateReferenceNumber("BKN");
 
@@ -118,7 +118,7 @@ export default function BookingForm({
       time_of_session: date,
     });
 
-    initializeTransaction({ payload });
+    initializeTransaction({ payload, payMethod: payment_method });
   }
 
   return (
@@ -192,7 +192,7 @@ export default function BookingForm({
         />
         <FormField
           control={form.control}
-          name="payment_method"
+          name="payment_type"
           render={({ field }) => (
             <FormItem className="space-y-1">
               <FormLabel>Choose how you want to pay</FormLabel>
@@ -232,35 +232,27 @@ export default function BookingForm({
             </FormItem>
           )}
         />
-        {payment_method === "session" && (
-          <FormField
-            control={form.control}
-            name="payment_type"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>When do you want to pay?</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="-" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="online">Pay Now</SelectItem>
-                  </SelectContent>
-                </Select>
-                {/* <FormDescription>
-                You can manage verified email addresses in your{" "}
-                <Link href="/examples/forms">email settings</Link>.
-              </FormDescription> */}
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
+        <FormField
+          control={form.control}
+          name="payment_method"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>When do you want to pay?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="-" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="flutterwave">Flutterwave</SelectItem>
+                  <SelectItem value="paystack">Paystack</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </form>
     </Form>
   );

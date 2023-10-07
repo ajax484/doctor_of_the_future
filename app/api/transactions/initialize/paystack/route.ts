@@ -33,7 +33,7 @@ export async function POST(req: NextApiRequest) {
 
       const responseData = paystackResponse.data;
       return NextResponse.json({
-        responseData,
+        data: { link: responseData?.data?.authorization_url },
         status: paystackResponse.status || 500,
       });
     } catch (error) {

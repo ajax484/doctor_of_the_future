@@ -31,7 +31,7 @@ const Page = () => {
   const user = useUser();
   const authModal = useAuthModal();
 
-  const [payMethod, setMethod] = useState<"paystack" | "lemonSqueezy">(
+  const [payMethod, setMethod] = useState<"paystack" | "flutterwave">(
     "paystack"
   );
 
@@ -49,10 +49,10 @@ const Page = () => {
       email,
       amount,
       reference,
-      metadata: { user_id: user?.id, books, email },
+      metadata: { user_id: user?.id, books, email, payment_method: payMethod },
     };
 
-    initializeTransaction({ payload });
+    initializeTransaction({ payload, payMethod });
   }
 
   return (
@@ -105,12 +105,33 @@ const Page = () => {
 
           <div className=" my-5">
             <RadioGroup
-              onValueChange={(value: "paystack" | "lemonSqueezy") =>
+              onValueChange={(value: "paystack" | "flutterwave") =>
                 setMethod(value)
               }
               defaultValue={payMethod}
               className="flex flex-col w-full"
             >
+              {/* paystack */}
+              <Label
+                htmlFor="flutterwave"
+                className="[&:has([data-state=checked])]:border-limeGreen [&:has([data-state=checked])]:bg-limeGreen/10 flex items-center justify-between border-[1px] p-4 cursor-pointer"
+              >
+                <div className="flex items-center w-full gap-x-3 justify-between">
+                  <span className="flex items-center gap-x-4">
+                    <RadioGroupItem value="flutterwave" id="flutterwave" />
+                    <span>Pay with Flutterwave</span>
+                  </span>
+                  <Image
+                    alt="flutterwave logo"
+                    src={
+                      "https://cdn.worldvectorlogo.com/logos/flutterwave-2.svg"
+                    }
+                    width={100}
+                    height={100}
+                    className="w-20 h-10"
+                  />
+                </div>
+              </Label>
               {/* paystack */}
               <Label
                 htmlFor="paystack"
