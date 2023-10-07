@@ -33,7 +33,7 @@ export async function POST(req: NextApiRequest) {
         },
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_FLUTTERWAVE_TEST_KEY}`,
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_FLUTTERWAVE_LIVE_KEY}`,
           },
         }
       );

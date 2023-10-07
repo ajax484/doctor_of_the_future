@@ -18,14 +18,29 @@ export async function GET(req: NextApiRequest) {
     const searchParams = req.nextUrl.searchParams;
     const reference = searchParams.get("tx_ref");
     const trxId = searchParams.get("transaction_id");
-    const supabase = createRouteHandlerClient({ cookies });
+    const currstatus = searchParams.get("status");
 
+    // Determine the redirect URL conditionally
+    let redirectURL;
+    if (process.env.NODE_ENV === "production") {
+      // Use the production public_url
+      redirectURL = process.env.NEXT_PUBLIC_APP_URL;
+    } else {
+      // Use localhost:3000 for development
+      redirectURL = "http://localhost:3000";
+    }
+
+    if (currstatus === "cancelled") {
+      return NextResponse.redirect(new URL("", redirectURL));
+    }
+
+    const supabase = createRouteHandlerClient({ cookies });
     console.log(trxId);
 
     const flutterwaveUrl = `https://api.flutterwave.com/v3/transactions/${trxId}/verify`;
     const flutterwaveResponse = await axios.get(flutterwaveUrl, {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_FLUTTERWAVE_TEST_KEY}`, // Replace with your actual Flutterwave API secret key
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_FLUTTERWAVE_LIVE_KEY}`, // Replace with your actual Flutterwave API secret key
       },
     });
 
@@ -116,16 +131,6 @@ export async function GET(req: NextApiRequest) {
           time_of_session,
         }),
       });
-    }
-
-    // Determine the redirect URL conditionally
-    let redirectURL;
-    if (process.env.NODE_ENV === "production") {
-      // Use the production public_url
-      redirectURL = process.env.NEXT_PUBLIC_APP_URL;
-    } else {
-      // Use localhost:3000 for development
-      redirectURL = "http://localhost:3000";
     }
 
     return NextResponse.redirect(
