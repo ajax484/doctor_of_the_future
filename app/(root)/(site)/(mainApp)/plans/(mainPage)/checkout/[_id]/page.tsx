@@ -137,7 +137,7 @@ export default function Page({ params }: { params: { _id: string } }) {
                     <Image
                       alt="flutterwave logo"
                       src={
-                        "https://cdn.worldvectorlogo.com/logos/flutterwave-2.svg"
+                        "https://i.ibb.co/rc66ZMq/paynow.png"
                       }
                       width={100}
                       height={100}

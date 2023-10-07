@@ -16,6 +16,10 @@ module.exports = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      {
+        protocol: "https",
+        hostname: "i.ibb.co",
+      },
 
       {
         protocol: "https",
@@ -33,8 +37,8 @@ module.exports = {
       },
 
       {
-        protocol:"https",
-        hostname: 'platform-lookaside.fbsbx.com'
+        protocol: "https",
+        hostname: "platform-lookaside.fbsbx.com",
       },
     ],
   },
