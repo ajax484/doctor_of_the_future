@@ -23,14 +23,14 @@ const MyBooking = () => {
       <div className="w-full">
         <Table className="py-5 text-xs ">
           <TableHeader>
-            <TableRow>
-              <TableHead className="">Reference</TableHead>
-              <TableHead>Booking Name</TableHead>
+            <TableRow className=" text-[11px] md:text-xs">
+              <TableHead>Reference</TableHead>
+              <TableHead >Booking</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Created At</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Time of Session</TableHead>
+              <TableHead>Session Time</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

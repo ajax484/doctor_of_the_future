@@ -5,16 +5,37 @@ import { urlForImage } from "@/sanity/lib/image";
 import { shimmer, toBase64 } from "@/utils/shimmerimage";
 import { HeartIcon, Loader2Icon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useGetPostLike } from "@/hooks/posts";
+import { UseAddViews, useGetPostLike, useGetPostViews } from "@/hooks/posts";
 import { useUser } from "@supabase/auth-helpers-react";
+import { IoHeart } from "react-icons/io5";
 
-const BlogCard = ({ post }) => {
+const BlogCard = ({ post, slug }) => {
   const { postLike, fetchingPostLike, fetchingPostLikeError, refetchPostLike } =
     useGetPostLike({
       slug: post.slug.current,
     });
 
-  console.log(post.slug.current, postLike);
+  const {
+    postViews,
+    fetchingPostViews,
+    fetchingPostViewsError,
+    refetchPostViews,
+  } = useGetPostViews({ slug });
+  const { addViews, performingAddViews, addViewsError } = UseAddViews({
+    slug,
+    refetchPostViews,
+  });
+
+  useEffect(() => {
+    if (
+      !!postViews?.data?.find((like) => like.user_id === user?.id) ||
+      fetchingPostViews
+    )
+      return;
+    addViews();
+  }, [postViews]);
+
+  // console.log(post.slug.current, postLike);
 
   const user = useUser();
 
@@ -34,7 +55,7 @@ const BlogCard = ({ post }) => {
               objectPosition="center"
             />
           </div>
-          <div className="w-1/2 px-4 md:px-8 p-2 flex flex-col justify-between">
+          <div className="w-1/2 px-4 md:px-8 p-2 flex flex-col justify-between hover:cursor-pointer hover:bg-gray-200 transition duration-200">
             <div>
               <h1 className="uppercase text-base md:text-2xl lg:text-3xl font-semibold">
                 {post.title}
@@ -42,11 +63,11 @@ const BlogCard = ({ post }) => {
               <p>{post.description}</p>
             </div>
             <div className="border-t-1 flex flex-col md:flex-row gap-y-4 justify-between pt-2">
-              <div className="flex gap-x-2 md:gapx-x-4">
+              <div className="flex items-center gap-x-2 md:gapx-x-4">
                 <span className=" text-xs md:text-sm">
                   {post.comments} comments
                 </span>
-                {/* <span className=" text-xs md:text-sm">{viewCount} views</span> */}
+                <span className=" text-xs md:text-sm">{postViews.count} views</span>
               </div>
               <div className="flex gap-2">
                 {fetchingPostLike ? (
@@ -58,11 +79,13 @@ const BlogCard = ({ post }) => {
                         postLike?.data?.find(
                           (like) => like.user_id === user?.id
                         )
-                          ? "text-pink-700"
+                          ? "text-pink-700  flex items-center gap-x-2"
                           : ""
                       }
                     >
-                      <HeartIcon />
+                      <span className=" text-2xl">
+                        <IoHeart />
+                      </span>
                     </span>
 
                     <span>{postLike.count || 0}</span>

@@ -17,7 +17,7 @@ const ProgramCard: React.FC<ProgramProps> = ({
 }) => {
   const router = useRouter();
   return (
-    <div className="border-[1px] border-gray-200 h-full flex flex-col justify-between gap-4">
+    <div className="border-[1px] border-gray-200 h-full flex flex-col justify-between gap-4 hover:cursor-pointer hover:bg-gray-200 transition duration-200">
       <div>
         <div className="w-full h-80 relative">
           <Image

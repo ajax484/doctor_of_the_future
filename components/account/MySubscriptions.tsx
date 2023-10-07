@@ -16,7 +16,7 @@ const MySubscriptions = () => {
   const { fetchingTransactions, fetchingTransactionsError, transactions } =
     useGetUserTransactions({ prdtType: "subscriptions" });
 
-  console.log(transactions);
+  // console.log(transactions);
 
   return (
     <Loading loading={fetchingTransactions} >

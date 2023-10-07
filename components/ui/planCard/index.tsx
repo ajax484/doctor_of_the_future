@@ -18,7 +18,7 @@ const PlanCard: React.FC<PlanProps> = ({
 
   return (
     <div
-      className={`py-4 px-2 border-[1px] border-gray-200 shadow-md text-center h-full flex flex-col justify-between gap-4 my-4 relative`}
+      className={`py-4 px-2 border-[1px] border-gray-200 shadow-md text-center h-full flex flex-col justify-between gap-4 my-4 relative  hover:cursor-pointer hover:bg-gray-200 transition duration-200`}
     >
       {/* {tag && (
          <div className="absolute bg-red-600 p-1 w-60  md:w-44 h-10 left-16 md:left-20 lg:w-32 lg:left-16 -top-6 md:-top-8 flex items-center justify-center z-20">
@@ -44,7 +44,7 @@ const PlanCard: React.FC<PlanProps> = ({
               className="flex justify-start items-center gap-0.5"
             >
               <IoCaretForwardOutline className=" text-black" />
-              <span className="first-letter:uppercase text-black">
+              <span className="first-letter:uppercase text-start text-base text-black">
                 {benefit}
               </span>
             </li>
